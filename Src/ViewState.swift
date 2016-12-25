@@ -35,7 +35,19 @@ class ViewState<TargetView: UIView>
     }
 }
 
-//===
+//=== MARK: Equatable
+
+// https://www.andrewcbancroft.com/2015/07/01/every-swift-value-type-should-be-equatable/
+
+extension ViewState: Equatable { }
+
+public
+func ==<LView: UIView, RView: UIView>(lhs: ViewState<LView>, rhs: ViewState<RView>) -> Bool
+{
+    return lhs.id == rhs.id
+}
+
+//=== MARK: Apply
 
 extension ViewState
 {
