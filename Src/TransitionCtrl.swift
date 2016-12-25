@@ -38,8 +38,38 @@ class TransitionCtrl<TargetView: UIView>
     func apply(_ newState: ViewState<TargetView>) throws
     {
         guard
-            let targetView = targetView,
-            isReadyForTransition
+            current != newState
+        else
+        {
+            return // just return without doing anything
+        }
+        
+        //===
+        
+        guard
+            transitioning.map({ $0.to != newState }) ?? true
+        else
+        {
+            return // just return without doing anything
+        }
+        
+        //===
+        
+        /*
+ 
+         Q: What we've checked so far?
+         
+         A: If we are already in the target state,
+            or if we are currently transitioning into that state, then
+            no need to do anything at all, and no need to throw an exception.
+         
+         */
+        
+        //===
+        
+        guard
+            isReadyForTransition,
+            let targetView = targetView
         else
         {
             throw UnfinishedTransition()
@@ -61,7 +91,9 @@ class TransitionCtrl<TargetView: UIView>
             }
             else
             {
-                self.transitioning = nil
+                // no need to do anything,
+                // most likely another transition
+                // is currently in progress
             }
         }
     }
