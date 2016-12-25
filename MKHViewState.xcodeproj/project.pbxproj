@@ -10,8 +10,11 @@
 		3E5077E26783FA34042273ED /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50AB9958D55288E3A7070D02 /* UIKit.framework */; };
 		5B3869AB93BCFBEB916A9A94 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50AB9958D55288E3A7070D02 /* UIKit.framework */; };
 		7B8F605282EE0069FF96CCEC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CFA55C2B17FFE6789F1B8C1 /* Foundation.framework */; };
+		94FAE3381E102E78009706A0 /* Declarations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FAE3371E102E78009706A0 /* Declarations.swift */; };
+		94FAE33A1E102FD7009706A0 /* ViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FAE3391E102FD7009706A0 /* ViewState.swift */; };
+		94FAE33C1E10326A009706A0 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FAE33B1E10326A009706A0 /* Errors.swift */; };
+		94FAE33E1E10329A009706A0 /* TransitionCtrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FAE33D1E10329A009706A0 /* TransitionCtrl.swift */; };
 		B5E7581830AE943E755AEE7D /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21A9606F2A231FFCCDB1994 /* Main.swift */; };
-		CDB15E070AAD847E5804B0DD /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B0B8CD522A18A41F8DD48A /* Main.swift */; };
 		D04534830BDAE7D64DA2AED7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CFA55C2B17FFE6789F1B8C1 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
@@ -21,7 +24,10 @@
 		1BC20771415FE04771603E40 /* MKHViewState. */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = MKHViewState.; path = MKHViewState.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CFA55C2B17FFE6789F1B8C1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		50AB9958D55288E3A7070D02 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		C6B0B8CD522A18A41F8DD48A /* Main.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
+		94FAE3371E102E78009706A0 /* Declarations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Declarations.swift; sourceTree = "<group>"; };
+		94FAE3391E102FD7009706A0 /* ViewState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewState.swift; sourceTree = "<group>"; };
+		94FAE33B1E10326A009706A0 /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		94FAE33D1E10329A009706A0 /* TransitionCtrl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionCtrl.swift; sourceTree = "<group>"; };
 		D21A9606F2A231FFCCDB1994 /* Main.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -103,7 +109,10 @@
 		B862B84F2298A0BCEA456373 /* Src */ = {
 			isa = PBXGroup;
 			children = (
-				C6B0B8CD522A18A41F8DD48A /* Main.swift */,
+				94FAE3371E102E78009706A0 /* Declarations.swift */,
+				94FAE3391E102FD7009706A0 /* ViewState.swift */,
+				94FAE33D1E10329A009706A0 /* TransitionCtrl.swift */,
+				94FAE33B1E10326A009706A0 /* Errors.swift */,
 			);
 			path = Src;
 			sourceTree = "<group>";
@@ -193,7 +202,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CDB15E070AAD847E5804B0DD /* Main.swift in Sources */,
+				94FAE33E1E10329A009706A0 /* TransitionCtrl.swift in Sources */,
+				94FAE33C1E10326A009706A0 /* Errors.swift in Sources */,
+				94FAE3381E102E78009706A0 /* Declarations.swift in Sources */,
+				94FAE33A1E102FD7009706A0 /* ViewState.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
