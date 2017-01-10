@@ -14,7 +14,7 @@ public
 typealias ViewStateId = String
 
 public
-typealias   Mutation<TargetView: UIView> = (_ view: TargetView) -> Void
+typealias Mutation<TargetView: UIView> = (_ view: TargetView) -> Void
 
 public
 typealias Transition<TargetView: UIView> = (_: TransitionParams<TargetView>) -> Void
@@ -23,10 +23,7 @@ public
 struct TransitionParams<TargetView: UIView>
 {
     public
-    let mutation: Mutation<TargetView>
-    
-    public
-    let view: TargetView
+    let mutation: () -> Void
     
     public
     let completion: TransitionCompletion

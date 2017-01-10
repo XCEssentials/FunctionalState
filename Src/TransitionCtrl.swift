@@ -68,11 +68,19 @@ class TransitionCtrl<TargetView: UIView>
         //===
         
         guard
-            isReadyForTransition,
-            let targetView = targetView
+            isReadyForTransition
         else
         {
             throw UnfinishedTransition()
+        }
+        
+        //===
+        
+        guard
+            let targetView = targetView // must be optional to be weak!
+        else
+        {
+            return
         }
         
         //===
@@ -84,13 +92,17 @@ class TransitionCtrl<TargetView: UIView>
         newState.apply(on: targetView) {
             
             if
-                $0
+                $0 // transaction finished?
             {
+                // YES
+                
                 self.current = newState
                 self.transitioning = nil
             }
             else
             {
+                // NO
+                
                 // no need to do anything,
                 // most likely another transition
                 // is currently in progress

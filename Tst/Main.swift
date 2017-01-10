@@ -95,9 +95,9 @@ enum Hlp
     static
     func animateDisable(_ params: TransitionParams<MyView>) -> Void
     {
-        UIView .animate(
+        UIView.animate(
             withDuration: 1.0,
-            animations: { params.mutation(params.view) },
+            animations: params.mutation,
             completion: params.completion
         )
     }
