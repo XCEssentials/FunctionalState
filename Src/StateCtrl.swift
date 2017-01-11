@@ -92,20 +92,12 @@ class StateCtrl<TargetView: UIView>
         newState.apply(on: targetView) {
             
             if
-                $0 // transaction finished?
+                $0 // transition finished?
             {
                 // YES
                 
                 self.current = newState
                 self.next = nil
-            }
-            else
-            {
-                // NO
-                
-                // no need to do anything,
-                // most likely another transition
-                // is currently in progress
             }
         }
     }
