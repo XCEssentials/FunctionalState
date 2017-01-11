@@ -99,6 +99,13 @@ class StateCtrl<TargetView: UIView>
                 self.current = newState
                 self.next = nil
             }
+            else
+            {
+                // NO
+                
+                // most likely transition has been
+                // interupted by applying anopther state
+            }
         }
     }
 }
