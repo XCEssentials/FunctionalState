@@ -22,26 +22,19 @@ class Main: XCTestCase
     
     func testExample()
     {
-        do
-        {
-            try aView.state.apply(MyView.states.highlighted)
-            
-            //===
-            
-            XCTAssert(aView.state.isReadyForTransition)
-            
-            //===
-            
-            try aView.state.apply(MyView.states.disabled)
-            
-            //===
-            
-            XCTAssert(!aView.state.isReadyForTransition) // because of animation 1.0 sec.
-        }
-        catch
-        {
-            XCTFail(error.localizedDescription)
-        }
+        aView.state.apply(MyView.states.highlighted)
+        
+        //===
+        
+        XCTAssert(aView.state.isReadyForTransition)
+        
+        //===
+        
+        aView.state.apply(MyView.states.disabled)
+        
+        //===
+        
+        XCTAssert(!aView.state.isReadyForTransition) // because of animation 1.0 sec.
     }
 }
 
@@ -52,8 +45,8 @@ class MyView: UIView
     // http://mikebuss.com/2014/06/22/lazy-initialization-swift/
 
     lazy
-    var state: TransitionCtrl<MyView> =
-        { [unowned self] in TransitionCtrl(self, states.normal) }()
+    var state: StateCtrl<MyView> =
+        { [unowned self] in StateCtrl(self, states.normal) }()
 }
 
 //=== MARK: States
@@ -95,9 +88,9 @@ enum Hlp
     static
     func animateDisable(_ params: TransitionParams<MyView>) -> Void
     {
-        UIView .animate(
+        UIView.animate(
             withDuration: 1.0,
-            animations: { params.mutation(params.view) },
+            animations: params.mutation,
             completion: params.completion
         )
     }

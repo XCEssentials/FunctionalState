@@ -1,5 +1,5 @@
 //
-//  TransitionCtrl.swift
+//  StateCtrl.swift
 //  MKHViewState
 //
 //  Created by Maxim Khatskevich on 12/25/16.
@@ -12,7 +12,7 @@ import UIKit
 
 public
 final
-class TransitionCtrl<TargetView: UIView>
+class StateCtrl<TargetView: UIView>
 {
     weak
     var targetView: TargetView?
@@ -21,7 +21,7 @@ class TransitionCtrl<TargetView: UIView>
     var current: ViewState<TargetView>
     
     public private(set)
-    var transitioning: (from: ViewState<TargetView>, to: ViewState<TargetView>)? = nil
+    var next: ViewState<TargetView>? = nil
     
     //===
     
@@ -35,7 +35,7 @@ class TransitionCtrl<TargetView: UIView>
     //===
     
     public
-    func apply(_ newState: ViewState<TargetView>) throws
+    func apply(_ newState: ViewState<TargetView>)
     {
         guard
             current != newState
@@ -47,7 +47,7 @@ class TransitionCtrl<TargetView: UIView>
         //===
         
         guard
-            transitioning.map({ $0.to != newState }) ?? true
+            next.map({ $0 != newState }) ?? true
         else
         {
             return // just return without doing anything
@@ -68,32 +68,34 @@ class TransitionCtrl<TargetView: UIView>
         //===
         
         guard
-            isReadyForTransition,
-            let targetView = targetView
+            let targetView = targetView // must be optional to be weak!
         else
         {
-            throw UnfinishedTransition()
+            return
         }
         
         //===
         
-        transitioning = (from: current, to: newState)
+        next = newState
         
         //===
         
         newState.apply(on: targetView) {
             
             if
-                $0
+                $0 // transition finished?
             {
+                // YES
+                
                 self.current = newState
-                self.transitioning = nil
+                self.next = nil
             }
             else
             {
-                // no need to do anything,
-                // most likely another transition
-                // is currently in progress
+                // NO
+                
+                // most likely transition has been
+                // interupted by applying anopther state
             }
         }
     }
@@ -102,7 +104,7 @@ class TransitionCtrl<TargetView: UIView>
 //===
 
 public
-extension TransitionCtrl
+extension StateCtrl
 {
-    var isReadyForTransition: Bool { return transitioning == nil }
+    var isReadyForTransition: Bool { return next == nil }
 }
