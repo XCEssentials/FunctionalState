@@ -35,7 +35,7 @@ class StateCtrl<TargetView: UIView>
     //===
     
     public
-    func apply(_ newState: ViewState<TargetView>) throws
+    func apply(_ newState: ViewState<TargetView>)
     {
         guard
             current != newState
@@ -64,15 +64,6 @@ class StateCtrl<TargetView: UIView>
             no need to do anything at all, and no need to throw an exception.
          
          */
-        
-        //===
-        
-        guard
-            isReadyForTransition
-        else
-        {
-            throw UnfinishedTransition()
-        }
         
         //===
         

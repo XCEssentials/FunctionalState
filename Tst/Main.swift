@@ -22,26 +22,19 @@ class Main: XCTestCase
     
     func testExample()
     {
-        do
-        {
-            try aView.state.apply(MyView.states.highlighted)
-            
-            //===
-            
-            XCTAssert(aView.state.isReadyForTransition)
-            
-            //===
-            
-            try aView.state.apply(MyView.states.disabled)
-            
-            //===
-            
-            XCTAssert(!aView.state.isReadyForTransition) // because of animation 1.0 sec.
-        }
-        catch
-        {
-            XCTFail(error.localizedDescription)
-        }
+        aView.state.apply(MyView.states.highlighted)
+        
+        //===
+        
+        XCTAssert(aView.state.isReadyForTransition)
+        
+        //===
+        
+        aView.state.apply(MyView.states.disabled)
+        
+        //===
+        
+        XCTAssert(!aView.state.isReadyForTransition) // because of animation 1.0 sec.
     }
 }
 
