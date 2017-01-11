@@ -1,5 +1,5 @@
 //
-//  TransitionCtrl.swift
+//  StateCtrl.swift
 //  MKHViewState
 //
 //  Created by Maxim Khatskevich on 12/25/16.
@@ -12,7 +12,7 @@ import UIKit
 
 public
 final
-class TransitionCtrl<TargetView: UIView>
+class StateCtrl<TargetView: UIView>
 {
     weak
     var targetView: TargetView?
@@ -21,7 +21,7 @@ class TransitionCtrl<TargetView: UIView>
     var current: ViewState<TargetView>
     
     public private(set)
-    var transitioning: (from: ViewState<TargetView>, to: ViewState<TargetView>)? = nil
+    var next: ViewState<TargetView>? = nil
     
     //===
     
@@ -47,7 +47,7 @@ class TransitionCtrl<TargetView: UIView>
         //===
         
         guard
-            transitioning.map({ $0.to != newState }) ?? true
+            next.map({ $0 != newState }) ?? true
         else
         {
             return // just return without doing anything
@@ -85,7 +85,7 @@ class TransitionCtrl<TargetView: UIView>
         
         //===
         
-        transitioning = (from: current, to: newState)
+        next = newState
         
         //===
         
@@ -97,7 +97,7 @@ class TransitionCtrl<TargetView: UIView>
                 // YES
                 
                 self.current = newState
-                self.transitioning = nil
+                self.next = nil
             }
             else
             {
@@ -114,7 +114,7 @@ class TransitionCtrl<TargetView: UIView>
 //===
 
 public
-extension TransitionCtrl
+extension StateCtrl
 {
-    var isReadyForTransition: Bool { return transitioning == nil }
+    var isReadyForTransition: Bool { return next == nil }
 }
