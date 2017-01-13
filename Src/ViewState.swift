@@ -16,17 +16,17 @@ class ViewState<TargetView: UIView>
 {
     let id: ViewStateId
     
-    let transition: Transition<TargetView>
+    let transition: (_: TransitionParams) -> Void
     
-    let mutation: Mutation<TargetView>
+    let mutation: (_ view: TargetView) -> Void
     
     //===
     
     public
     init(
         id: ViewStateId = NSUUID().uuidString,
-        transition: @escaping Transition<TargetView> = { $0.mutation(); $0.completion(true) },
-        mutation: @escaping Mutation<TargetView>
+        transition: @escaping (_: TransitionParams) -> Void = { $0.mutation(); $0.completion(true) },
+        mutation: @escaping (_ view: TargetView) -> Void
         )
     {
         self.id = id
@@ -51,7 +51,7 @@ func ==<LView: UIView, RView: UIView>(lhs: ViewState<LView>, rhs: ViewState<RVie
 
 extension ViewState
 {
-    func apply(on view: TargetView, completion: @escaping TransitionCompletion)
+    func apply(on view: TargetView, completion: @escaping (_ finished: Bool) -> Void)
     {
         transition(
             TransitionParams(
