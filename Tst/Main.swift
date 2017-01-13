@@ -86,7 +86,7 @@ extension MyView
 enum Hlp
 {
     static
-    func animateDisable(_ params: TransitionParams<MyView>) -> Void
+    func animateDisable(_ params: TransitionParams) -> Void
     {
         UIView.animate(
             withDuration: 1.0,
