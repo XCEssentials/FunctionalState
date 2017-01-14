@@ -17,11 +17,16 @@ class StateCtrl<TargetView: UIView>
     weak
     var targetView: TargetView?
     
-    public private(set)
+    //===
+    
+    public fileprivate(set)
     var current: ViewState<TargetView>? = nil
     
-    public private(set)
+    public fileprivate(set)
     var next: ViewState<TargetView>? = nil
+    
+    public
+    var isReadyForTransition: Bool { return next == nil }
     
     //===
     
@@ -30,10 +35,12 @@ class StateCtrl<TargetView: UIView>
     {
         self.targetView = view
     }
-    
-    //===
-    
-    public
+}
+
+//=== MARK: Apply
+
+extension StateCtrl
+{
     func apply(_ newState: ViewState<TargetView>)
     {
         guard
@@ -55,19 +62,19 @@ class StateCtrl<TargetView: UIView>
         //===
         
         /*
- 
+         
          Q: What we've checked so far?
          
          A: If we are already in the target state,
-            or if we are currently transitioning into that state, then
-            no need to do anything at all, and no need to throw an exception.
+         or if we are currently transitioning into that state, then
+         no need to do anything at all, and no need to throw an exception.
          
          */
         
         //===
         
         guard
-            let targetView = targetView // must be optional to be weak!
+            let targetView = targetView
         else
         {
             return
@@ -98,12 +105,4 @@ class StateCtrl<TargetView: UIView>
             }
         }
     }
-}
-
-//===
-
-public
-extension StateCtrl
-{
-    var isReadyForTransition: Bool { return next == nil }
 }
