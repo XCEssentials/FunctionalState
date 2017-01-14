@@ -45,8 +45,7 @@ class MyView: UIView
     // http://mikebuss.com/2014/06/22/lazy-initialization-swift/
 
     lazy
-    var state: StateCtrl<MyView> =
-        { [unowned self] in StateCtrl(self, states.normal) }()
+    var state: StateCtrl<MyView> = StateCtrl(for: self)
 }
 
 //=== MARK: States

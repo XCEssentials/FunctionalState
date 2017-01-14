@@ -18,7 +18,7 @@ class StateCtrl<TargetView: UIView>
     var targetView: TargetView?
     
     public private(set)
-    var current: ViewState<TargetView>
+    var current: ViewState<TargetView>? = nil
     
     public private(set)
     var next: ViewState<TargetView>? = nil
@@ -26,10 +26,9 @@ class StateCtrl<TargetView: UIView>
     //===
     
     public
-    init(_ view: TargetView, _ current: ViewState<TargetView>)
+    init(for view: TargetView)
     {
         self.targetView = view
-        self.current = current
     }
     
     //===
