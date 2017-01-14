@@ -13,12 +13,6 @@ import UIKit
 public
 typealias ViewStateId = String
 
-//public
-//typealias Mutation<TargetView: UIView> = (_ view: TargetView) -> Void
-
-//public
-//typealias Transition<TargetView: UIView> = (_: TransitionParams) -> Void
-
 public
 struct TransitionParams
 {
@@ -28,6 +22,3 @@ struct TransitionParams
     public
     let completion: (_ finished: Bool) -> Void
 }
-
-//public
-//typealias TransitionCompletion = (_ finished: Bool) -> Void
