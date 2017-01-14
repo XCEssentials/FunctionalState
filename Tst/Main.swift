@@ -7,90 +7,30 @@
 //
 
 import XCTest
-import UIKit
-
-//@testable
-import MKHViewState
 
 //===
 
 class Main: XCTestCase
 {
-    let aView = MyView()
-    
-    //===
-    
     func testExample()
     {
-        aView.state.apply(MyView.states.highlighted)
+        let aView = MyView()
         
         //===
         
-        XCTAssert(aView.state.isReadyForTransition)
+        aView.apply(MyView.Highlighted.state)
         
         //===
         
-        aView.state.apply(MyView.states.disabled)
+        XCTAssert(aView.stateCtrl.isReadyForTransition)
         
         //===
         
-        XCTAssert(!aView.state.isReadyForTransition) // because of animation 1.0 sec.
-    }
-}
-
-//===
-
-class MyView: UIView
-{
-    // http://mikebuss.com/2014/06/22/lazy-initialization-swift/
-
-    lazy
-    var state: StateCtrl<MyView> = StateCtrl(for: self)
-}
-
-//=== MARK: States
-
-extension MyView
-{
-    typealias State = ViewState<MyView>
-    
-    static
-    let states = (
+        aView.apply(MyView.Disabled.state)
         
-        normal: State() {
-            
-            $0.alpha = 1.0
-            $0.isUserInteractionEnabled = true
-            $0.backgroundColor = .clear
-        },
+        //===
         
-        highlighted: State() {
-            
-            $0.alpha = 1.0
-            $0.isUserInteractionEnabled = true
-            $0.backgroundColor = .green
-        },
-
-        disabled: State(transition: Hlp.animateDisable) {
-            
-            $0.alpha = 0.5
-            $0.isUserInteractionEnabled = false
-            $0.backgroundColor = .gray
-        }
-    )
-}
-
-//=== MARK: Special helpers
-
-enum Hlp
-{
-    static
-    func animateDisable(_ params: TransitionParams) -> Void
-    {
-        UIView.animate(
-            withDuration: 1.0,
-            animations: params.mutation,
-            completion: params.completion
-        )
+        // not ready, because of animation 1.0 sec.
+        XCTAssert(!aView.stateCtrl.isReadyForTransition)
     }
 }

@@ -11,10 +11,22 @@ import UIKit
 //===
 
 public
+struct TransitionParams
+{
+    public
+    let mutation: () -> Void
+    
+    public
+    let completion: (_ finished: Bool) -> Void
+}
+
+//===
+
+public
 final
 class ViewState<TargetView: UIView>
 {
-    let id: ViewStateId
+    let id: String
     
     let transition: (_: TransitionParams) -> Void
     
@@ -24,7 +36,7 @@ class ViewState<TargetView: UIView>
     
     public
     init(
-        id: ViewStateId = NSUUID().uuidString,
+        id: String = NSUUID().uuidString,
         transition: @escaping (_: TransitionParams) -> Void = { $0.mutation(); $0.completion(true) },
         mutation: @escaping (_ view: TargetView) -> Void
         )
@@ -42,7 +54,10 @@ class ViewState<TargetView: UIView>
 extension ViewState: Equatable { }
 
 public
-func ==<LView: UIView, RView: UIView>(lhs: ViewState<LView>, rhs: ViewState<RView>) -> Bool
+func ==<LView: UIView, RView: UIView>(
+    lhs: ViewState<LView>,
+    rhs: ViewState<RView>
+    ) -> Bool
 {
     return lhs.id == rhs.id
 }
@@ -51,7 +66,10 @@ func ==<LView: UIView, RView: UIView>(lhs: ViewState<LView>, rhs: ViewState<RVie
 
 extension ViewState
 {
-    func apply(on view: TargetView, completion: @escaping (_ finished: Bool) -> Void)
+    func apply(
+        on view: TargetView,
+        completion: @escaping (_ finished: Bool) -> Void
+        )
     {
         transition(
             TransitionParams(
