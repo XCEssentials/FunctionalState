@@ -1,8 +1,8 @@
 Pod::Spec.new do |s|
 
-  s.name                      = 'MKHViewState'
+  s.name                      = 'MKHState'
   s.version                   = '1.2.0'
-  s.summary                   = 'Implement any view as a discrete system and describe its states in a declarative style.'
+  s.summary                   = 'Turn any object into a discrete system and describe its states in a declarative style.'
   s.homepage                  = 'https://github.com/maximkhatskevich/#{s.name}'
   s.license                   = { :type => 'MIT', :file => 'LICENSE' }
   s.author                    = { 'Maxim Khatskevich' => 'maxim@khatskevi.ch' }
