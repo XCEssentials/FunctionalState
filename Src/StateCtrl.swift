@@ -6,7 +6,7 @@
 //  Copyright © 2016 Maxim Khatskevich. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 //===
 
@@ -21,18 +21,18 @@ typealias Transition =
 
 public
 final
-class StateCtrl<TargetView: UIView>
+class StateCtrl<Target: AnyObject>
 {
     weak
-    var targetView: TargetView?
+    var target: Target?
     
     //===
     
     public fileprivate(set)
-    var current: ViewState<TargetView>? = nil
+    var current: State<Target>? = nil
     
     public fileprivate(set)
-    var next: ViewState<TargetView>? = nil
+    var next: State<Target>? = nil
     
     public
     var isReadyForTransition: Bool { return next == nil }
@@ -40,9 +40,9 @@ class StateCtrl<TargetView: UIView>
     //===
     
     public
-    init(for view: TargetView)
+    init(for view: Target)
     {
-        self.targetView = view
+        self.target = view
     }
 }
 
@@ -51,7 +51,7 @@ class StateCtrl<TargetView: UIView>
 extension StateCtrl
 {
     func apply(
-        _ newState: ViewState<TargetView>,
+        _ newState: State<Target>,
         transition: Transition? = nil
         )
     {
@@ -86,7 +86,7 @@ extension StateCtrl
         //===
         
         guard
-            let targetView = targetView
+            let target = target
         else
         {
             return
@@ -98,7 +98,7 @@ extension StateCtrl
         
         //===
         
-        let mutation = { newState.mutation(targetView) }
+        let mutation = { newState.mutation(target) }
         
         let transition = transition ?? { $0(); $1(true) }
         

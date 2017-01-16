@@ -17,7 +17,7 @@ extension MyView
     enum Highlighted
     {
         static
-        let state = State() {
+        let state = St() {
             
             $0.alpha = 1.0
             $0.isUserInteractionEnabled = true

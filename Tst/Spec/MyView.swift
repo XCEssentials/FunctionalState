@@ -14,7 +14,7 @@ import MKHState
 
 class MyView: UIView, DiscreteSystem
 {
-    typealias State = ViewState<MyView>
+    typealias St = State<MyView>
     
     //===
     

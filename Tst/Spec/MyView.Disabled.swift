@@ -17,7 +17,7 @@ extension MyView
     enum Disabled
     {
         static
-        let state = State() {
+        let state = St() {
             
             $0.alpha = 0.5
             $0.isUserInteractionEnabled = false

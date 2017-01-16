@@ -1,29 +1,29 @@
 //
-//  ViewState.swift
+//  State.swift
 //  MKHState
 //
 //  Created by Maxim Khatskevich on 12/25/16.
 //  Copyright © 2016 Maxim Khatskevich. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 //===
 
 public
 final
-class ViewState<TargetView: UIView>
+class State<Target: AnyObject>
 {
     let id: String
     
-    let mutation: (_ view: TargetView) -> Void
+    let mutation: (_ view: Target) -> Void
     
     //===
     
     public
     init(
         id: String = NSUUID().uuidString,
-        mutation: @escaping (_ view: TargetView) -> Void
+        mutation: @escaping (_ view: Target) -> Void
         )
     {
         self.id = id
@@ -35,12 +35,12 @@ class ViewState<TargetView: UIView>
 
 // https://www.andrewcbancroft.com/2015/07/01/every-swift-value-type-should-be-equatable/
 
-extension ViewState: Equatable { }
+extension State: Equatable { }
 
 public
-func ==<LView: UIView, RView: UIView>(
-    lhs: ViewState<LView>,
-    rhs: ViewState<RView>
+func ==<LTarget: AnyObject, RTarget: AnyObject>(
+    lhs: State<LTarget>,
+    rhs: State<RTarget>
     ) -> Bool
 {
     return lhs.id == rhs.id
