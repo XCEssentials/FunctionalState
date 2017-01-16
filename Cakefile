@@ -9,8 +9,8 @@ testSuffix = "Tst"
 
 #===
 
-project.name = "MKHViewState"
-project.class_prefix = "VST"
+project.name = "MKHState"
+project.class_prefix = "STE"
 project.organization = "Maxim Khatskevich"
 
 #===

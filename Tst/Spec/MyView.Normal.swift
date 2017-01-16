@@ -1,6 +1,6 @@
 //
 //  MyView.Normal.swift
-//  MKHViewState
+//  MKHState
 //
 //  Created by Maxim Khatskevich on 1/14/17.
 //  Copyright © 2017 Maxim Khatskevich. All rights reserved.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-import MKHViewState
+import MKHState
 
 //===
 
@@ -17,7 +17,7 @@ extension MyView
     enum Normal
     {
         static
-        let state = State() {
+        let state = St() {
             
             $0.alpha = 1.0
             $0.isUserInteractionEnabled = true

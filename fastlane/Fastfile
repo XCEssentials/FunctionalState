@@ -22,7 +22,7 @@ default_platform :ios
 
 #===
 
-projName = 'MKHViewState'
+projName = 'MKHState'
 projFileName = projName + '.xcodeproj'
 
 #===
