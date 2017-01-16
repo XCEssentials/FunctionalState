@@ -1,6 +1,6 @@
 //
 //  MyView.Disabled.swift
-//  MKHViewState
+//  MKHState
 //
 //  Created by Maxim Khatskevich on 1/14/17.
 //  Copyright © 2017 Maxim Khatskevich. All rights reserved.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-import MKHViewState
+import MKHState
 
 //===
 
