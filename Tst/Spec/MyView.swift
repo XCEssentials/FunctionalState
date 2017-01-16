@@ -12,15 +12,15 @@ import MKHState
 
 //===
 
-//class MyView: UIView, DiscreteSystem
-//{
-//    typealias St = State<MyView, Void>
-//    
-//    //===
-//    
+class MyView: UIView
+{    
 //    lazy
 //    var stateCtrl: StateCtrl<MyView, Void> = StateCtrl(for: self)
-//}
+}
+
+//===
+
+extension MyView: DiscreteSystem { }
 
 //=== MARK: Special helpers
 

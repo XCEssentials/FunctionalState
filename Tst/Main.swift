@@ -14,24 +14,26 @@ class Main: XCTestCase
 {
     func testExample()
     {
-//        let aView = MyView()
-//        
-//        //===
-//        
-//        aView.apply(MyView.Highlighted.state, with: Void)
-//        
-//        //===
-//        
+        let aView = MyView()
+        
+        //===
+        
+        aView.apply{ $0.highlighted(.blue) }
+        
+        //===
+        
 //        XCTAssert(aView.stateCtrl.isReadyForTransition)
-//        
-//        //===
-//        
+        
+        //===
+
+        aView.apply{ $0.disabled() }
+        
 //        aView.apply(MyView.Disabled.state,
 //                    transition: MyView.oneSecondAnimation)
-//        
-//        //===
-//        
-//        // not ready, because of animation 1.0 sec.
+        
+        //===
+        
+        // not ready, because of animation 1.0 sec.
 //        XCTAssert(!aView.stateCtrl.isReadyForTransition)
     }
 }
