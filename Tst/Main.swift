@@ -26,7 +26,8 @@ class Main: XCTestCase
         
         //===
         
-        aView.apply(MyView.Disabled.state)
+        aView.apply(MyView.Disabled.state,
+                    transition: MyView.oneSecondAnimation)
         
         //===
         

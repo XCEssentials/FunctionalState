@@ -45,17 +45,3 @@ func ==<LView: UIView, RView: UIView>(
 {
     return lhs.id == rhs.id
 }
-
-//=== MARK: Apply
-
-extension ViewState
-{
-    func apply(
-        on view: TargetView,
-        completion: @escaping (_ finished: Bool) -> Void
-        )
-    {
-        self.mutation(view)
-        completion(true)
-    }
-}

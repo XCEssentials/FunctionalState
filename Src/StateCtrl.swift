@@ -11,6 +11,15 @@ import UIKit
 //===
 
 public
+typealias Transition =
+(
+    _ mutation: @escaping () -> Void,
+    _ completion: @escaping  (_ finished: Bool) -> Void
+) -> Void
+
+//===
+
+public
 final
 class StateCtrl<TargetView: UIView>
 {
@@ -41,7 +50,10 @@ class StateCtrl<TargetView: UIView>
 
 extension StateCtrl
 {
-    func apply(_ newState: ViewState<TargetView>)
+    func apply(
+        _ newState: ViewState<TargetView>,
+        transition: Transition? = nil
+        )
     {
         guard
             current != newState
@@ -86,7 +98,13 @@ extension StateCtrl
         
         //===
         
-        newState.apply(on: targetView) {
+        let mutation = { newState.mutation(targetView) }
+        
+        let transition = transition ?? { $0(); $1(true) }
+        
+        //===
+        
+        transition(mutation) {
             
             if
                 $0 // transition finished?

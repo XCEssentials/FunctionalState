@@ -23,8 +23,9 @@ protocol DiscreteSystem: class
 public
 extension DiscreteSystem
 {
-    func apply(_ newState: ViewState<TargetView>)
+    func apply(_ newState: ViewState<TargetView>,
+               transition: Transition? = nil)
     {
-        stateCtrl.apply(newState)
+        stateCtrl.apply(newState, transition: transition)
     }
 }

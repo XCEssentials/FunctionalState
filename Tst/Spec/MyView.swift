@@ -21,3 +21,18 @@ class MyView: UIView, DiscreteSystem
     lazy
     var stateCtrl: StateCtrl<MyView> = StateCtrl(for: self)
 }
+
+//=== MARK: Special helpers
+
+extension MyView
+{
+    static
+    let oneSecondAnimation: Transition =
+        {
+            UIView.animate(
+                withDuration: 1.0,
+                animations: $0,
+                completion: $1
+            )
+    }
+}
