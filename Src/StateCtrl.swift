@@ -1,29 +1,38 @@
 //
 //  StateCtrl.swift
-//  MKHViewState
+//  MKHState
 //
 //  Created by Maxim Khatskevich on 12/25/16.
 //  Copyright © 2016 Maxim Khatskevich. All rights reserved.
 //
 
-import UIKit
+import Foundation
+
+//===
+
+public
+typealias Transition =
+(
+    _ mutation: @escaping () -> Void,
+    _ completion: @escaping  (_ finished: Bool) -> Void
+) -> Void
 
 //===
 
 public
 final
-class StateCtrl<TargetView: UIView>
+class StateCtrl<Target: AnyObject>
 {
     weak
-    var targetView: TargetView?
+    var target: Target?
     
     //===
     
     public fileprivate(set)
-    var current: ViewState<TargetView>? = nil
+    var current: State<Target>? = nil
     
     public fileprivate(set)
-    var next: ViewState<TargetView>? = nil
+    var next: State<Target>? = nil
     
     public
     var isReadyForTransition: Bool { return next == nil }
@@ -31,9 +40,9 @@ class StateCtrl<TargetView: UIView>
     //===
     
     public
-    init(for view: TargetView)
+    init(for view: Target)
     {
-        self.targetView = view
+        self.target = view
     }
 }
 
@@ -41,7 +50,10 @@ class StateCtrl<TargetView: UIView>
 
 extension StateCtrl
 {
-    func apply(_ newState: ViewState<TargetView>)
+    func apply(
+        _ newState: State<Target>,
+        transition: Transition? = nil
+        )
     {
         guard
             current != newState
@@ -74,7 +86,7 @@ extension StateCtrl
         //===
         
         guard
-            let targetView = targetView
+            let target = target
         else
         {
             return
@@ -86,7 +98,13 @@ extension StateCtrl
         
         //===
         
-        newState.apply(on: targetView) {
+        let mutation = { newState.mutation(target) }
+        
+        let transition = transition ?? { $0(); $1(true) }
+        
+        //===
+        
+        transition(mutation) {
             
             if
                 $0 // transition finished?

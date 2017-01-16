@@ -1,21 +1,21 @@
 //
 //  DiscreteSystem.swift
-//  MKHViewState
+//  MKHState
 //
 //  Created by Maxim Khatskevich on 1/14/17.
 //  Copyright © 2017 Maxim Khatskevich. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 //===
 
 public
 protocol DiscreteSystem: class
 {
-    associatedtype TargetView: UIView
+    associatedtype Target: AnyObject
     
-    var stateCtrl: StateCtrl<TargetView> { get }
+    var stateCtrl: StateCtrl<Target> { get }
 }
 
 //===
@@ -23,8 +23,9 @@ protocol DiscreteSystem: class
 public
 extension DiscreteSystem
 {
-    func apply(_ newState: ViewState<TargetView>)
+    func apply(_ newState: State<Target>,
+               transition: Transition? = nil)
     {
-        stateCtrl.apply(newState)
+        stateCtrl.apply(newState, transition: transition)
     }
 }
