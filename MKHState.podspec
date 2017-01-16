@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name                      = 'MKHState'
-  s.version                   = '1.2.0'
+  s.version                   = '2.0.0'
   s.summary                   = 'Turn any object into a discrete system and describe its states in a declarative style.'
   s.homepage                  = 'https://github.com/maximkhatskevich/#{s.name}'
   s.license                   = { :type => 'MIT', :file => 'LICENSE' }
