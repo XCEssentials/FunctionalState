@@ -27,10 +27,24 @@ extension DiscreteSystem
         return State("\(self).\(context)", mutation)
     }
     
-    func apply(_ getState: (_: Self.Type) -> State<Self>)
+    //===
+    
+    func apply(
+        _ getState: (_: Self.Type) -> State<Self>
+        )
     {
-        let state = getState(Self.self)
-        
-        state.mutation(self)
+        apply(getState, via: nil, nil)
+    }
+    
+    func apply(
+        _ getState: (_: Self.Type) -> State<Self>,
+        via transition: Transition? = nil,
+        _ completion: Completion? = nil
+        )
+    {
+        Utils.apply(getState(Self.self),
+                    on: self,
+                    via: transition,
+                    completion)
     }
 }

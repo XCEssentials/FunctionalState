@@ -16,6 +16,8 @@
 		7DD676C11478E55C381A167D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3011CD4CDD7D1F9E309C7A2 /* UIKit.framework */; };
 		7F96D3ADC292505CE8DD9805 /* MyView.Disabled.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25D5B6A76B21F957504A9CB /* MyView.Disabled.swift */; };
 		88585C4AD15434AD57F04B31 /* MyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DF647296B0C2A7BA142A43 /* MyView.swift */; };
+		94F848CE1E2E13750019F638 /* TypeAliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F848CD1E2E13750019F638 /* TypeAliases.swift */; };
+		94F848D01E2E15CE0019F638 /* Apply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F848CF1E2E15CE0019F638 /* Apply.swift */; };
 		9909DFA1945F45BBBD339CAA /* DiscreteSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D454FDF9D2EFADBE67E4D3F /* DiscreteSystem.swift */; };
 		A252D24FD6F79102198458C2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BA9893F0722A5F3C5BBB60F /* Foundation.framework */; };
 		A681D951A03B307E007699AE /* MyView.Normal.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44D6F2887CEE0640AB4C3C2 /* MyView.Normal.swift */; };
@@ -30,6 +32,8 @@
 		53DF647296B0C2A7BA142A43 /* MyView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MyView.swift; sourceTree = "<group>"; };
 		5BA9893F0722A5F3C5BBB60F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		75A6A621C3DDEF7101DF7CF1 /* MKHStateTst.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MKHStateTst.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		94F848CD1E2E13750019F638 /* TypeAliases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeAliases.swift; sourceTree = "<group>"; };
+		94F848CF1E2E15CE0019F638 /* Apply.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Apply.swift; sourceTree = "<group>"; };
 		969A90CE3B84EF33D7749D9D /* State.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		A6D83E3B77852A536FF57AED /* Main.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
 		D25D5B6A76B21F957504A9CB /* MyView.Disabled.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MyView.Disabled.swift; sourceTree = "<group>"; };
@@ -62,9 +66,11 @@
 		08256C7B7AC4800AC2A1592A /* Src */ = {
 			isa = PBXGroup;
 			children = (
+				94F848CF1E2E15CE0019F638 /* Apply.swift */,
 				1D454FDF9D2EFADBE67E4D3F /* DiscreteSystem.swift */,
 				969A90CE3B84EF33D7749D9D /* State.swift */,
 				343A96E781C61B1E0033F473 /* StateCtrl.swift */,
+				94F848CD1E2E13750019F638 /* TypeAliases.swift */,
 			);
 			path = Src;
 			sourceTree = "<group>";
@@ -227,6 +233,8 @@
 			files = (
 				9909DFA1945F45BBBD339CAA /* DiscreteSystem.swift in Sources */,
 				67E3CA8D5F8EC7F91B7FE726 /* State.swift in Sources */,
+				94F848CE1E2E13750019F638 /* TypeAliases.swift in Sources */,
+				94F848D01E2E15CE0019F638 /* Apply.swift in Sources */,
 				1DC71DC24F23F01EB9CF1CB6 /* StateCtrl.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

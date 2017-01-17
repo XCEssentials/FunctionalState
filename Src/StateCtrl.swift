@@ -10,15 +10,6 @@ import Foundation
 
 //===
 
-//public
-//typealias Transition =
-//(
-//    _ mutation: @escaping () -> Void,
-//    _ completion: @escaping  (_ finished: Bool) -> Void
-//) -> Void
-
-//===
-
 public
 final
 class StateCtrl<Target: AnyObject>
@@ -33,6 +24,9 @@ class StateCtrl<Target: AnyObject>
     
     public fileprivate(set)
     var next: State<Target>? = nil
+    
+    public
+    var defaultTransition: Transition? = nil
     
     public
     var isReadyForTransition: Bool { return next == nil }
@@ -51,7 +45,18 @@ class StateCtrl<Target: AnyObject>
 public
 extension StateCtrl
 {
-    func apply(_ getState: (_: Target.Type) -> State<Target>)
+    func apply(
+        _ getState: (_: Target.Type) -> State<Target>
+        )
+    {
+        apply(getState, via: nil, nil)
+    }
+    
+    func apply(
+        _ getState: (_: Target.Type) -> State<Target>,
+        via transition: Transition? = nil,
+        _ completion: Completion? = nil
+        )
     {
         guard
             let target = target
@@ -62,8 +67,69 @@ extension StateCtrl
         
         //===
         
-        let state = getState(Target.self)
+        let newState = getState(Target.self)
         
-        state.mutation(target)
+        //===
+        
+        guard
+            current != newState
+        else
+        {
+            return // just return without doing anything
+        }
+        
+        //===
+        
+        guard
+            next.map({ $0 != newState }) ?? true
+        else
+        {
+            return // just return without doing anything
+        }
+        
+        //===
+        
+        /*
+         
+         Q: What we've checked so far?
+         
+         A: If we are already in the target state,
+         or if we are currently transitioning into that state, then
+         no need to do anything at all, and no need to throw an exception.
+         
+         */
+        
+        //===
+        
+        next = newState
+        
+        //===
+        
+        Utils
+            .apply(
+                newState,
+                on: target,
+                via: (transition ?? defaultTransition),
+                {
+                    if
+                        $0 // transition finished?
+                    {
+                        // YES
+                        
+                        self.current = newState
+                        self.next = nil
+                    }
+                    else
+                    {
+                        // NO
+                        
+                        // most likely transition has been
+                        // interupted by applying another state
+                    }
+                    
+                    //===
+                    
+                    completion?($0)
+                })
     }
 }

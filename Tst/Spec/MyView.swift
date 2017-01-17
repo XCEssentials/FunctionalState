@@ -12,11 +12,7 @@ import MKHState
 
 //===
 
-class MyView: UIView
-{    
-//    lazy
-//    var stateCtrl: StateCtrl<MyView, Void> = StateCtrl(for: self)
-}
+class MyView: UIView { }
 
 //===
 
@@ -24,15 +20,15 @@ extension MyView: DiscreteSystem { }
 
 //=== MARK: Special helpers
 
-//extension MyView
-//{
-//    static
-//    let oneSecondAnimation: Transition =
-//        {
-//            UIView.animate(
-//                withDuration: 1.0,
-//                animations: $0,
-//                completion: $1
-//            )
-//    }
-//}
+extension MyView
+{
+    static
+    let oneSecondAnimation: Transition =
+        {
+            UIView.animate(
+                withDuration: 1.0,
+                animations: $0,
+                completion: $1
+            )
+    }
+}

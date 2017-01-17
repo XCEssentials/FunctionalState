@@ -22,6 +22,7 @@ class Main: XCTestCase
         
         //===
         
+        // aView.apply{ $0.highlighted(.blue) }
         ctrl.apply{ $0.highlighted(.blue) }
         
         //===
@@ -30,14 +31,12 @@ class Main: XCTestCase
         
         //===
 
-        ctrl.apply{ $0.disabled() }
-        
-//        aView.apply(MyView.Disabled.state,
-//                    transition: MyView.oneSecondAnimation)
+        // aView.apply({ $0.disabled() }, via: MyView.oneSecondAnimation)
+        ctrl.apply({ $0.disabled() }, via: MyView.oneSecondAnimation)
         
         //===
         
         // not ready, because of animation 1.0 sec.
-//        XCTAssert(!ctrl.isReadyForTransition)
+        XCTAssert(!ctrl.isReadyForTransition)
     }
 }
