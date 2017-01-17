@@ -1,2 +1,2 @@
-# MKHViewState
-Implement any view as a discrete system and describe its states in a declarative style.
+# MKHState
+Turn any object into a discrete system and describe its states in a declarative style.
