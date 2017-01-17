@@ -17,11 +17,9 @@ extension MyView
     static
     func highlighted(_ color: UIColor) -> State<MyView>
     {
-        return state {
+        return state { (_) in
             
-            $0.alpha = 1.0
-            $0.isUserInteractionEnabled = true
-            $0.backgroundColor = color
+            print("Applying Highlighted state")
         }
     }
 }

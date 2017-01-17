@@ -14,29 +14,71 @@ import MKHState
 
 class Main: XCTestCase
 {
-    func testExample()
+    let aView = MyView()
+    
+    var ctrl: StateCtrl<MyView>!
+    
+    //===
+    
+    func testApplyDirectlyToView()
     {
-        let aView = MyView()
-        
-        let ctrl = StateCtrl(for: aView)
+        let ex = expectation(description: "After All States Apply")
         
         //===
         
-        // aView.apply{ $0.highlighted(.blue) }
-        ctrl.apply{ $0.highlighted(.blue) }
+        aView.apply{ $0.highlighted(.blue) }
+        
+        //===
+        
+        aView.apply(
+            { $0.disabled() },
+            via: MyView.shortAnimation,
+            { if $0 { ex.fulfill() } })
+        
+        //===
+        
+        waitForExpectations(timeout: 1.0)
+    }
+    
+    func testExample()
+    {
+        let ex2 = expectation(description: "Second state applied")
+        let ex3 = expectation(description: "Third state applied")
+        
+        //===
+        
+        ctrl = StateCtrl(for: aView)
+        
+        //===
+        
+        ctrl.enqueue{ $0.highlighted(.blue) }
         
         //===
         
         XCTAssert(ctrl.isReadyForTransition)
         
         //===
-
-        // aView.apply({ $0.disabled() }, via: MyView.oneSecondAnimation)
-        ctrl.apply({ $0.disabled() }, via: MyView.oneSecondAnimation)
+        
+        ctrl.enqueue({ $0.disabled() },
+                     via: MyView.shortAnimation,
+                     { if $0 { ex2.fulfill() } })
         
         //===
         
-        // not ready, because of animation 1.0 sec.
         XCTAssert(!ctrl.isReadyForTransition)
+        
+        //===
+        
+        ctrl.enqueue({ $0.normal(0.6) },
+                     via: MyView.shortAnimation,
+                     { if $0 { ex3.fulfill() } })
+        
+        //===
+        
+        XCTAssert(!ctrl.isReadyForTransition)
+        
+        //===
+        
+        waitForExpectations(timeout: 1.5)
     }
 }

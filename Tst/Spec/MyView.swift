@@ -6,13 +6,13 @@
 //  Copyright © 2017 Maxim Khatskevich. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 import MKHState
 
 //===
 
-class MyView: UIView { }
+class MyView { }
 
 //===
 
@@ -23,12 +23,24 @@ extension MyView: DiscreteSystem { }
 extension MyView
 {
     static
-    let oneSecondAnimation: Transition =
-    {
-        UIView.animate(
-            withDuration: 1.0,
-            animations: $0,
-            completion: $1
-        )
+    let shortAnimation: Transition = { (mutation, completion) in
+        
+        DispatchQueue
+            .global()
+            .async {
+                
+                print("Animating")
+                mutation()
+                
+                //===
+                
+                DispatchQueue
+                    .main
+                    .asyncAfter(deadline: .now() + 0.5) {
+                        
+                        print("Completing now!")
+                        completion(true)
+                    }
+            }
     }
 }

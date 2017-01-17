@@ -17,11 +17,9 @@ extension MyView
     static
     func disabled() -> State<MyView>
     {
-        return state {
+        return state { (_) in
             
-            $0.alpha = 1.0
-            $0.isUserInteractionEnabled = true
-            $0.backgroundColor = .gray
+            print("Applying Disabled state")
         }
     }
 }

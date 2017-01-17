@@ -11,6 +11,11 @@ import Foundation
 //===
 
 public
+typealias StateGetter<Target: AnyObject> = (_: Target.Type) -> State<Target>
+
+//===
+
+public
 typealias Completion = (_ finished: Bool) -> Void
 
 //===
