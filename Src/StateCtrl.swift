@@ -11,15 +11,6 @@ import Foundation
 //===
 
 public
-typealias Transition =
-(
-    _ mutation: @escaping () -> Void,
-    _ completion: @escaping  (_ finished: Bool) -> Void
-) -> Void
-
-//===
-
-public
 final
 class StateCtrl<Target: AnyObject>
 {
@@ -35,6 +26,9 @@ class StateCtrl<Target: AnyObject>
     var next: State<Target>? = nil
     
     public
+    var defaultTransition: Transition? = nil
+    
+    public
     var isReadyForTransition: Bool { return next == nil }
     
     //===
@@ -48,13 +42,35 @@ class StateCtrl<Target: AnyObject>
 
 //=== MARK: Apply
 
+public
 extension StateCtrl
 {
     func apply(
-        _ newState: State<Target>,
-        transition: Transition? = nil
+        _ getState: (_: Target.Type) -> State<Target>
         )
     {
+        apply(getState, via: nil, nil)
+    }
+    
+    func apply(
+        _ getState: (_: Target.Type) -> State<Target>,
+        via transition: Transition? = nil,
+        _ completion: Completion? = nil
+        )
+    {
+        guard
+            let target = target
+        else
+        {
+            return
+        }
+        
+        //===
+        
+        let newState = getState(Target.self)
+        
+        //===
+        
         guard
             current != newState
         else
@@ -85,42 +101,35 @@ extension StateCtrl
         
         //===
         
-        guard
-            let target = target
-        else
-        {
-            return
-        }
-        
-        //===
-        
         next = newState
         
         //===
         
-        let mutation = { newState.mutation(target) }
-        
-        let transition = transition ?? { $0(); $1(true) }
-        
-        //===
-        
-        transition(mutation) {
-            
-            if
-                $0 // transition finished?
-            {
-                // YES
-                
-                self.current = newState
-                self.next = nil
-            }
-            else
-            {
-                // NO
-                
-                // most likely transition has been
-                // interupted by applying anopther state
-            }
-        }
+        Utils
+            .apply(
+                newState,
+                on: target,
+                via: (transition ?? defaultTransition),
+                {
+                    if
+                        $0 // transition finished?
+                    {
+                        // YES
+                        
+                        self.current = newState
+                        self.next = nil
+                    }
+                    else
+                    {
+                        // NO
+                        
+                        // most likely transition has been
+                        // interupted by applying another state
+                    }
+                    
+                    //===
+                    
+                    completion?($0)
+                })
     }
 }

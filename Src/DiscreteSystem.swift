@@ -11,21 +11,40 @@ import Foundation
 //===
 
 public
-protocol DiscreteSystem: class
-{
-    associatedtype Target: AnyObject
-    
-    var stateCtrl: StateCtrl<Target> { get }
-}
+protocol DiscreteSystem: class { }
 
 //===
 
 public
 extension DiscreteSystem
 {
-    func apply(_ newState: State<Target>,
-               transition: Transition? = nil)
+    static
+    func state(
+        context: String = #function,
+        mutation: @escaping (_: Self) -> Void
+        ) -> State<Self>
     {
-        stateCtrl.apply(newState, transition: transition)
+        return State("\(self).\(context)", mutation)
+    }
+    
+    //===
+    
+    func apply(
+        _ getState: (_: Self.Type) -> State<Self>
+        )
+    {
+        apply(getState, via: nil, nil)
+    }
+    
+    func apply(
+        _ getState: (_: Self.Type) -> State<Self>,
+        via transition: Transition? = nil,
+        _ completion: Completion? = nil
+        )
+    {
+        Utils.apply(getState(Self.self),
+                    on: self,
+                    via: transition,
+                    completion)
     }
 }
