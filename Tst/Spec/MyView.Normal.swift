@@ -17,11 +17,9 @@ extension MyView
     static
     func normal(_ opacity: CGFloat) -> State<MyView>
     {
-        return state {
+        return state { (_) in
             
-            $0.alpha = opacity
-            $0.isUserInteractionEnabled = true
-            $0.backgroundColor = .clear
+            print("Applying Normal state")
         }
     }
 }

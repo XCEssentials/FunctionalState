@@ -25,6 +25,8 @@ class StateCtrl<Target: AnyObject>
     public fileprivate(set)
     var next: State<Target>? = nil
     
+    var queue: [(StateGetter<Target>, Transition?, Completion?)] = []
+    
     public
     var defaultTransition: Transition? = nil
     
@@ -118,6 +120,14 @@ extension StateCtrl
                         
                         self.current = newState
                         self.next = nil
+                        
+                        //===
+                        
+                        completion?($0)
+                        
+                        //===
+                        
+                        self.applyNext()
                     }
                     else
                     {
@@ -125,11 +135,62 @@ extension StateCtrl
                         
                         // most likely transition has been
                         // interupted by applying another state
+                        
+                        //===
+                        
+                        completion?($0)
+                        
+                        //===
+                        
+                        self.resetQueue()
                     }
-                    
-                    //===
-                    
-                    completion?($0)
                 })
+    }
+    
+    func enqueue(
+        _ getState: @escaping (_: Target.Type) -> State<Target>
+        )
+    {
+        enqueue(getState, via: nil, nil)
+    }
+    
+    func enqueue(
+        _ getState: @escaping (_: Target.Type) -> State<Target>,
+        via transition: Transition? = nil,
+        _ completion: Completion? = nil
+        )
+    {
+        if
+            isReadyForTransition
+        {
+            apply(getState, via: transition, completion)
+        }
+        else
+        {
+            queue.append(
+                (getState, transition, completion))
+        }
+    }
+}
+
+//===
+
+extension StateCtrl
+{
+    func applyNext()
+    {
+        if
+            isReadyForTransition,
+            queue.count > 0
+        {
+            let q = queue.removeFirst()
+            
+            apply(q.0, via: q.1, q.2)
+        }
+    }
+    
+    func resetQueue()
+    {
+        queue.removeAll()
     }
 }
