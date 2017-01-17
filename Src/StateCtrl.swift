@@ -48,6 +48,7 @@ class StateCtrl<Target: AnyObject>
 
 //=== MARK: Apply
 
+public
 extension StateCtrl
 {
     func apply(_ getState: (_: Target.Type) -> State<Target>)

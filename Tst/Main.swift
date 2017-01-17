@@ -8,6 +8,8 @@
 
 import XCTest
 
+import MKHState
+
 //===
 
 class Main: XCTestCase
@@ -16,17 +18,19 @@ class Main: XCTestCase
     {
         let aView = MyView()
         
-        //===
-        
-        aView.apply{ $0.highlighted(.blue) }
+        let ctrl = StateCtrl(for: aView)
         
         //===
         
-//        XCTAssert(aView.stateCtrl.isReadyForTransition)
+        ctrl.apply{ $0.highlighted(.blue) }
+        
+        //===
+        
+        XCTAssert(ctrl.isReadyForTransition)
         
         //===
 
-        aView.apply{ $0.disabled() }
+        ctrl.apply{ $0.disabled() }
         
 //        aView.apply(MyView.Disabled.state,
 //                    transition: MyView.oneSecondAnimation)
@@ -34,6 +38,6 @@ class Main: XCTestCase
         //===
         
         // not ready, because of animation 1.0 sec.
-//        XCTAssert(!aView.stateCtrl.isReadyForTransition)
+//        XCTAssert(!ctrl.isReadyForTransition)
     }
 }
