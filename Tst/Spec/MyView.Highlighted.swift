@@ -14,14 +14,14 @@ import MKHState
 
 extension MyView
 {
-    enum Highlighted
+    static
+    func highlighted(_ color: UIColor) -> State<MyView>
     {
-        static
-        let state = St() {
+        return state {
             
             $0.alpha = 1.0
             $0.isUserInteractionEnabled = true
-            $0.backgroundColor = .green
+            $0.backgroundColor = color
         }
     }
 }

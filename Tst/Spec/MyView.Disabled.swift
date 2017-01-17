@@ -14,13 +14,13 @@ import MKHState
 
 extension MyView
 {
-    enum Disabled
+    static
+    func disabled() -> State<MyView>
     {
-        static
-        let state = St() {
+        return state {
             
-            $0.alpha = 0.5
-            $0.isUserInteractionEnabled = false
+            $0.alpha = 1.0
+            $0.isUserInteractionEnabled = true
             $0.backgroundColor = .gray
         }
     }

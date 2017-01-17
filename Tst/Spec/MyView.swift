@@ -12,15 +12,11 @@ import MKHState
 
 //===
 
-class MyView: UIView, DiscreteSystem
-{
-    typealias St = State<MyView>
-    
-    //===
-    
-    lazy
-    var stateCtrl: StateCtrl<MyView> = StateCtrl(for: self)
-}
+class MyView: UIView { }
+
+//===
+
+extension MyView: DiscreteSystem { }
 
 //=== MARK: Special helpers
 
@@ -28,11 +24,11 @@ extension MyView
 {
     static
     let oneSecondAnimation: Transition =
-        {
-            UIView.animate(
-                withDuration: 1.0,
-                animations: $0,
-                completion: $1
-            )
+    {
+        UIView.animate(
+            withDuration: 1.0,
+            animations: $0,
+            completion: $1
+        )
     }
 }

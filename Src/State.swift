@@ -11,19 +11,17 @@ import Foundation
 //===
 
 public
-final
-class State<Target: AnyObject>
+struct State<Target: AnyObject>
 {
     let id: String
     
-    let mutation: (_ view: Target) -> Void
+    let mutation: (_: Target) -> Void
     
     //===
     
-    public
     init(
-        id: String = NSUUID().uuidString,
-        mutation: @escaping (_ view: Target) -> Void
+        _ id: String = NSUUID().uuidString,
+        _ mutation: @escaping (_: Target) -> Void
         )
     {
         self.id = id
