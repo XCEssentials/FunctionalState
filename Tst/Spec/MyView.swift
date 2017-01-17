@@ -24,11 +24,11 @@ extension MyView
 {
     static
     let oneSecondAnimation: Transition =
-        {
-            UIView.animate(
-                withDuration: 1.0,
-                animations: $0,
-                completion: $1
-            )
+    {
+        UIView.animate(
+            withDuration: 1.0,
+            animations: $0,
+            completion: $1
+        )
     }
 }
