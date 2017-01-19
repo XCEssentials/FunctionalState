@@ -62,14 +62,7 @@ class Main: XCTestCase
         ctrl.enqueue({ $0.disabled() },
                      via: MyView.shortAnimation,
                      { if $0 { ex2.fulfill() } })
-        
-        //===
-        
-        XCTAssert(!ctrl.isReadyForTransition)
-        
-        //===
-        
-        ctrl.enqueue({ $0.normal(0.6) },
+            .enqueue({ $0.normal(0.6) },
                      via: MyView.shortAnimation,
                      { if $0 { ex3.fulfill() } })
         

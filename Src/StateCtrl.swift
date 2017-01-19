@@ -147,18 +147,20 @@ extension StateCtrl
                 })
     }
     
+    @discardableResult
     func enqueue(
         _ getState: @escaping (_: Target.Type) -> State<Target>
-        )
+        ) -> StateCtrl<Target>
     {
-        enqueue(getState, via: nil, nil)
+        return enqueue(getState, via: nil, nil)
     }
     
+    @discardableResult
     func enqueue(
         _ getState: @escaping (_: Target.Type) -> State<Target>,
         via transition: Transition? = nil,
         _ completion: Completion? = nil
-        )
+        ) -> StateCtrl<Target>
     {
         if
             isReadyForTransition
@@ -170,6 +172,10 @@ extension StateCtrl
             queue.append(
                 (getState, transition, completion))
         }
+        
+        //===
+        
+        return self
     }
 }
 
