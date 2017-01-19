@@ -26,11 +26,11 @@ class Main: XCTestCase
         
         //===
         
-        aView.apply{ $0.highlighted(.blue) }
+        aView.become{ $0.highlighted(.blue) }
         
         //===
         
-        aView.apply(
+        aView.become(
             { $0.disabled() },
             via: MyView.shortAnimation,
             { if $0 { ex.fulfill() } })
