@@ -29,22 +29,28 @@ extension DiscreteSystem
     
     //===
     
+    @discardableResult
     func apply(
         _ getState: (_: Self.Type) -> State<Self>
-        )
+        ) -> Self
     {
-        apply(getState, via: nil, nil)
+        return apply(getState, via: nil, nil)
     }
     
+    @discardableResult
     func apply(
         _ getState: (_: Self.Type) -> State<Self>,
         via transition: Transition? = nil,
         _ completion: Completion? = nil
-        )
+        ) -> Self
     {
         Utils.apply(getState(Self.self),
                     on: self,
                     via: transition,
                     completion)
+        
+        //===
+        
+        return self
     }
 }
