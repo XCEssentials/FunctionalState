@@ -31,9 +31,9 @@ class Main: XCTestCase
         //===
         
         aView.become(
-            { $0.disabled() },
             via: MyView.shortAnimation,
-            { if $0 { ex.fulfill() } })
+            { if $0 { ex.fulfill() } },
+            { $0.disabled() })
         
         //===
         
@@ -59,12 +59,12 @@ class Main: XCTestCase
         
         //===
         
-        ctrl.enqueue({ $0.disabled() },
-                     via: MyView.shortAnimation,
-                     { if $0 { ex2.fulfill() } })
-            .enqueue({ $0.normal(0.6) },
-                     via: MyView.shortAnimation,
-                     { if $0 { ex3.fulfill() } })
+        ctrl.enqueue(via: MyView.shortAnimation,
+                     { if $0 { ex2.fulfill() } },
+                     { $0.disabled() })
+            .enqueue(via: MyView.shortAnimation,
+                     { if $0 { ex3.fulfill() } },
+                     { $0.normal(0.6) })
         
         //===
         

@@ -31,17 +31,9 @@ extension DiscreteSystem
     
     @discardableResult
     func apply(
-        _ getState: (_: Self.Type) -> State<Self>
-        ) -> Self
-    {
-        return apply(getState, via: nil, nil)
-    }
-    
-    @discardableResult
-    func apply(
-        _ getState: (_: Self.Type) -> State<Self>,
         via transition: Transition? = nil,
-        _ completion: Completion? = nil
+        _ completion: Completion? = nil,
+        _ getState: (_: Self.Type) -> State<Self>
         ) -> Self
     {
         Utils.apply(getState(Self.self),
@@ -62,19 +54,11 @@ extension DiscreteSystem
 {
     @discardableResult
     func become(
+        via transition: Transition? = nil,
+        _ completion: Completion? = nil,
         _ getState: (_: Self.Type) -> State<Self>
         ) -> Self
     {
-        return apply(getState, via: nil, nil)
-    }
-    
-    @discardableResult
-    func become(
-        _ getState: (_: Self.Type) -> State<Self>,
-        via transition: Transition? = nil,
-        _ completion: Completion? = nil
-        ) -> Self
-    {
-        return apply(getState, via: transition, completion)
+        return apply(via: transition, completion, getState)
     }
 }

@@ -25,7 +25,7 @@ class StateCtrl<Target: AnyObject>
     public fileprivate(set)
     var next: State<Target>? = nil
     
-    var queue: [(StateGetter<Target>, Transition?, Completion?)] = []
+    var queue: [(Transition?, Completion?, StateGetter<Target>)] = []
     
     public
     var defaultTransition: Transition? = nil
@@ -48,16 +48,9 @@ public
 extension StateCtrl
 {
     func apply(
-        _ getState: (_: Target.Type) -> State<Target>
-        )
-    {
-        apply(getState, via: nil, nil)
-    }
-    
-    func apply(
-        _ getState: (_: Target.Type) -> State<Target>,
         via transition: Transition? = nil,
-        _ completion: Completion? = nil
+        _ completion: Completion? = nil,
+        _ getState: (_: Target.Type) -> State<Target>
         )
     {
         guard
@@ -149,28 +142,19 @@ extension StateCtrl
     
     @discardableResult
     func enqueue(
-        _ getState: @escaping (_: Target.Type) -> State<Target>
-        ) -> StateCtrl<Target>
-    {
-        return enqueue(getState, via: nil, nil)
-    }
-    
-    @discardableResult
-    func enqueue(
-        _ getState: @escaping (_: Target.Type) -> State<Target>,
         via transition: Transition? = nil,
-        _ completion: Completion? = nil
+        _ completion: Completion? = nil,
+        _ getState: @escaping (_: Target.Type) -> State<Target>
         ) -> StateCtrl<Target>
     {
         if
             isReadyForTransition
         {
-            apply(getState, via: transition, completion)
+            apply(via: transition, completion, getState)
         }
         else
         {
-            queue.append(
-                (getState, transition, completion))
+            queue.append((transition, completion, getState))
         }
         
         //===
@@ -191,7 +175,7 @@ extension StateCtrl
         {
             let q = queue.removeFirst()
             
-            apply(q.0, via: q.1, q.2)
+            apply(via: q.0, q.1, q.2)
         }
     }
     
