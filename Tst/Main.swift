@@ -26,14 +26,13 @@ class Main: XCTestCase
         
         //===
         
-        aView.apply{ $0.highlighted(.blue) }
+        aView.become { $0.highlighted(.blue) }
         
         //===
         
-        aView.apply(
-            { $0.disabled() },
-            via: MyView.shortAnimation,
-            { if $0 { ex.fulfill() } })
+        aView.become({ $0.disabled() },
+                     via: MyView.shortAnimation,
+                     completion: { if $0 { ex.fulfill() } })
         
         //===
         
@@ -51,7 +50,7 @@ class Main: XCTestCase
         
         //===
         
-        ctrl.enqueue{ $0.highlighted(.blue) }
+        ctrl.enqueue { $0.highlighted(.blue) }
         
         //===
         
@@ -61,10 +60,10 @@ class Main: XCTestCase
         
         ctrl.enqueue({ $0.disabled() },
                      via: MyView.shortAnimation,
-                     { if $0 { ex2.fulfill() } })
+                     completion: { if $0 { ex2.fulfill() } })
             .enqueue({ $0.normal(0.6) },
                      via: MyView.shortAnimation,
-                     { if $0 { ex3.fulfill() } })
+                     completion: { if $0 { ex3.fulfill() } })
         
         //===
         

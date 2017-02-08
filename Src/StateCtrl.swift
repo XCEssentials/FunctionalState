@@ -48,16 +48,9 @@ public
 extension StateCtrl
 {
     func apply(
-        _ getState: (_: Target.Type) -> State<Target>
-        )
-    {
-        apply(getState, via: nil, nil)
-    }
-    
-    func apply(
         _ getState: (_: Target.Type) -> State<Target>,
         via transition: Transition? = nil,
-        _ completion: Completion? = nil
+        completion: Completion? = nil
         )
     {
         guard
@@ -112,7 +105,7 @@ extension StateCtrl
                 newState,
                 on: target,
                 via: (transition ?? defaultTransition),
-                {
+                completion: {
                     if
                         $0 // transition finished?
                     {
@@ -152,25 +145,24 @@ extension StateCtrl
         _ getState: @escaping (_: Target.Type) -> State<Target>
         ) -> StateCtrl<Target>
     {
-        return enqueue(getState, via: nil, nil)
+        return enqueue(getState, via: nil, completion: nil)
     }
     
     @discardableResult
     func enqueue(
         _ getState: @escaping (_: Target.Type) -> State<Target>,
         via transition: Transition? = nil,
-        _ completion: Completion? = nil
+        completion: Completion? = nil
         ) -> StateCtrl<Target>
     {
         if
             isReadyForTransition
         {
-            apply(getState, via: transition, completion)
+            apply(getState, via: transition, completion: completion)
         }
         else
         {
-            queue.append(
-                (getState, transition, completion))
+            queue.append((getState, transition, completion))
         }
         
         //===
@@ -189,9 +181,9 @@ extension StateCtrl
             isReadyForTransition,
             queue.count > 0
         {
-            let q = queue.removeFirst()
+            let (sG, t, c) = queue.removeFirst()
             
-            apply(q.0, via: q.1, q.2)
+            apply(sG, via: t, completion: c)
         }
     }
     

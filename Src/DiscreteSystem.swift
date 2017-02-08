@@ -31,26 +31,46 @@ extension DiscreteSystem
     
     @discardableResult
     func apply(
-        _ getState: (_: Self.Type) -> State<Self>
-        ) -> Self
-    {
-        return apply(getState, via: nil, nil)
-    }
-    
-    @discardableResult
-    func apply(
         _ getState: (_: Self.Type) -> State<Self>,
         via transition: Transition? = nil,
-        _ completion: Completion? = nil
+        completion: Completion? = nil
         ) -> Self
     {
         Utils.apply(getState(Self.self),
                     on: self,
                     via: transition,
-                    completion)
+                    completion: completion)
         
         //===
         
         return self
+    }
+}
+
+//=== MARK: Aliases
+
+public
+extension DiscreteSystem
+{
+    @discardableResult
+    func become(
+        _ getState: (_: Self.Type) -> State<Self>
+        ) -> Self
+    {
+        return apply(getState,
+                     via: nil,
+                     completion: nil)
+    }
+    
+    @discardableResult
+    func become(
+        _ getState: (_: Self.Type) -> State<Self>,
+        via transition: Transition? = nil,
+        completion: Completion? = nil
+        ) -> Self
+    {
+        return apply(getState,
+                     via: transition,
+                     completion: completion)
     }
 }
