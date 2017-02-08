@@ -17,7 +17,7 @@ enum Utils
         _ state: State<Target>,
         on target: Target,
         via transition: Transition? = nil,
-        _ completion: Completion? = nil
+        completion: Completion? = nil
         )
     {
         let mutation = { state.mutation(target) }

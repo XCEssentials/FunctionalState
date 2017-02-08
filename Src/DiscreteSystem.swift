@@ -31,15 +31,15 @@ extension DiscreteSystem
     
     @discardableResult
     func apply(
+        _ getState: (_: Self.Type) -> State<Self>,
         via transition: Transition? = nil,
-        _ completion: Completion? = nil,
-        _ getState: (_: Self.Type) -> State<Self>
+        completion: Completion? = nil
         ) -> Self
     {
         Utils.apply(getState(Self.self),
                     on: self,
                     via: transition,
-                    completion)
+                    completion: completion)
         
         //===
         
@@ -54,11 +54,23 @@ extension DiscreteSystem
 {
     @discardableResult
     func become(
-        via transition: Transition? = nil,
-        _ completion: Completion? = nil,
         _ getState: (_: Self.Type) -> State<Self>
         ) -> Self
     {
-        return apply(via: transition, completion, getState)
+        return apply(getState,
+                     via: nil,
+                     completion: nil)
+    }
+    
+    @discardableResult
+    func become(
+        _ getState: (_: Self.Type) -> State<Self>,
+        via transition: Transition? = nil,
+        completion: Completion? = nil
+        ) -> Self
+    {
+        return apply(getState,
+                     via: transition,
+                     completion: completion)
     }
 }

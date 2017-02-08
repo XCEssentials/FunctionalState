@@ -25,7 +25,7 @@ class StateCtrl<Target: AnyObject>
     public fileprivate(set)
     var next: State<Target>? = nil
     
-    var queue: [(Transition?, Completion?, StateGetter<Target>)] = []
+    var queue: [(StateGetter<Target>, Transition?, Completion?)] = []
     
     public
     var defaultTransition: Transition? = nil
@@ -48,9 +48,9 @@ public
 extension StateCtrl
 {
     func apply(
+        _ getState: (_: Target.Type) -> State<Target>,
         via transition: Transition? = nil,
-        _ completion: Completion? = nil,
-        _ getState: (_: Target.Type) -> State<Target>
+        completion: Completion? = nil
         )
     {
         guard
@@ -105,7 +105,7 @@ extension StateCtrl
                 newState,
                 on: target,
                 via: (transition ?? defaultTransition),
-                {
+                completion: {
                     if
                         $0 // transition finished?
                     {
@@ -142,19 +142,27 @@ extension StateCtrl
     
     @discardableResult
     func enqueue(
-        via transition: Transition? = nil,
-        _ completion: Completion? = nil,
         _ getState: @escaping (_: Target.Type) -> State<Target>
+        ) -> StateCtrl<Target>
+    {
+        return enqueue(getState, via: nil, completion: nil)
+    }
+    
+    @discardableResult
+    func enqueue(
+        _ getState: @escaping (_: Target.Type) -> State<Target>,
+        via transition: Transition? = nil,
+        completion: Completion? = nil
         ) -> StateCtrl<Target>
     {
         if
             isReadyForTransition
         {
-            apply(via: transition, completion, getState)
+            apply(getState, via: transition, completion: completion)
         }
         else
         {
-            queue.append((transition, completion, getState))
+            queue.append((getState, transition, completion))
         }
         
         //===
@@ -173,9 +181,9 @@ extension StateCtrl
             isReadyForTransition,
             queue.count > 0
         {
-            let q = queue.removeFirst()
+            let (sG, t, c) = queue.removeFirst()
             
-            apply(via: q.0, q.1, q.2)
+            apply(sG, via: t, completion: c)
         }
     }
     
