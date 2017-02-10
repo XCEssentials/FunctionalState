@@ -36,9 +36,11 @@ class StateCtrl<Target: AnyObject>
     //===
     
     public
-    init(for view: Target)
+    init(for view: Target,
+         _ defaultTransition: Transition? = nil)
     {
         self.target = view
+        self.defaultTransition = defaultTransition
     }
 }
 
@@ -158,7 +160,9 @@ extension StateCtrl
         if
             isReadyForTransition
         {
-            apply(getState, via: transition, completion: completion)
+            apply(getState,
+                  via: transition,
+                  completion: completion)
         }
         else
         {
