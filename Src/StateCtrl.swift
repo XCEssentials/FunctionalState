@@ -106,7 +106,7 @@ extension StateCtrl
             .apply(
                 newState,
                 on: target,
-                via: (transition ?? defaultTransition),
+                via: transition,
                 completion: {
                     if
                         $0 // transition finished?
