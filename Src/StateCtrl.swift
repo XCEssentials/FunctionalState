@@ -158,7 +158,9 @@ extension StateCtrl
         if
             isReadyForTransition
         {
-            apply(getState, via: transition, completion: completion)
+            apply(getState,
+                  via: transition,
+                  completion: completion)
         }
         else
         {
