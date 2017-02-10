@@ -25,10 +25,10 @@ class StateCtrl<Target: AnyObject>
     public fileprivate(set)
     var next: State<Target>? = nil
     
-    var queue: [(StateGetter<Target>, Transition?, Completion?)] = []
+    var queue: [(StateGetter<Target>, GenericTransition?, Completion?)] = []
     
     public
-    var defaultTransition: Transition? = nil
+    var defaultTransition: GenericTransition? = nil
     
     public
     var isReadyForTransition: Bool { return next == nil }
@@ -37,7 +37,7 @@ class StateCtrl<Target: AnyObject>
     
     public
     init(for view: Target,
-         _ defaultTransition: Transition? = nil)
+         _ defaultTransition: GenericTransition? = nil)
     {
         self.target = view
         self.defaultTransition = defaultTransition
@@ -51,7 +51,7 @@ extension StateCtrl
 {
     func apply(
         _ getState: (_: Target.Type) -> State<Target>,
-        via transition: Transition? = nil,
+        via transition: GenericTransition? = nil,
         completion: Completion? = nil
         )
     {
@@ -153,7 +153,7 @@ extension StateCtrl
     @discardableResult
     func enqueue(
         _ getState: @escaping (_: Target.Type) -> State<Target>,
-        via transition: Transition? = nil,
+        via transition: GenericTransition? = nil,
         completion: Completion? = nil
         ) -> StateCtrl<Target>
     {

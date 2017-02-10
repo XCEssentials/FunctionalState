@@ -32,7 +32,7 @@ extension DiscreteSystem
     @discardableResult
     func apply(
         _ getState: (_: Self.Type) -> State<Self>,
-        via transition: Transition? = nil,
+        via transition: GenericTransition? = nil,
         completion: Completion? = nil
         ) -> Self
     {
@@ -65,7 +65,7 @@ extension DiscreteSystem
     @discardableResult
     func become(
         _ getState: (_: Self.Type) -> State<Self>,
-        via transition: Transition? = nil,
+        via transition: GenericTransition? = nil,
         completion: Completion? = nil
         ) -> Self
     {

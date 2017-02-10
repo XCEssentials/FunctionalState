@@ -21,7 +21,7 @@ typealias Completion = (_ finished: Bool) -> Void
 //===
 
 public
-typealias Transition =
+typealias GenericTransition =
     (
     _ mutation: @escaping () -> Void,
     _ completion: @escaping  Completion

@@ -16,7 +16,7 @@ enum Utils
     func apply<Target: AnyObject>(
         _ state: State<Target>,
         on target: Target,
-        via transition: Transition? = nil,
+        via transition: GenericTransition? = nil,
         completion: Completion? = nil
         )
     {
