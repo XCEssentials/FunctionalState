@@ -16,6 +16,8 @@
 		7DD676C11478E55C381A167D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3011CD4CDD7D1F9E309C7A2 /* UIKit.framework */; };
 		7F96D3ADC292505CE8DD9805 /* MyView.Disabled.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25D5B6A76B21F957504A9CB /* MyView.Disabled.swift */; };
 		88585C4AD15434AD57F04B31 /* MyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DF647296B0C2A7BA142A43 /* MyView.swift */; };
+		944AFBF61E4F3FA300189681 /* PendingManagedTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944AFBF51E4F3FA300189681 /* PendingManagedTransition.swift */; };
+		944AFBF81E4F475300189681 /* PendingTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944AFBF71E4F475300189681 /* PendingTransition.swift */; };
 		94F848CE1E2E13750019F638 /* TypeAliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F848CD1E2E13750019F638 /* TypeAliases.swift */; };
 		94F848D01E2E15CE0019F638 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F848CF1E2E15CE0019F638 /* Utils.swift */; };
 		9909DFA1945F45BBBD339CAA /* DiscreteSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D454FDF9D2EFADBE67E4D3F /* DiscreteSystem.swift */; };
@@ -32,6 +34,8 @@
 		53DF647296B0C2A7BA142A43 /* MyView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MyView.swift; sourceTree = "<group>"; };
 		5BA9893F0722A5F3C5BBB60F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		75A6A621C3DDEF7101DF7CF1 /* MKHStateTst.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MKHStateTst.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		944AFBF51E4F3FA300189681 /* PendingManagedTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendingManagedTransition.swift; sourceTree = "<group>"; };
+		944AFBF71E4F475300189681 /* PendingTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendingTransition.swift; sourceTree = "<group>"; };
 		94F848CD1E2E13750019F638 /* TypeAliases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeAliases.swift; sourceTree = "<group>"; };
 		94F848CF1E2E15CE0019F638 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		969A90CE3B84EF33D7749D9D /* State.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
@@ -68,8 +72,10 @@
 			children = (
 				94F848CF1E2E15CE0019F638 /* Utils.swift */,
 				1D454FDF9D2EFADBE67E4D3F /* DiscreteSystem.swift */,
+				944AFBF71E4F475300189681 /* PendingTransition.swift */,
 				969A90CE3B84EF33D7749D9D /* State.swift */,
 				343A96E781C61B1E0033F473 /* StateCtrl.swift */,
+				944AFBF51E4F3FA300189681 /* PendingManagedTransition.swift */,
 				94F848CD1E2E13750019F638 /* TypeAliases.swift */,
 			);
 			path = Src;
@@ -231,9 +237,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				944AFBF61E4F3FA300189681 /* PendingManagedTransition.swift in Sources */,
 				9909DFA1945F45BBBD339CAA /* DiscreteSystem.swift in Sources */,
 				67E3CA8D5F8EC7F91B7FE726 /* State.swift in Sources */,
 				94F848CE1E2E13750019F638 /* TypeAliases.swift in Sources */,
+				944AFBF81E4F475300189681 /* PendingTransition.swift in Sources */,
 				94F848D01E2E15CE0019F638 /* Utils.swift in Sources */,
 				1DC71DC24F23F01EB9CF1CB6 /* StateCtrl.swift in Sources */,
 			);
@@ -264,7 +272,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = YES;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 13;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -289,12 +297,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 13;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = UJA88X59XP;
 				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 12;
+				DYLIB_CURRENT_VERSION = 13;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -360,7 +368,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 13;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -416,12 +424,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 13;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = UJA88X59XP;
 				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 12;
+				DYLIB_CURRENT_VERSION = 13;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;

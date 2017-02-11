@@ -23,14 +23,14 @@ extension MyView: DiscreteSystem { }
 extension MyView
 {
     static
-    let shortAnimation: Transition = { (mutation, completion) in
+    let shortAnimation: Transition<MyView> = { (_, m, c) in
         
         DispatchQueue
             .global()
             .async {
                 
                 print("Animating")
-                mutation()
+                m()
                 
                 //===
                 
@@ -39,7 +39,7 @@ extension MyView
                     .asyncAfter(deadline: .now() + 0.5) {
                         
                         print("Completing now!")
-                        completion(true)
+                        c(true)
                     }
             }
     }
