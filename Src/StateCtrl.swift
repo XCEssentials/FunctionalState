@@ -17,6 +17,8 @@ class StateCtrl<Target: AnyObject>
     weak
     var target: Target?
     
+    var queue: [(StateGetter<Target>, Transition<Target>?, Completion?)] = []
+    
     //===
     
     public fileprivate(set)
@@ -25,10 +27,10 @@ class StateCtrl<Target: AnyObject>
     public fileprivate(set)
     var next: State<Target>? = nil
     
-    var queue: [(StateGetter<Target>, Transition?, Completion?)] = []
+    //===
     
     public
-    var defaultTransition: Transition? = nil
+    var defaultTransition: Transition<Target>? = nil
     
     public
     var isReadyForTransition: Bool { return next == nil }
@@ -37,21 +39,20 @@ class StateCtrl<Target: AnyObject>
     
     public
     init(for view: Target,
-         _ defaultTransition: Transition? = nil)
+         _ defaultTransition: Transition<Target>? = nil)
     {
         self.target = view
         self.defaultTransition = defaultTransition
     }
 }
 
-//=== MARK: Apply
+//=== MARK: Internal members
 
-public
 extension StateCtrl
 {
-    func apply(
+    func process(
         _ getState: (_: Target.Type) -> State<Target>,
-        via transition: Transition? = nil,
+        via transition: Transition<Target>? = nil,
         completion: Completion? = nil
         )
     {
@@ -106,8 +107,9 @@ extension StateCtrl
             .apply(
                 newState,
                 on: target,
-                via: (transition ?? defaultTransition),
+                via: transition,
                 completion: {
+                    
                     if
                         $0 // transition finished?
                     {
@@ -122,7 +124,7 @@ extension StateCtrl
                         
                         //===
                         
-                        self.applyNext()
+                        self.processNext()
                     }
                     else
                     {
@@ -142,44 +144,7 @@ extension StateCtrl
                 })
     }
     
-    @discardableResult
-    func enqueue(
-        _ getState: @escaping (_: Target.Type) -> State<Target>
-        ) -> StateCtrl<Target>
-    {
-        return enqueue(getState, via: nil, completion: nil)
-    }
-    
-    @discardableResult
-    func enqueue(
-        _ getState: @escaping (_: Target.Type) -> State<Target>,
-        via transition: Transition? = nil,
-        completion: Completion? = nil
-        ) -> StateCtrl<Target>
-    {
-        if
-            isReadyForTransition
-        {
-            apply(getState,
-                  via: transition,
-                  completion: completion)
-        }
-        else
-        {
-            queue.append((getState, transition, completion))
-        }
-        
-        //===
-        
-        return self
-    }
-}
-
-//===
-
-extension StateCtrl
-{
-    func applyNext()
+    func processNext()
     {
         if
             isReadyForTransition,
@@ -187,12 +152,29 @@ extension StateCtrl
         {
             let (sG, t, c) = queue.removeFirst()
             
-            apply(sG, via: t, completion: c)
+            process(sG, via: t, completion: c)
         }
     }
     
     func resetQueue()
     {
         queue.removeAll()
+    }
+}
+
+//=== MARK: Apply
+
+public
+extension StateCtrl
+{
+    func apply(
+        _ getState: @escaping (_: Target.Type) -> State<Target>
+        ) -> PendingManagedTransition<Target>
+    {
+        return
+            PendingManagedTransition(
+                state: self,
+                defaultTransition: defaultTransition,
+                getState: getState)
     }
 }
