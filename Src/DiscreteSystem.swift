@@ -33,7 +33,6 @@ extension DiscreteSystem
 public
 extension DiscreteSystem
 {
-    @discardableResult
     func apply(
         _ getState: @escaping (_: Self.Type) -> State<Self>
         ) -> PendingTransition<Self>
@@ -50,7 +49,6 @@ extension DiscreteSystem
 public
 extension DiscreteSystem
 {
-    @discardableResult
     func become(
         _ getState: @escaping (_: Self.Type) -> State<Self>
         ) -> PendingTransition<Self>

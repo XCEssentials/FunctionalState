@@ -26,7 +26,9 @@ class Main: XCTestCase
         
         //===
         
-        aView.become{ $0.highlighted(.blue) }
+        aView
+            .become{ $0.highlighted(.blue) }
+            .instantly()
         
         //===
         

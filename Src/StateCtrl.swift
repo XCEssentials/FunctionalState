@@ -17,6 +17,8 @@ class StateCtrl<Target: AnyObject>
     weak
     var target: Target?
     
+    var queue: [(StateGetter<Target>, Transition<Target>?, Completion?)] = []
+    
     //===
     
     public fileprivate(set)
@@ -25,7 +27,7 @@ class StateCtrl<Target: AnyObject>
     public fileprivate(set)
     var next: State<Target>? = nil
     
-    var queue: [(StateGetter<Target>, Transition<Target>?, Completion?)] = []
+    //===
     
     public
     var defaultTransition: Transition<Target>? = nil
@@ -44,7 +46,7 @@ class StateCtrl<Target: AnyObject>
     }
 }
 
-//=== MARK: Process
+//=== MARK: Internal members
 
 extension StateCtrl
 {
@@ -165,7 +167,6 @@ extension StateCtrl
 public
 extension StateCtrl
 {
-    @discardableResult
     func apply(
         _ getState: @escaping (_: Target.Type) -> State<Target>
         ) -> PendingManagedTransition<Target>
