@@ -26,51 +26,38 @@ extension DiscreteSystem
     {
         return State("\(self).\(context)", mutation)
     }
-    
-    //===
-    
+}
+
+//=== MARK: Apply
+
+public
+extension DiscreteSystem
+{
     @discardableResult
     func apply(
-        _ getState: (_: Self.Type) -> State<Self>,
-        via transition: GenericTransition? = nil,
-        completion: Completion? = nil
-        ) -> Self
+        _ getState: @escaping (_: Self.Type) -> State<Self>
+        ) -> PendingTransition<Self>
     {
-        Utils.apply(getState(Self.self),
-                    on: self,
-                    via: transition,
-                    completion: completion)
-        
-        //===
-        
-        return self
+        return
+            PendingTransition(
+                target: self,
+                getState: getState)
     }
 }
 
-//=== MARK: Aliases
+//=== MARK: Alias
 
 public
 extension DiscreteSystem
 {
     @discardableResult
     func become(
-        _ getState: (_: Self.Type) -> State<Self>
-        ) -> Self
+        _ getState: @escaping (_: Self.Type) -> State<Self>
+        ) -> PendingTransition<Self>
     {
-        return apply(getState,
-                     via: nil,
-                     completion: nil)
-    }
-    
-    @discardableResult
-    func become(
-        _ getState: (_: Self.Type) -> State<Self>,
-        via transition: GenericTransition? = nil,
-        completion: Completion? = nil
-        ) -> Self
-    {
-        return apply(getState,
-                     via: transition,
-                     completion: completion)
+        return
+            PendingTransition(
+                target: self,
+                getState: getState)
     }
 }

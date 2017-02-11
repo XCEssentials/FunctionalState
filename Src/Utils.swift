@@ -16,20 +16,20 @@ enum Utils
     func apply<Target: AnyObject>(
         _ state: State<Target>,
         on target: Target,
-        via transition: GenericTransition? = nil,
+        via transition: Transition<Target>? = nil,
         completion: Completion? = nil
         )
     {
         let mutation = { state.mutation(target) }
         
-        let transition = transition ?? { $0(); $1(true) }
-        
         let completion = completion ?? { _ in }
+        
+        let transition = transition ?? { $1(); $2(true) }
         
         //===
         
         // actually apply state mutation now:
         
-        transition(mutation, completion)
+        transition(target, mutation, completion)
     }
 }
