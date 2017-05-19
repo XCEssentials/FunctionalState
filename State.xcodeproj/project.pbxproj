@@ -18,6 +18,7 @@
 		50CB659E1BC94683D4C83B7F /* TypeAliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5225AD11789744FAFD5CE87 /* TypeAliases.swift */; };
 		58D9509FABC1C9B0F6F29B2E /* DiscreteSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923D3DEF885665396E5B9CFF /* DiscreteSystem.swift */; };
 		938A8DDA9989333B852096D1 /* PendingManagedTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7495B943CB959FABE2A5C6 /* PendingManagedTransition.swift */; };
+		94A582F71ECF1B110082AE56 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A582F61ECF1B110082AE56 /* Queue.swift */; };
 		B95DC48C9CF95A161AEB7086 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CCED991A805C7DF42596892 /* Foundation.framework */; };
 		B9BF924723B0859B0587E22A /* PendingTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3507DC0707EFE887AC1D7BD2 /* PendingTransition.swift */; };
 		C759A67676902CFEE32571E8 /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B06FF3A9276C135FCE3A4A /* Main.swift */; };
@@ -59,11 +60,12 @@
 /* Begin PBXFileReference section */
 		0745B258A7A81A9B4E1695E7 /* MyView.Highlighted.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MyView.Highlighted.swift; sourceTree = "<group>"; };
 		3507DC0707EFE887AC1D7BD2 /* PendingTransition.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PendingTransition.swift; sourceTree = "<group>"; };
-		3B1298F1B48C04E6E361C684 /* Fwk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Fwk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3B1298F1B48C04E6E361C684 /* Fwk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Fwk.framework; path = XCEState.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CCED991A805C7DF42596892 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		635F98B9E56969EDA91B6AC9 /* MyView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MyView.swift; sourceTree = "<group>"; };
 		7E51DA9D9A7E50C0C1828321 /* MyView.Normal.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MyView.Normal.swift; sourceTree = "<group>"; };
 		923D3DEF885665396E5B9CFF /* DiscreteSystem.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DiscreteSystem.swift; sourceTree = "<group>"; };
+		94A582F61ECF1B110082AE56 /* Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		9847DF935A4E5C3C040D7256 /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C7495B943CB959FABE2A5C6 /* PendingManagedTransition.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PendingManagedTransition.swift; sourceTree = "<group>"; };
 		A9154AFF4A9669BD324FBFD3 /* MyView.Disabled.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MyView.Disabled.swift; sourceTree = "<group>"; };
@@ -98,7 +100,7 @@
 			isa = PBXGroup;
 			children = (
 			);
-			name = "$local";
+			name = $local;
 			sourceTree = "<group>";
 		};
 		37C1B8F1A071FBCFA3351631 /* Src */ = {
@@ -111,8 +113,8 @@
 				BEAC8AFC0D7025778AA74102 /* StateCtrl.swift */,
 				E5225AD11789744FAFD5CE87 /* TypeAliases.swift */,
 				B30CFD771418D274018CBA0B /* Utils.swift */,
+				94A582F61ECF1B110082AE56 /* Queue.swift */,
 			);
-			name = Src;
 			path = Src;
 			sourceTree = SOURCE_ROOT;
 		};
@@ -131,7 +133,6 @@
 				C5B06FF3A9276C135FCE3A4A /* Main.swift */,
 				C55C4BD7B7526020F6CF09C4 /* Spec */,
 			);
-			name = Tst;
 			path = Tst;
 			sourceTree = SOURCE_ROOT;
 		};
@@ -170,7 +171,6 @@
 				7E51DA9D9A7E50C0C1828321 /* MyView.Normal.swift */,
 				635F98B9E56969EDA91B6AC9 /* MyView.swift */,
 			);
-			name = Spec;
 			path = Spec;
 			sourceTree = "<group>";
 		};
@@ -260,6 +260,7 @@
 				58D9509FABC1C9B0F6F29B2E /* DiscreteSystem.swift in Sources */,
 				938A8DDA9989333B852096D1 /* PendingManagedTransition.swift in Sources */,
 				B9BF924723B0859B0587E22A /* PendingTransition.swift in Sources */,
+				94A582F71ECF1B110082AE56 /* Queue.swift in Sources */,
 				2E3E66284FBD5F3187258CBF /* State.swift in Sources */,
 				0127054BFE8D8B6807CF129B /* StateCtrl.swift in Sources */,
 				50CB659E1BC94683D4C83B7F /* TypeAliases.swift in Sources */,

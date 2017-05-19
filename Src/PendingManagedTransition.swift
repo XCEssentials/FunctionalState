@@ -28,19 +28,12 @@ extension PendingManagedTransition
     @discardableResult
     func instantly() -> StateCtrl<Target>
     {
-        if
-            state.isReadyForTransition
-        {
-            state.process(getState,
-                          via: nil,
-                          completion: nil)
-        }
-        else
-        {
-            state
-                .queue
-                .append((getState, nil, nil))
-        }
+        state
+            .queue
+            .enqueue((getState, nil, nil))
+        
+        state
+            .processNext()
         
         //===
         
@@ -52,19 +45,12 @@ extension PendingManagedTransition
         _ completion: Completion? = nil
         ) -> StateCtrl<Target>
     {
-        if
-            state.isReadyForTransition
-        {
-            state.process(getState,
-                          via: defaultTransition,
-                          completion: completion)
-        }
-        else
-        {
-            state
-                .queue
-                .append((getState, defaultTransition, completion))
-        }
+        state
+            .queue
+            .enqueue((getState, defaultTransition, completion))
+        
+        state
+            .processNext()
         
         //===
         
@@ -77,19 +63,12 @@ extension PendingManagedTransition
         _ completion: Completion? = nil
         ) -> StateCtrl<Target>
     {
-        if
-            state.isReadyForTransition
-        {
-            state.process(getState,
-                          via: transition,
-                          completion: completion)
-        }
-        else
-        {
-            state
-                .queue
-                .append((getState, transition, completion))
-        }
+        state
+            .queue
+            .enqueue((getState, transition, completion))
+        
+        state
+            .processNext()
         
         //===
         

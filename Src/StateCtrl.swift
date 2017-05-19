@@ -17,7 +17,7 @@ class StateCtrl<Target: AnyObject>
     weak
     var target: Target?
     
-    var queue: [(StateGetter<Target>, Transition<Target>?, Completion?)] = []
+    var queue = Queue<(StateGetter<Target>, Transition<Target>?, Completion?)>()
     
     //===
     
@@ -79,7 +79,7 @@ extension StateCtrl
         //===
         
         guard
-            next.map({ $0 != newState }) ?? true
+            (next == nil) || (next! != newState)
         else
         {
             return // just return without doing anything
@@ -139,7 +139,7 @@ extension StateCtrl
                         
                         //===
                         
-                        self.resetQueue()
+                        self.queue.reset()
                     }
                 })
     }
@@ -147,18 +147,12 @@ extension StateCtrl
     func processNext()
     {
         if
-            isReadyForTransition,
-            queue.count > 0
+            isReadyForTransition
         {
-            let (sG, t, c) = queue.removeFirst()
-            
-            process(sG, via: t, completion: c)
+            queue
+                .dequeue()
+                .map{ process($0, via: $1, completion: $2) }
         }
-    }
-    
-    func resetQueue()
-    {
-        queue.removeAll()
     }
 }
 
