@@ -4,6 +4,7 @@
 //
 //  Created by Maxim Khatskevich on 5/19/17.
 //
+//  https://github.com/raywenderlich/swift-algorithm-club/tree/master/Queue
 //
 
 import Foundation
