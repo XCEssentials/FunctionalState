@@ -21,10 +21,19 @@ extension DiscreteSystem
     static
     func state(
         context: String = #function,
-        mutation: @escaping (_: Self) -> Void
+        onSet: @escaping State<Self>.TargetMutation
         ) -> State<Self>
     {
-        return State("\(self).\(context)", mutation)
+        return State("\(self).\(context)", onSet)
+    }
+    
+    static
+    func onSet(
+        context: String = #function,
+        _ onSet: @escaping State<Self>.TargetMutation
+        ) -> PendingState<Self>
+    {
+        return PendingState("\(self).\(context)", onSet)
     }
 }
 

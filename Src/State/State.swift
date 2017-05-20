@@ -13,19 +13,36 @@ import Foundation
 public
 struct State<Target: AnyObject>
 {
+    public
+    typealias TargetMutation = (_: Target) -> Void
+    
     let id: String
     
-    let mutation: (_: Target) -> Void
+    let onSet: TargetMutation
+    
+    let onUpdate: TargetMutation
     
     //===
     
     init(
         _ id: String = NSUUID().uuidString,
-        _ mutation: @escaping (_: Target) -> Void
+        _ onSet: @escaping TargetMutation
         )
     {
         self.id = id
-        self.mutation = mutation
+        self.onSet = onSet
+        self.onUpdate = { _ in }
+    }
+    
+    init(
+        _ id: String = NSUUID().uuidString,
+        _ onSet: @escaping TargetMutation,
+        _ onUpdate: @escaping TargetMutation
+        )
+    {
+        self.id = id
+        self.onSet = onSet
+        self.onUpdate = onUpdate
     }
 }
 

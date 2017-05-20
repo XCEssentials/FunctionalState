@@ -13,7 +13,7 @@ import Foundation
 public
 struct PendingManagedTransition<Target: AnyObject>
 {
-    let state: StateCtrl<Target>
+    let ctrl: StateCtrl<Target>
     
     let defaultTransition: Transition<Target>?
     
@@ -28,16 +28,13 @@ extension PendingManagedTransition
     @discardableResult
     func instantly() -> StateCtrl<Target>
     {
-        state
-            .queue
-            .enqueue((getState, nil, nil))
+        ctrl.enqueue((getState, nil, nil))
         
-        state
-            .processNext()
+        ctrl.processNext()
         
         //===
         
-        return state
+        return ctrl
     }
     
     @discardableResult
@@ -45,16 +42,13 @@ extension PendingManagedTransition
         _ completion: Completion? = nil
         ) -> StateCtrl<Target>
     {
-        state
-            .queue
-            .enqueue((getState, defaultTransition, completion))
+        ctrl.enqueue((getState, defaultTransition, completion))
         
-        state
-            .processNext()
+        ctrl.processNext()
         
         //===
         
-        return state
+        return ctrl
     }
     
     @discardableResult
@@ -63,15 +57,12 @@ extension PendingManagedTransition
         _ completion: Completion? = nil
         ) -> StateCtrl<Target>
     {
-        state
-            .queue
-            .enqueue((getState, transition, completion))
+        ctrl.enqueue((getState, transition, completion))
         
-        state
-            .processNext()
+        ctrl.processNext()
         
         //===
         
-        return state
+        return ctrl
     }
 }

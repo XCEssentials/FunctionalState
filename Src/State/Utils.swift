@@ -20,7 +20,11 @@ enum Utils
         completion: Completion? = nil
         )
     {
-        let mutation = { state.mutation(target) }
+        let mutation = {
+            
+            state.onSet(target)
+            state.onUpdate(target)
+        }
         
         let completion = completion ?? { _ in }
         

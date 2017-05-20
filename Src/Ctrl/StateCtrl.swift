@@ -17,6 +17,7 @@ class StateCtrl<Target: AnyObject>
     weak
     var target: Target?
     
+    fileprivate
     var queue = Queue<(StateGetter<Target>, Transition<Target>?, Completion?)>()
     
     //===
@@ -73,16 +74,24 @@ extension StateCtrl
             current != newState
         else
         {
-            return // just return without doing anything
+            newState.onUpdate(target) // current == newState
+            
+            //===
+            
+            return
         }
         
         //===
         
         guard
-            (next == nil) || (next! != newState)
+            next != newState
         else
         {
-            return // just return without doing anything
+            newState.onUpdate(target) // next == newState
+            
+            //===
+            
+            return
         }
         
         //===
@@ -154,6 +163,15 @@ extension StateCtrl
                 .map{ process($0, via: $1, completion: $2) }
         }
     }
+    
+    func enqueue(_ task: (StateGetter<Target>, Transition<Target>?, Completion?))
+    {
+        queue.enqueue(task)
+        
+        //===
+        
+        processNext()
+    }
 }
 
 //=== MARK: Apply
@@ -165,10 +183,10 @@ extension StateCtrl
         _ getState: @escaping (_: Target.Type) -> State<Target>
         ) -> PendingManagedTransition<Target>
     {
-        return
-            PendingManagedTransition(
-                state: self,
-                defaultTransition: defaultTransition,
-                getState: getState)
+        return PendingManagedTransition(
+            ctrl: self,
+            defaultTransition: defaultTransition,
+            getState: getState
+        )
     }
 }
