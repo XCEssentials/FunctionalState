@@ -43,7 +43,7 @@ extension Dispatcher
     {
         // a state has been set, ready for a new transition
         
-        var current: Int = 1
+        // var current: State
     }
 }
 
