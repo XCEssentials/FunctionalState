@@ -17,9 +17,18 @@ extension MyView
     static
     func normal(_ opacity: CGFloat) -> State<MyView>
     {
-        return state { (_) in
+//        return state { (_) in
+//            
+//            print("Applying Normal state")
+//        }
+        
+        return onSet { (_) in
             
             print("Applying Normal state")
+        }
+        .onUpdate{  (_) in
+            
+            //
         }
     }
 }
