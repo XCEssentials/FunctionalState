@@ -12,7 +12,6 @@
 		1797CCA5766943FDA05037E1 /* MyView.Highlighted.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0745B258A7A81A9B4E1695E7 /* MyView.Highlighted.swift */; };
 		1C46C47CC04F68F244C85621 /* MyView.Disabled.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9154AFF4A9669BD324FBFD3 /* MyView.Disabled.swift */; };
 		49D71705832A51EAE75AE736 /* MyView.Normal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E51DA9D9A7E50C0C1828321 /* MyView.Normal.swift */; };
-		58D9509FABC1C9B0F6F29B2E /* DiscreteSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923D3DEF885665396E5B9CFF /* DiscreteSystem.swift */; };
 		9417B0D11EE8464E000F80CE /* Functional.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9417B0D01EE8464E000F80CE /* Functional.swift */; };
 		9417B0D31EE8466E000F80CE /* Functional_State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9417B0D21EE8466E000F80CE /* Functional_State.swift */; };
 		9417B0D51EE848D7000F80CE /* Functional_DiscreteSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9417B0D41EE848D7000F80CE /* Functional_DiscreteSystem.swift */; };
@@ -20,14 +19,7 @@
 		9417B0D91EE85757000F80CE /* Functional_Transition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9417B0D81EE85757000F80CE /* Functional_Transition.swift */; };
 		9417B0DB1EE85857000F80CE /* Functional_Transition_Wrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9417B0DA1EE85857000F80CE /* Functional_Transition_Wrapper.swift */; };
 		9417B0DD1EE858F2000F80CE /* Functional_Transition_Pending.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9417B0DC1EE858F2000F80CE /* Functional_Transition_Pending.swift */; };
-		94A583021ECF20A10082AE56 /* PendingManagedTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A582F91ECF20A10082AE56 /* PendingManagedTransition.swift */; };
-		94A583031ECF20A10082AE56 /* StateCtrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A582FA1ECF20A10082AE56 /* StateCtrl.swift */; };
 		94A583041ECF20A10082AE56 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A582FC1ECF20A10082AE56 /* Queue.swift */; };
-		94A583051ECF20A10082AE56 /* PendingTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A582FE1ECF20A10082AE56 /* PendingTransition.swift */; };
-		94A583061ECF20A10082AE56 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A582FF1ECF20A10082AE56 /* State.swift */; };
-		94A583071ECF20A10082AE56 /* TypeAliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A583001ECF20A10082AE56 /* TypeAliases.swift */; };
-		94A583081ECF20A10082AE56 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A583011ECF20A10082AE56 /* Utils.swift */; };
-		94A5830A1ED03FE80082AE56 /* PendingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A583091ED03FE80082AE56 /* PendingState.swift */; };
 		94E92BF51EE71E6E0039BCAB /* Static_State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E92BF41EE71E6E0039BCAB /* Static_State.swift */; };
 		94E92BF71EE71EBA0039BCAB /* Static_DiscreteSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E92BF61EE71EBA0039BCAB /* Static_DiscreteSystem.swift */; };
 		94E92BF91EE71FEA0039BCAB /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E92BF81EE71FEA0039BCAB /* Errors.swift */; };
@@ -83,7 +75,6 @@
 		5CCED991A805C7DF42596892 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		635F98B9E56969EDA91B6AC9 /* MyView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MyView.swift; sourceTree = "<group>"; };
 		7E51DA9D9A7E50C0C1828321 /* MyView.Normal.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MyView.Normal.swift; sourceTree = "<group>"; };
-		923D3DEF885665396E5B9CFF /* DiscreteSystem.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DiscreteSystem.swift; sourceTree = "<group>"; };
 		9417B0D01EE8464E000F80CE /* Functional.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Functional.swift; sourceTree = "<group>"; };
 		9417B0D21EE8466E000F80CE /* Functional_State.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Functional_State.swift; sourceTree = "<group>"; };
 		9417B0D41EE848D7000F80CE /* Functional_DiscreteSystem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Functional_DiscreteSystem.swift; sourceTree = "<group>"; };
@@ -91,14 +82,7 @@
 		9417B0D81EE85757000F80CE /* Functional_Transition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Functional_Transition.swift; sourceTree = "<group>"; };
 		9417B0DA1EE85857000F80CE /* Functional_Transition_Wrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Functional_Transition_Wrapper.swift; sourceTree = "<group>"; };
 		9417B0DC1EE858F2000F80CE /* Functional_Transition_Pending.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Functional_Transition_Pending.swift; sourceTree = "<group>"; };
-		94A582F91ECF20A10082AE56 /* PendingManagedTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendingManagedTransition.swift; sourceTree = "<group>"; };
-		94A582FA1ECF20A10082AE56 /* StateCtrl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateCtrl.swift; sourceTree = "<group>"; };
 		94A582FC1ECF20A10082AE56 /* Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
-		94A582FE1ECF20A10082AE56 /* PendingTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendingTransition.swift; sourceTree = "<group>"; };
-		94A582FF1ECF20A10082AE56 /* State.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
-		94A583001ECF20A10082AE56 /* TypeAliases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeAliases.swift; sourceTree = "<group>"; };
-		94A583011ECF20A10082AE56 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
-		94A583091ED03FE80082AE56 /* PendingState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendingState.swift; sourceTree = "<group>"; };
 		94E92BF41EE71E6E0039BCAB /* Static_State.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Static_State.swift; sourceTree = "<group>"; };
 		94E92BF61EE71EBA0039BCAB /* Static_DiscreteSystem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Static_DiscreteSystem.swift; sourceTree = "<group>"; };
 		94E92BF81EE71FEA0039BCAB /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
@@ -151,9 +135,6 @@
 			isa = PBXGroup;
 			children = (
 				94E92BF31EE71E490039BCAB /* NEW */,
-				923D3DEF885665396E5B9CFF /* DiscreteSystem.swift */,
-				94A582FD1ECF20A10082AE56 /* State */,
-				94A582F81ECF20A10082AE56 /* Ctrl */,
 				94A582FB1ECF20A10082AE56 /* Misc */,
 			);
 			path = Src;
@@ -200,33 +181,12 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		94A582F81ECF20A10082AE56 /* Ctrl */ = {
-			isa = PBXGroup;
-			children = (
-				94A582FA1ECF20A10082AE56 /* StateCtrl.swift */,
-				94A582F91ECF20A10082AE56 /* PendingManagedTransition.swift */,
-			);
-			path = Ctrl;
-			sourceTree = "<group>";
-		};
 		94A582FB1ECF20A10082AE56 /* Misc */ = {
 			isa = PBXGroup;
 			children = (
 				94A582FC1ECF20A10082AE56 /* Queue.swift */,
 			);
 			path = Misc;
-			sourceTree = "<group>";
-		};
-		94A582FD1ECF20A10082AE56 /* State */ = {
-			isa = PBXGroup;
-			children = (
-				94A583001ECF20A10082AE56 /* TypeAliases.swift */,
-				94A582FF1ECF20A10082AE56 /* State.swift */,
-				94A583091ED03FE80082AE56 /* PendingState.swift */,
-				94A582FE1ECF20A10082AE56 /* PendingTransition.swift */,
-				94A583011ECF20A10082AE56 /* Utils.swift */,
-			);
-			path = State;
 			sourceTree = "<group>";
 		};
 		94E92BF31EE71E490039BCAB /* NEW */ = {
@@ -462,16 +422,8 @@
 				94E92C011EE739B50039BCAB /* Functional_State_Dispatcher_Ready.swift in Sources */,
 				94E92C031EE739D70039BCAB /* Functional_State_Dispatcher_InTransition.swift in Sources */,
 				9417B0D51EE848D7000F80CE /* Functional_DiscreteSystem.swift in Sources */,
-				94A583021ECF20A10082AE56 /* PendingManagedTransition.swift in Sources */,
-				58D9509FABC1C9B0F6F29B2E /* DiscreteSystem.swift in Sources */,
 				94E92BF91EE71FEA0039BCAB /* Errors.swift in Sources */,
-				94A583051ECF20A10082AE56 /* PendingTransition.swift in Sources */,
-				94A583031ECF20A10082AE56 /* StateCtrl.swift in Sources */,
 				94A583041ECF20A10082AE56 /* Queue.swift in Sources */,
-				94A583071ECF20A10082AE56 /* TypeAliases.swift in Sources */,
-				94A583061ECF20A10082AE56 /* State.swift in Sources */,
-				94A583081ECF20A10082AE56 /* Utils.swift in Sources */,
-				94A5830A1ED03FE80082AE56 /* PendingState.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
