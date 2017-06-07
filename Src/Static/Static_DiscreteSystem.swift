@@ -2,6 +2,21 @@ import Foundation
 
 //===
 
+extension Static
+{
+    enum DiscreteSystem // scope
+    {
+        public
+        enum Errors // scope
+        {
+            public
+            struct WrongState: Error { }
+        }
+    }
+}
+
+//===
+
 public
 protocol Static_DiscreteSystem: class { }
 
@@ -30,7 +45,7 @@ extension Static_DiscreteSystem
         }
         else
         {
-            throw Errors.WrongInternalState()
+            throw Static.DiscreteSystem.Errors.WrongState()
         }
     }
     
@@ -50,7 +65,7 @@ extension Static_DiscreteSystem
         }
         else
         {
-            throw Errors.WrongInternalState()
+            throw Static.DiscreteSystem.Errors.WrongState()
         }
     }
 }

@@ -2,7 +2,7 @@ import Foundation
 
 //===
 
-extension Functional.State.Dispatcher
+extension Functional.Dispatcher
 {
     struct InTransition: Static_State
     {

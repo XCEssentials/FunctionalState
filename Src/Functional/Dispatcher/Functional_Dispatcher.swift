@@ -11,11 +11,11 @@ import Foundation
 //===
 
 public
-extension Functional.State
+extension Functional
 {
     public
     final
-    class Dispatcher
+    class Dispatcher<Target: AnyObject>
     {
         weak
         var target: Target?
@@ -41,12 +41,12 @@ extension Functional.State
 
 //===
 
-extension Functional.State.Dispatcher: Static_DiscreteSystem { }
+extension Functional.Dispatcher: Static_DiscreteSystem { }
 
 //===
 
 public
-extension Functional.State.Dispatcher
+extension Functional.Dispatcher
 {
     public
     func apply(
@@ -63,7 +63,7 @@ extension Functional.State.Dispatcher
 
 //===
 
-extension Functional.State.Dispatcher
+extension Functional.Dispatcher
 {
     func enqueue(_ task: Functional.Transition<Target>.Wrapper)
     {

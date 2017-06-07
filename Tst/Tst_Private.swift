@@ -19,28 +19,28 @@ class Tst_Private: XCTestCase
 {
     func testStates()
     {
-        let target = NSObject()
-        
-        let disp = Dispatcher<NSObject>(with: target)
-        
-        //===
-        
-        let ready =
-        
-        RXC.value("In the beginning, the state is Ready") {
-            
-            try? Dispatcher<NSObject>.Ready.at(disp)
-        }!
-        
-        //===
-        
-        RXC.isNil("Current state is undefined") {
-            
-            return ready.current
-        }
-        
-        
-        
+//        let target = NSObject()
+//        
+//        let disp = Dispatcher<NSObject>(with: target)
+//        
+//        //===
+//        
+//        let ready =
+//        
+//        RXC.value("In the beginning, the state is Ready") {
+//            
+//            try? Dispatcher<NSObject>.Ready.at(disp)
+//        }!
+//        
+//        //===
+//        
+//        RXC.isNil("Current state is undefined") {
+//            
+//            return ready.current
+//        }
+//        
+//        
+//        
 //        //===
 //        
 //        disp.internalState = Dispatcher.Ready(current: nil)

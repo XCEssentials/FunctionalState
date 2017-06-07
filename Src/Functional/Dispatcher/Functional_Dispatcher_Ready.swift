@@ -10,7 +10,7 @@ import Foundation
 
 //===
 
-extension Functional.State.Dispatcher
+extension Functional.Dispatcher
 {
     struct Ready: Static_State
     {

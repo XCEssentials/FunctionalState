@@ -9,7 +9,7 @@ extension Functional.Transition
     struct Pending
     {
         public
-        let dispatcher: Functional.State<Target>.Dispatcher
+        let dispatcher: Functional.Dispatcher<Target>
         
         let defaultTransition: Functional.Transition<Target>.Body?
         
@@ -23,7 +23,7 @@ public
 extension Functional.Transition.Pending
 {
     @discardableResult
-    func instantly() -> Functional.State<Target>.Dispatcher
+    func instantly() -> Functional.Dispatcher<Target>
     {
         dispatcher.enqueue((getState, nil, nil))
         
@@ -37,7 +37,7 @@ extension Functional.Transition.Pending
     @discardableResult
     func viaTransition(
         _ completion: Functional.Transition.Completion? = nil
-        ) -> Functional.State<Target>.Dispatcher
+        ) -> Functional.Dispatcher<Target>
     {
         dispatcher.enqueue((getState, defaultTransition, completion))
         
@@ -52,7 +52,7 @@ extension Functional.Transition.Pending
     func via(
         _ transition: @escaping Functional.Transition<Target>.Body,
         _ completion: Functional.Transition<Target>.Completion? = nil
-        ) -> Functional.State<Target>.Dispatcher
+        ) -> Functional.Dispatcher<Target>
     {
         dispatcher.enqueue((getState, transition, completion))
         
