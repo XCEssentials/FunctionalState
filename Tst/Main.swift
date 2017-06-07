@@ -8,6 +8,7 @@
 
 import XCTest
 
+@testable
 import XCEState
 
 //===
@@ -16,29 +17,28 @@ class Main: XCTestCase
 {
     let aView = MyView()
     
-    var ctrl: StateCtrl<MyView>!
+    var disp: Functional.Dispatcher<MyView>!
     
     //===
     
-    func testApplyDirectlyToView()
+    override
+    func setUp()
     {
-        let ex = expectation(description: "After All States Apply")
+        super.setUp()
         
         //===
         
-        aView
-            .become{ $0.highlighted(.blue) }
-            .instantly()
+        disp = Functional.Dispatcher(for: aView, MyView.shortAnimation)
+    }
+    
+    override
+    func tearDown()
+    {
+        disp = nil
         
         //===
         
-        aView
-            .become{ $0.disabled() }
-            .via(MyView.shortAnimation) { if $0 { ex.fulfill() } }
-        
-        //===
-        
-        waitForExpectations(timeout: 1.0)
+        super.tearDown()
     }
     
     func testExample()
@@ -48,30 +48,24 @@ class Main: XCTestCase
         
         //===
         
-        ctrl = StateCtrl(for: aView, MyView.shortAnimation)
+        // applying twice same state to check update block execution
+        
+        disp.apply{ $0.highlighted(.blue) }.instantly()
+            .apply{ $0.highlighted(.blue) }.instantly()
         
         //===
         
-        ctrl
-            .apply { $0.highlighted(.blue) }
-            .instantly()
+        XCTAssert(disp.state.current is Functional.Dispatcher<MyView>.Ready)
+        
         
         //===
         
-        XCTAssert(ctrl.isReadyForTransition)
+        disp.apply{ $0.disabled() }.viaTransition { if $0 { ex2.fulfill() } }
+            .apply{ $0.normal(0.6) }.via(MyView.shortAnimation) { if $0 { ex3.fulfill() } }
         
         //===
         
-        ctrl
-            .apply { $0.disabled() }
-            .viaTransition { if $0 { ex2.fulfill() } }
-        
-            .apply { $0.normal(0.6) }
-            .via(MyView.shortAnimation) { if $0 { ex3.fulfill() } }
-        
-        //===
-        
-        XCTAssert(!ctrl.isReadyForTransition)
+        XCTAssert(!(disp.state.current is Functional.Dispatcher<MyView>.Ready))
         
         //===
         

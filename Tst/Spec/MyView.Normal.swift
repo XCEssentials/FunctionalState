@@ -15,20 +15,11 @@ import XCEState
 extension MyView
 {
     static
-    func normal(_ opacity: CGFloat) -> State<MyView>
+    func normal(_ opacity: CGFloat) -> Functional.State<MyView>
     {
-//        return state { (_) in
-//            
-//            print("Applying Normal state")
-//        }
-        
-        return onSet { (_) in
+        return state { (_) in
             
             print("Applying Normal state")
-        }
-        .onUpdate{  (_) in
-            
-            //
         }
     }
 }

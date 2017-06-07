@@ -29,12 +29,16 @@ extension Functional
         
         public
         init(
-            with target: Target,
+            for target: Target,
             _ defaultTransition: Functional.Transition<Target>.Body? = nil
             )
         {
             self.target = target
             self.defaultTransition = defaultTransition
+            
+            //===
+            
+            self.state.current = Ready(current: nil)
         }
     }
 }

@@ -270,10 +270,10 @@
 		C55C4BD7B7526020F6CF09C4 /* Spec */ = {
 			isa = PBXGroup;
 			children = (
+				635F98B9E56969EDA91B6AC9 /* MyView.swift */,
+				7E51DA9D9A7E50C0C1828321 /* MyView.Normal.swift */,
 				A9154AFF4A9669BD324FBFD3 /* MyView.Disabled.swift */,
 				0745B258A7A81A9B4E1695E7 /* MyView.Highlighted.swift */,
-				7E51DA9D9A7E50C0C1828321 /* MyView.Normal.swift */,
-				635F98B9E56969EDA91B6AC9 /* MyView.swift */,
 			);
 			path = Spec;
 			sourceTree = "<group>";
