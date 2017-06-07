@@ -1,9 +1,9 @@
 //
-//  Tst_Private.swift
-//  State
+//  Main.swift
+//  MKHStateTst
 //
-//  Created by Maxim Khatskevich on 6/6/17.
-//
+//  Created by Maxim Khatskevich on 12/25/16.
+//  Copyright © 2016 Maxim Khatskevich. All rights reserved.
 //
 
 import XCTest
@@ -11,45 +11,64 @@ import XCTest
 @testable
 import XCEState
 
-import XCETesting
-
 //===
 
 class Tst_Private: XCTestCase
 {
-    func testStates()
+    let aView = MyView()
+    
+    var disp: Functional.Dispatcher<MyView>!
+    
+    //===
+    
+    override
+    func setUp()
     {
-//        let target = NSObject()
-//        
-//        let disp = Dispatcher<NSObject>(with: target)
-//        
-//        //===
-//        
-//        let ready =
-//        
-//        RXC.value("In the beginning, the state is Ready") {
-//            
-//            try? Dispatcher<NSObject>.Ready.at(disp)
-//        }!
-//        
-//        //===
-//        
-//        RXC.isNil("Current state is undefined") {
-//            
-//            return ready.current
-//        }
-//        
-//        
-//        
-//        //===
-//        
-//        disp.internalState = Dispatcher.Ready(current: nil)
-//        
-//        //===
-//        
-//        RXC.isNotNil("After set state to Ready, the state is actually Ready") {
-//            
-//            try? Dispatcher.Ready.at(disp)
-//        }
+        super.setUp()
+        
+        //===
+        
+        disp = Functional.Dispatcher(for: aView, MyView.defaultTransition)
+    }
+    
+    override
+    func tearDown()
+    {
+        disp = nil
+        
+        //===
+        
+        super.tearDown()
+    }
+    
+    func testExample()
+    {
+        let ex2 = expectation(description: "Second state applied")
+        let ex3 = expectation(description: "Third state applied")
+        
+        //===
+        
+        // applying twice same state to check update block execution
+        
+        disp.apply{ $0.highlighted(.blue) }.instantly()
+            .apply{ $0.highlighted(.blue) }.instantly()
+        
+        //===
+        
+        XCTAssert(disp.state.current is Functional.Dispatcher<MyView>.Ready)
+        
+        
+        //===
+        
+        disp.apply{ $0.disabled() }.viaTransition { if $0 { ex2.fulfill() } }
+            .apply{ $0.normal(0.6) }.via(MyView.defaultTransition!) { if $0 { ex3.fulfill() } }
+        
+        //===
+        
+        XCTAssert(!(disp.state.current is Functional.Dispatcher<MyView>.Ready))
+        
+        //===
+        
+        waitForExpectations(timeout: 1.5)
     }
 }

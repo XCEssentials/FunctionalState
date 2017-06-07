@@ -12,18 +12,15 @@ import XCEState
 
 //===
 
+final
 class MyView { }
 
 //===
 
-extension MyView: Functional_DiscreteSystem { }
-
-//=== MARK: Special helpers
-
-extension MyView
+extension MyView: Functional_DiscreteSystem
 {
     static
-    let shortAnimation: Functional.Transition<MyView>.Body = { (_, m, c) in
+    let defaultTransition: Functional.Transition<MyView>.Body? = { (_, m, c) in
         
         DispatchQueue.global().async {
                 

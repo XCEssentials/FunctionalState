@@ -27,7 +27,6 @@ extension Functional
         
         //===
         
-        public
         init(
             for target: Target,
             _ defaultTransition: Functional.Transition<Target>.Body? = nil
