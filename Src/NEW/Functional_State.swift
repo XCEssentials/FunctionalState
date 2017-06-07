@@ -72,7 +72,7 @@ extension Functional.State
         _ state: Functional.State<Target>,
         on target: Target,
         via transition: Functional.Transition<Target>.Body? = nil,
-        completion: Completion? = nil
+        completion: Functional.Transition<Target>.Completion? = nil
         )
     {
         let mutation = {

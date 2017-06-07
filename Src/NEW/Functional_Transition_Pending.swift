@@ -51,7 +51,7 @@ extension Functional.Transition.Pending
     @discardableResult
     func via(
         _ transition: @escaping Functional.Transition<Target>.Body,
-        _ completion: Completion? = nil
+        _ completion: Functional.Transition<Target>.Completion? = nil
         ) -> Functional.State<Target>.Dispatcher
     {
         dispatcher.enqueue((getState, transition, completion))

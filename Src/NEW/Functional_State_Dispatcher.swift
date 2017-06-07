@@ -108,17 +108,17 @@ extension Functional.State.Dispatcher
         
         //===
         
-//        Utils.apply(newState, on: target, via: task.transition) {
-//                    
-//            self.state.current = Ready(current: newState)
-//            
-//            //===
-//            
-//            task.completion?($0)
-//            
-//            //===
-//            
-//            self.processNext()
-//        }
+        Functional.State.apply(newState, on: target, via: task.transition) {
+                    
+            self.state.current = Ready(current: newState)
+            
+            //===
+            
+            task.completion?($0)
+            
+            //===
+            
+            self.processNext()
+        }
     }
 }
