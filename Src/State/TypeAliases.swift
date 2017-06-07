@@ -36,3 +36,12 @@ typealias Transition<Target: AnyObject> =
     _ mutation: @escaping () -> Void,
     _ completion: @escaping Completion
     ) -> Void
+
+//===
+
+public
+typealias StateTransitionTask<Target: AnyObject> = (
+    getState: StateGetter<Target>,
+    transition: Transition<Target>?,
+    completion: Completion?
+)

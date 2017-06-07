@@ -17,7 +17,9 @@ protocol InternalState { }
 extension InternalState
 {
     static
-    func at(_ container: InternalStateContainer) throws -> Self
+    func at(
+        _ container: InternalStateContainer
+        ) throws -> Self
     {
         if
             let result = container.internalState as? Self

@@ -12,16 +12,48 @@ import Foundation
 
 public
 final
-class Dispatcher: InternalStateContainer
+class Dispatcher<Target: AnyObject>: InternalStateContainer
 {
-    var internalState: InternalState = Undefined()
+    var internalState: InternalState = Ready(current: nil)
+    
+    //===
+    
+    weak
+    var target: Target?
+    
+    var queue = Queue<StateTransitionTask<Target>>()
+    
+    public
+    var defaultTransition: Transition<Target>? = nil
     
     //===
     
     public
-    init()
+    init(
+        with target: Target,
+        _ defaultTransition: Transition<Target>? = nil
+        )
     {
-        //
+        self.target = target
+        self.defaultTransition = defaultTransition
+    }
+}
+
+//===
+
+public
+extension Dispatcher
+{
+    public
+    func apply(
+        _ getState: @escaping StateGetter<Target>
+        ) -> PMTransition<Target>
+    {
+        return PMTransition(
+            dispatcher: self,
+            defaultTransition: defaultTransition,
+            getState: getState
+        )
     }
 }
 
@@ -29,30 +61,60 @@ class Dispatcher: InternalStateContainer
 
 extension Dispatcher
 {
-    struct Undefined: InternalState
+    func enqueue(_ task: StateTransitionTask<Target>)
     {
-        // a state never has been set yet
-    }
-}
-
-//===
-
-extension Dispatcher
-{
-    struct Ready: InternalState
-    {
-        // a state has been set, ready for a new transition
+        queue.enqueue(task)
         
-        // var current: State
+        //===
+        
+        processNext()
     }
-}
-
-//===
-
-extension Dispatcher
-{
-    struct InTransition: InternalState
+    
+    func processNext()
     {
-        // a transition into a new state is ongoing
+        guard
+            let target = target,
+            let now = internalState as? Ready,
+            let task = queue.dequeue() // dequeue after we chaked internalState!
+        else
+        {
+            return
+        }
+        
+        //===
+        
+        let newState = task.getState(Target.self)
+        
+        //===
+        
+        guard
+            now.current != newState
+        else
+        {
+            newState.onUpdate(target) // current == newState
+            
+            //===
+            
+            return
+        }
+        
+        //===
+        
+        internalState = InTransition(previous: now.current, next: newState)
+        
+        //===
+        
+        Utils.apply(newState, on: target, via: task.transition) {
+                    
+            self.internalState = Ready(current: newState)
+            
+            //===
+            
+            task.completion?($0)
+            
+            //===
+            
+            self.processNext()
+        }
     }
 }
