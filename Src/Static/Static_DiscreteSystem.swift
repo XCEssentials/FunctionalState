@@ -2,6 +2,7 @@ import Foundation
 
 //===
 
+public
 extension Static
 {
     enum DiscreteSystem // scope

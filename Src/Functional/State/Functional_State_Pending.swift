@@ -5,7 +5,6 @@ import Foundation
 public
 extension Functional.State
 {
-    public
     struct Pending
     {
         public

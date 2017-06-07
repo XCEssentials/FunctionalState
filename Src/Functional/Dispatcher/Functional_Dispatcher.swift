@@ -13,7 +13,6 @@ import Foundation
 public
 extension Functional
 {
-    public
     final
     class Dispatcher<Target: AnyObject>
     {

@@ -5,7 +5,6 @@ import Foundation
 public
 extension Functional
 {
-    public
     struct State<Target: AnyObject>
     {
         public

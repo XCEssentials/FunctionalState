@@ -5,7 +5,6 @@ import Foundation
 public
 extension Functional
 {
-    public
     enum Transition<Target: AnyObject>
     {
         public

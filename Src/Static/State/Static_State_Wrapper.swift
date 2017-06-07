@@ -5,7 +5,6 @@ import Foundation
 public
 extension Static.State
 {
-    public
     final
     class Wrapper
     {

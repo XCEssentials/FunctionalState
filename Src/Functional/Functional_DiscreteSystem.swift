@@ -14,7 +14,6 @@ protocol Functional_DiscreteSystem: class
 public
 extension Functional_DiscreteSystem
 {
-    public
     var state: Functional.Dispatcher<Self>
     {
         let wrapper = Functional.DispatcherWrapper.get(

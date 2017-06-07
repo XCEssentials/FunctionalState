@@ -206,8 +206,8 @@
 			isa = PBXGroup;
 			children = (
 				94D44DEF1EE86B1E00B5595C /* Functional_Dispatcher.swift */,
-				94D44DF01EE86B1E00B5595C /* Functional_Dispatcher_InTransition.swift */,
 				94D44DF11EE86B1E00B5595C /* Functional_Dispatcher_Ready.swift */,
+				94D44DF01EE86B1E00B5595C /* Functional_Dispatcher_InTransition.swift */,
 				94CD5B951EE87D7400AF38AD /* Functional_DispatcherWrapper.swift */,
 			);
 			path = Dispatcher;

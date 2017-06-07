@@ -5,7 +5,6 @@ import Foundation
 public
 extension Functional.Transition
 {
-    public
     struct Pending
     {
         public
