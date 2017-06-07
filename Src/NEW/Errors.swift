@@ -10,7 +10,9 @@ import Foundation
 
 //===
 
+public
 enum Errors // scope
 {
+    public
     struct WrongInternalState: Error { }
 }

@@ -39,15 +39,17 @@ class Tst_Private: XCTestCase
             return ready.current
         }
         
-        //===
         
-        disp.internalState = Dispatcher.Ready(current: nil)
         
-        //===
-        
-        RXC.isNotNil("After set state to Ready, the state is actually Ready") {
-            
-            try? Dispatcher.Ready.at(disp)
-        }
+//        //===
+//        
+//        disp.internalState = Dispatcher.Ready(current: nil)
+//        
+//        //===
+//        
+//        RXC.isNotNil("After set state to Ready, the state is actually Ready") {
+//            
+//            try? Dispatcher.Ready.at(disp)
+//        }
     }
 }

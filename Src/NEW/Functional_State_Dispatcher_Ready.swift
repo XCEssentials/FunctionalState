@@ -10,12 +10,12 @@ import Foundation
 
 //===
 
-extension Dispatcher
+extension Functional.State.Dispatcher
 {
-    struct Ready: InternalState
+    struct Ready: Static_State
     {
         // a state has been set, ready for a new transition
         
-        let current: State<Target>?
+        let current: Functional.State<Target>?
     }
 }
