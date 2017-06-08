@@ -17,9 +17,13 @@ extension MyView
     static
     func highlighted(_ color: UIColor) -> State<MyView>
     {
-        return state { (_) in
-            
+        return onSet { (_) in
+        
             print("Applying Highlighted state")
+        }
+        .onUpdate{  (_) in
+            
+            print("Updating Highlighted state")
         }
     }
 }

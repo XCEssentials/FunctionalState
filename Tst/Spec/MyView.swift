@@ -1,46 +1,31 @@
-//
-//  MyView.swift
-//  MKHState
-//
-//  Created by Maxim Khatskevich on 1/14/17.
-//  Copyright © 2017 Maxim Khatskevich. All rights reserved.
-//
-
 import Foundation
 
 import XCEState
 
 //===
 
+final
 class MyView { }
 
 //===
 
-extension MyView: DiscreteSystem { }
-
-//=== MARK: Special helpers
-
-extension MyView
+extension MyView: Stateful
 {
     static
-    let shortAnimation: Transition<MyView> = { (_, m, c) in
+    let specialTransition: Transition<MyView>.Body = { (_, m, c) in
         
-        DispatchQueue
-            .global()
-            .async {
+        DispatchQueue.global().async {
                 
-                print("Animating")
-                m()
+            print("Animating")
+            m()
+            
+            //===
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 
-                //===
-                
-                DispatchQueue
-                    .main
-                    .asyncAfter(deadline: .now() + 0.5) {
-                        
-                        print("Completing now!")
-                        c(true)
-                    }
+                print("Completing now!")
+                c(true)
             }
+        }
     }
 }
