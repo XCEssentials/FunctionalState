@@ -15,7 +15,7 @@ import XCEState
 extension MyView
 {
     static
-    func disabled() -> Functional.State<MyView>
+    func disabled() -> State<MyView>
     {
         return state { (_) in
             

@@ -3,7 +3,7 @@ import Foundation
 //===
 
 public
-extension Functional.State
+extension State
 {
     struct Pending
     {
@@ -31,12 +31,12 @@ extension Functional.State
 //===
 
 public
-extension Functional.State.Pending
+extension State.Pending
 {
     func onUpdate(
         _ onUpdate: @escaping TargetMutation
-        ) -> Functional.State<Target>
+        ) -> State<Target>
     {
-        return Functional.State<Target>(id, onSet, onUpdate)
+        return State<Target>(id, onSet, onUpdate)
     }
 }

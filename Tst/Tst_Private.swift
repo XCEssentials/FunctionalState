@@ -17,7 +17,7 @@ class Tst_Private: XCTestCase
 {
     let aView = MyView()
     
-    var disp: Functional.Dispatcher<MyView>!
+    var disp: Dispatcher<MyView>!
     
     //===
     
@@ -28,7 +28,7 @@ class Tst_Private: XCTestCase
         
         //===
         
-        disp = Functional.Dispatcher(for: aView, MyView.defaultTransition)
+        disp = Dispatcher(for: aView, MyView.defaultTransition)
     }
     
     override
@@ -55,7 +55,7 @@ class Tst_Private: XCTestCase
         
         //===
         
-        XCTAssert(disp.state.current is Functional.Dispatcher<MyView>.Ready)
+        XCTAssert(disp.state.current is Dispatcher<MyView>.Ready)
         
         
         //===
@@ -65,7 +65,7 @@ class Tst_Private: XCTestCase
         
         //===
         
-        XCTAssert(!(disp.state.current is Functional.Dispatcher<MyView>.Ready))
+        XCTAssert(!(disp.state.current is Dispatcher<MyView>.Ready))
         
         //===
         

@@ -3,26 +3,26 @@ import Foundation
 //===
 
 public
-extension Functional.Transition
+extension Transition
 {
     struct Pending
     {
         public
-        let dispatcher: Functional.Dispatcher<Target>
+        let dispatcher: Dispatcher<Target>
         
-        let defaultTransition: Functional.Transition<Target>.Body?
+        let defaultTransition: Transition<Target>.Body?
         
-        let getState: Functional.State<Target>.Getter
+        let getState: State<Target>.Getter
     }
 }
 
 //===
 
 public
-extension Functional.Transition.Pending
+extension Transition.Pending
 {
     @discardableResult
-    func instantly() -> Functional.Dispatcher<Target>
+    func instantly() -> Dispatcher<Target>
     {
         dispatcher.enqueue((getState, nil, nil))
         
@@ -35,8 +35,8 @@ extension Functional.Transition.Pending
     
     @discardableResult
     func viaTransition(
-        _ completion: Functional.Transition.Completion? = nil
-        ) -> Functional.Dispatcher<Target>
+        _ completion: Transition<Target>.Completion? = nil
+        ) -> Dispatcher<Target>
     {
         dispatcher.enqueue((getState, defaultTransition, completion))
         
@@ -49,9 +49,9 @@ extension Functional.Transition.Pending
     
     @discardableResult
     func via(
-        _ transition: @escaping Functional.Transition<Target>.Body,
-        _ completion: Functional.Transition<Target>.Completion? = nil
-        ) -> Functional.Dispatcher<Target>
+        _ transition: @escaping Transition<Target>.Body,
+        _ completion: Transition<Target>.Completion? = nil
+        ) -> Dispatcher<Target>
     {
         dispatcher.enqueue((getState, transition, completion))
         

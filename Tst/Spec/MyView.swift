@@ -1,11 +1,3 @@
-//
-//  MyView.swift
-//  MKHState
-//
-//  Created by Maxim Khatskevich on 1/14/17.
-//  Copyright © 2017 Maxim Khatskevich. All rights reserved.
-//
-
 import Foundation
 
 import XCEState
@@ -17,10 +9,10 @@ class MyView { }
 
 //===
 
-extension MyView: Functional_DiscreteSystem
+extension MyView: Stateful
 {
     static
-    let defaultTransition: Functional.Transition<MyView>.Body? = { (_, m, c) in
+    let defaultTransition: Transition<MyView>.Body? = { (_, m, c) in
         
         DispatchQueue.global().async {
                 

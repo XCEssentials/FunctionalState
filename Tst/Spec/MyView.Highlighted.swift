@@ -15,7 +15,7 @@ import XCEState
 extension MyView
 {
     static
-    func highlighted(_ color: UIColor) -> Functional.State<MyView>
+    func highlighted(_ color: UIColor) -> State<MyView>
     {
         return onSet { (_) in
         
