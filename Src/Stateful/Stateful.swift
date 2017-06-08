@@ -3,20 +3,52 @@ import Foundation
 //===
 
 public
-protocol Stateful: class { }
+protocol Stateful: class
+{
+    static
+    var defaultTransition: Transition<Self>.Body { get }
+}
+
+//===
+
+
+public
+extension Stateful
+{
+    // default implementation
+    
+    static
+    var defaultTransition: Transition<Self>.Body { return { $1(); $2(true) } }
+}
 
 //===
 
 public
 extension Stateful
 {
+    // don't be confuxed,
+    // this is jsut for a nice call API like:
+    //
+    // aView.state.apply{ $0.newState() }.viaTransition()
+    
     var state: Dispatcher<Self>
     {
-        return DispatcherWrapper.get(for: self)
+        return DispatcherWrapper.get(
+            for: self,
+            with: Self.defaultTransition
+        )
     }
+}
+
+//===
+
+public
+extension Stateful
+{
+    // below are helpers for decalring state mutations
     
     //===
-
+    
     static
     func state(
         context: String = #function,

@@ -30,7 +30,7 @@ class DispatcherWrapper
     static
     func get<Target: AnyObject>(
         for target: Target,
-        with defaultTransition: Transition<Target>.Body? = nil
+        with defaultTransition: Transition<Target>.Body?
         ) -> Dispatcher<Target>
     {
         if
