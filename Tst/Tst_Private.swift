@@ -11,6 +11,8 @@ import XCTest
 @testable
 import XCEState
 
+import XCEStaticState
+
 //===
 
 class Tst_Private: XCTestCase
@@ -55,17 +57,26 @@ class Tst_Private: XCTestCase
         
         //===
         
-        XCTAssert(disp.state.current is Dispatcher<MyView>.Ready)
+        XCTAssert(disp.core.state is Dispatcher<MyView>.States.Ready)
         
         
         //===
         
-        disp.apply{ $0.disabled() }.viaTransition { if $0 { ex2.fulfill() } }
-            .apply{ $0.normal(0.6) }.via(MyView.defaultTransition!) { if $0 { ex3.fulfill() } }
+        disp.apply{ $0.disabled() }
+            .viaTransition{
+                
+                if $0 { ex2.fulfill() }
+            }
+            
+            .apply{ $0.normal(0.6) }
+            .via(MyView.specialTransition){
+                
+                if $0 { ex3.fulfill() }
+            }
         
         //===
         
-        XCTAssert(!(disp.state.current is Dispatcher<MyView>.Ready))
+        XCTAssert(!(disp.core.state is Dispatcher<MyView>.States.Ready))
         
         //===
         

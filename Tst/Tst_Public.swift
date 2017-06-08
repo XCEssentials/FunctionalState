@@ -39,10 +39,16 @@ class Tst_Public: XCTestCase
             .state
             
             .apply{ $0.disabled() }
-            .viaTransition { if $0 { ex2.fulfill() } }
+            .viaTransition{
+                
+                if $0 { ex2.fulfill() }
+            }
             
             .apply{ $0.normal(0.6) }
-            .via(MyView.defaultTransition!) { if $0 { ex3.fulfill() } }
+            .via(MyView.defaultTransition){ // equivalent of "viaTransition"
+                
+                if $0 { ex3.fulfill() }
+            }
         
         //===
         

@@ -12,7 +12,7 @@ class MyView { }
 extension MyView: Stateful
 {
     static
-    let defaultTransition: Transition<MyView>.Body? = { (_, m, c) in
+    let specialTransition: Transition<MyView>.Body = { (_, m, c) in
         
         DispatchQueue.global().async {
                 
