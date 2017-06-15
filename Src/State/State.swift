@@ -14,7 +14,7 @@ struct State<Target: AnyObject>
     //===
     
     public
-    let id: String
+    let identifier: String
     
     let onSet: TargetMutation
     
@@ -23,22 +23,22 @@ struct State<Target: AnyObject>
     //===
     
     init(
-        _ id: String = NSUUID().uuidString,
+        _ identifier: String = NSUUID().uuidString,
         _ onSet: @escaping TargetMutation
         )
     {
-        self.id = id
+        self.identifier = identifier
         self.onSet = onSet
         self.onUpdate = { _ in }
     }
     
     init(
-        _ id: String = NSUUID().uuidString,
+        _ identifier: String = NSUUID().uuidString,
         _ onSet: @escaping TargetMutation,
         _ onUpdate: @escaping TargetMutation
         )
     {
-        self.id = id
+        self.identifier = identifier
         self.onSet = onSet
         self.onUpdate = onUpdate
     }
@@ -52,9 +52,9 @@ extension State: Equatable
 {
     public
     static
-    func ==(lhs: State<Target>, rhs: State<Target>) -> Bool
+    func == (lhs: State<Target>, rhs: State<Target>) -> Bool
     {
-        return lhs.id == rhs.id
+        return lhs.identifier == rhs.identifier
     }
 }
 

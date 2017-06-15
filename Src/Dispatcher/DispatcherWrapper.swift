@@ -10,7 +10,7 @@ class DispatcherWrapper
     //===
     
     private
-    init(with dispatcher: AnyObject)
+    init<Target>(with dispatcher: Dispatcher<Target>)
     {
         self.dispatcher = dispatcher
     }
@@ -34,9 +34,10 @@ class DispatcherWrapper
         ) -> Dispatcher<Target>
     {
         if
-            let wrapper = storage.object(forKey: target)
+            let wrapper = storage.object(forKey: target),
+            let result = wrapper.dispatcher as? Dispatcher<Target>
         {
-            return wrapper.dispatcher as! Dispatcher<Target>
+            return result
         }
         else
         {

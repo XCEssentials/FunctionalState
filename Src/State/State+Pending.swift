@@ -11,18 +11,18 @@ extension State
         typealias TargetMutation = (_: Target) -> Void
         
         public
-        let id: String
+        let identifier: String
         
         let onSet: TargetMutation
         
         //===
         
         init(
-            _ id: String = NSUUID().uuidString,
+            _ identifier: String = NSUUID().uuidString,
             _ onSet: @escaping TargetMutation
             )
         {
-            self.id = id
+            self.identifier = identifier
             self.onSet = onSet
         }
     }
@@ -37,6 +37,6 @@ extension State.Pending
         _ onUpdate: @escaping TargetMutation
         ) -> State<Target>
     {
-        return State<Target>(id, onSet, onUpdate)
+        return State<Target>(identifier, onSet, onUpdate)
     }
 }

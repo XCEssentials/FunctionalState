@@ -59,7 +59,6 @@ class Tst_Private: XCTestCase
         
         XCTAssert(disp.core.state is Dispatcher<MyView>.States.Ready)
         
-        
         //===
         
         disp.apply{ $0.disabled() }

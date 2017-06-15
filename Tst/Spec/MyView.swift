@@ -12,19 +12,19 @@ class MyView { }
 extension MyView: Stateful
 {
     static
-    let specialTransition: Transition<MyView>.Body = { (_, m, c) in
+    let specialTransition: Transition<MyView>.Body = { (_, mutations, completion) in
         
         DispatchQueue.global().async {
                 
             print("Animating")
-            m()
+            mutations()
             
             //===
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 
                 print("Completing now!")
-                c(true)
+                completion(true)
             }
         }
     }
