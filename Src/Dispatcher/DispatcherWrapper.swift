@@ -2,47 +2,38 @@ import Foundation
 
 //===
 
-final
-class DispatcherWrapper
+fileprivate
+enum DispatcherWrapper // scope
 {
-    let dispatcher: AnyObject
-    
-    //===
-    
-    private
-    init<Target>(with dispatcher: Dispatcher<Target>)
-    {
-        self.dispatcher = dispatcher
-    }
-    
-    //===
-    
-    private
     static
-    var storage = NSMapTable<AnyObject, DispatcherWrapper>(
+    var storage = NSMapTable<AnyObject, AnyObject>(
         keyOptions: .weakMemory,
         valueOptions: .strongMemory
     )
-    
-    //===
-    
+}
+
+//===
+
+public
+extension Dispatcher
+{
     public
     static
-    func get<Target>(
+    func get(
         for target: Target,
         with defaultTransition: Transition<Target>.Body?
         ) -> Dispatcher<Target>
     {
         if
-            let wrapper = storage.object(forKey: target),
-            let result = wrapper.dispatcher as? Dispatcher<Target>
+            let dispatcher = DispatcherWrapper.storage.object(forKey: target),
+            let result = dispatcher as? Dispatcher<Target>
         {
             return result
         }
         else
         {
             let result = Dispatcher(for: target, defaultTransition)
-            storage.setObject(DispatcherWrapper(with: result), forKey: target)
+            DispatcherWrapper.storage.setObject(result, forKey: target)
             
             return result
         }

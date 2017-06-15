@@ -32,7 +32,7 @@ extension Stateful
     
     var state: Dispatcher<Self>
     {
-        return DispatcherWrapper.get(
+        return Dispatcher.get(
             for: self,
             with: Self.defaultTransition
         )
