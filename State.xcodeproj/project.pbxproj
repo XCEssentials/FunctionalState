@@ -178,8 +178,8 @@
 			isa = PBXGroup;
 			children = (
 				940343221EE9B0880060A493 /* Dispatcher.swift */,
-				940343241EE9B0880060A493 /* Dispatcher+Core.swift */,
 				9403433B1EE9CD2C0060A493 /* Dispatcher+processing.swift */,
+				940343241EE9B0880060A493 /* Dispatcher+Core.swift */,
 				940343251EE9B0880060A493 /* DispatcherWrapper.swift */,
 			);
 			path = Dispatcher;
