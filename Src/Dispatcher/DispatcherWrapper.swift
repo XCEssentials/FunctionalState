@@ -28,7 +28,7 @@ class DispatcherWrapper
     
     public
     static
-    func get<Target: AnyObject>(
+    func get<Target>(
         for target: Target,
         with defaultTransition: Transition<Target>.Body?
         ) -> Dispatcher<Target>

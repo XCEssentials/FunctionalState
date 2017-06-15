@@ -10,7 +10,7 @@ class Dispatcher<Target: AnyObject>
 {
     var queue = Queue<Transition<Target>.Wrapper>()
     
-    let core = States()
+    let core = Core()
     
     //===
     
@@ -33,7 +33,7 @@ class Dispatcher<Target: AnyObject>
         
         //===
         
-        self.core.state = States.Ready(current: nil)
+        self.core.state = Core.Ready(current: nil)
     }
 }
 

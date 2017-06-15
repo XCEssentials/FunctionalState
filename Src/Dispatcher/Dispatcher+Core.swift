@@ -7,12 +7,12 @@ import XCEStaticState
 extension Dispatcher
 {
     final
-    class States: XCEStaticState.Stateful { }
+    class Core: XCEStaticState.Stateful { }
 }
 
 //===
 
-extension Dispatcher.States
+extension Dispatcher.Core
 {
     struct Ready: XCEStaticState.State
     {

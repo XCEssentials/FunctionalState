@@ -17,9 +17,9 @@ extension Dispatcher
     {
         guard
             let target = target,
-            let now = core.state as? States.Ready,
+            let now = core.state as? Core.Ready,
             let task = queue.dequeue() // dequeue after we chaked internalState!
-            else
+        else
         {
             return
         }
@@ -32,7 +32,7 @@ extension Dispatcher
         
         guard
             now.current != newState
-            else
+        else
         {
             newState.onUpdate(target) // current == newState
             
@@ -43,13 +43,13 @@ extension Dispatcher
         
         //===
         
-        core.state = States.InTransition(previous: now.current, next: newState)
+        core.state = Core.InTransition(previous: now.current, next: newState)
         
         //===
         
         State.apply(newState, on: target, via: task.transition) {
             
-            self.core.state = States.Ready(current: newState)
+            self.core.state = Core.Ready(current: newState)
             
             //===
             

@@ -11,7 +11,6 @@ protocol Stateful: class
 
 //===
 
-
 public
 extension Stateful
 {
@@ -26,7 +25,7 @@ extension Stateful
 public
 extension Stateful
 {
-    // don't be confuxed,
+    // don't be confused,
     // this is jsut for a nice call API like:
     //
     // aView.state.apply{ $0.newState() }.viaTransition()

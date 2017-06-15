@@ -48,15 +48,14 @@ struct State<Target: AnyObject>
 
 // https://www.andrewcbancroft.com/2015/07/01/every-swift-value-type-should-be-equatable/
 
-extension State: Equatable { }
-
-public
-func ==<LTarget: AnyObject, RTarget: AnyObject>(
-    lhs: State<LTarget>,
-    rhs: State<RTarget>
-    ) -> Bool
+extension State: Equatable
 {
-    return lhs.id == rhs.id
+    public
+    static
+    func ==(lhs: State<Target>, rhs: State<Target>) -> Bool
+    {
+        return lhs.id == rhs.id
+    }
 }
 
 //===
