@@ -46,8 +46,6 @@ struct State<Target: AnyObject>
 
 //=== MARK: Equatable
 
-// https://www.andrewcbancroft.com/2015/07/01/every-swift-value-type-should-be-equatable/
-
 extension State: Equatable
 {
     public
