@@ -1,5 +1,5 @@
 repoName = 'State'
-projName = repoName
+projName = 'Main'
 
 #===
 
