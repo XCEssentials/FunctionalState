@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
 
   s.name                      = companyPrefix + projName
   s.summary                   = projSummary
-  s.version                   = '2.6.0'
+  s.version                   = '2.6.1'
   s.homepage                  = companyGitHubPage + '/' + projName
   
   s.source                    = { :git => companyGitHubAccount + '/' + projName + '.git', :tag => s.version }
@@ -20,9 +20,12 @@ Pod::Spec.new do |s|
   s.ios.deployment_target     = '8.0'
   s.requires_arc              = true
   
-  # s.dependency                'AAA', '~> X.Y.Z'
+  s.dependency                'XCEStaticState', '~> 1.1'
 
   s.license                   = { :type => 'MIT', :file => 'LICENSE' }
   s.author                    = { 'Maxim Khatskevich' => 'maxim@khatskevi.ch' }
+
+  s.deprecated                = true
+  s.deprecated_in_favor_of    = 'XCEFunctionalState'
   
 end
