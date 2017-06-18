@@ -74,7 +74,7 @@ extension State.Pending
      - Returns: State that combines `identifier` and `onSet` from the `Pending` instance and given `onUpdate` closure.
      */
     func onUpdate(
-        _ onUpdate: @escaping State.TargetMutation
+        _ onUpdate: @escaping State<Target>.TargetMutation
         ) -> State<Target>
     {
         return State(
