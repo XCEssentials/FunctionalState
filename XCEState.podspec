@@ -24,5 +24,8 @@ Pod::Spec.new do |s|
 
   s.license                   = { :type => 'MIT', :file => 'LICENSE' }
   s.author                    = { 'Maxim Khatskevich' => 'maxim@khatskevi.ch' }
+
+  s.deprecated                = true
+  s.deprecated_in_favor_of    = 'XCEFunctionalState'
   
 end
