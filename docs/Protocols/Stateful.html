@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Stateful Protocol Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Protocol/Stateful" class="dashAnchor"></a>
+    <a title="Stateful Protocol Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">XCEState Docs</a> (100% documented)</p>
+        <p class="header-right"><a href="https://github.com/XCEssentials/State"><img src="../img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">XCEState Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        Stateful Protocol Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/Dispatcher.html">Dispatcher</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enums</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/Transition.html">Transition</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Transition/Pending.html">– Pending</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/Stateful.html">Stateful</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structs</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/State.html">State</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/State/Pending.html">– Pending</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>Stateful</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="kd">protocol</span> <span class="kt">Stateful</span><span class="p">:</span> <span class="kd">class</span></code></pre>
+
+                </div>
+              </div>
+            <p>Turns any class into <a href="https://en.wikipedia.org/wiki/Discrete_system">discrete system</a>.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZvP8XCEState8Stateful17defaultTransitionFTxFT_T_FSbT__T_"></a>
+                    <a name="//apple_ref/swift/Variable/defaultTransition" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZvP8XCEState8Stateful17defaultTransitionFTxFT_T_FSbT__T_">defaultTransition</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Transition that will be used by default, if it will be requested to apply new state via transition, but NO exact transition will be specified. This value will be used for initializing associated <code><a href="../Classes/Dispatcher.html">Dispatcher</a></code> object.</p>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>Default implementation of the <code>defaultTransition</code> requirement. It&rsquo;s equivalent of applying new state instantly.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">static</span>
+    <span class="k">var</span> <span class="nv">defaultTransition</span><span class="p">:</span> <span class="kt"><a href="../Enums/Transition.html">Transition</a></span><span class="o">&lt;</span><span class="k">Self</span><span class="o">&gt;.</span><span class="kt">Body</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vE8XCEStatePS_8Stateful5stateGCS_10Dispatcherx_"></a>
+                    <a name="//apple_ref/swift/Property/state" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vE8XCEStatePS_8Stateful5stateGCS_10Dispatcherx_">state</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Exclusive way to accessing state dispatcher of <code>self</code>. Lazy-initializable, weakly binded with <code>self</code>, deallocates automatically when <code>self</code> is deallocated.</p>
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    Don&rsquo;t be confused. It returns <code><a href="../Classes/Dispatcher.html">Dispatcher</a></code>, but its name <code>state</code> - just for a nicer API like this:
+
+</div>
+<pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">MyView</span><span class="p">:</span> <span class="kt">Stateful</span> <span class="p">{}</span>
+
+<span class="kd">extension</span> <span class="kt">MyView</span>
+<span class="p">{</span>
+    <span class="kd">static</span>
+    <span class="kd">func</span> <span class="nf">initialized</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">State</span><span class="o">&lt;</span><span class="kt">MyView</span><span class="o">&gt;</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="n">state</span><span class="p">{</span> <span class="o">...</span> <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">let</span> <span class="nv">aView</span> <span class="o">=</span> <span class="kt">MyView</span><span class="p">()</span>
+
+<span class="n">aView</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">apply</span><span class="p">{</span> <span class="nv">$0</span><span class="o">.</span><span class="nf">initialized</span><span class="p">()</span> <span class="p">}</span><span class="o">.</span><span class="nf">viaTransition</span><span class="p">()</span>
+</code></pre>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">state</span><span class="p">:</span> <span class="kt"><a href="../Classes/Dispatcher.html">Dispatcher</a></span><span class="o">&lt;</span><span class="k">Self</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZFE8XCEStatePS_8Stateful5stateFT4nameSS5onSetFxT__GVS_5Statex_"></a>
+                    <a name="//apple_ref/swift/Method/state(name:onSet:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZFE8XCEStatePS_8Stateful5stateFT4nameSS5onSetFxT__GVS_5Statex_">state(name:onSet:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Designeted metod for declaring state with <code>onSet</code> mutation closure only (without <code>onUpdate</code>).</p>
+
+<ul>
+<li><p>Result: <code><a href="../Structs/State.html">State</a></code> instance that contains <code>identifier</code> built with <code>name</code>, provided <code>onSet</code> closure and empty <code>onUpdate</code> closure.</p></li>
+</ul>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">static</span>
+    <span class="kd">func</span> <span class="nf">state</span><span class="p">(</span>
+        <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="err">#</span><span class="n">function</span><span class="p">,</span>
+        <span class="nv">onSet</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Structs/State.html">State</a></span><span class="o">&lt;</span><span class="k">Self</span><span class="o">&gt;.</span><span class="kt">TargetMutation</span>
+        <span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/State.html">State</a></span><span class="o">&lt;</span><span class="k">Self</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>name</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Desired name of the state. This will contribute to the state <code>identifier</code>, so it must be unique within type. It&rsquo;s highly recommended to not specify it explicitly so the default implementation will pick up enclosing function name as state name.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>onSet</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>This closure will be used as <code>onSet</code> closure of result state.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZFE8XCEStatePS_8Stateful5onSetFT4nameSSFxT__GVVS_5State7Pendingx__"></a>
+                    <a name="//apple_ref/swift/Method/onSet(name:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZFE8XCEStatePS_8Stateful5onSetFT4nameSSFxT__GVVS_5State7Pendingx__">onSet(name:_:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Designeted metod for declaring state with both <code>onSet</code> and <code>onUpdate</code> mutation closures.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">static</span>
+    <span class="kd">func</span> <span class="nf">onSet</span><span class="p">(</span>
+        <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="err">#</span><span class="n">function</span><span class="p">,</span>
+        <span class="n">_</span> <span class="nv">onSet</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Structs/State.html">State</a></span><span class="o">&lt;</span><span class="k">Self</span><span class="o">&gt;.</span><span class="kt">TargetMutation</span>
+        <span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/State.html">State</a></span><span class="o">&lt;</span><span class="k">Self</span><span class="o">&gt;.</span><span class="kt">Pending</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>name</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Desired name of the state. This will contribute to the state <code>identifier</code>, so it must be unique within type. It&rsquo;s highly recommended to not specify it explicitly so the default implementation will pick up enclosing function name as state name.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>onSet</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>This closure will be used as <code>onSet</code> closure of result state.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Instance of <code>Pending</code> state that eventually allows to define <code><a href="../Structs/State.html">State</a></code> instance that contains <code>identifier</code> built with <code>name</code>, provided <code>onSet</code> and <code>onUpdate</code> closures.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2017 <a class="link" href="https://github.com/maximkhatskevich" target="_blank" rel="external">Maxim Khatskevich</a>. All rights reserved. (Last updated: 2017-06-19)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>
