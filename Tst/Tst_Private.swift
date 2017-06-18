@@ -57,7 +57,7 @@ class Tst_Private: XCTestCase
         
         //===
         
-        XCTAssert(disp.core.state is Dispatcher<MyView>.States.Ready)
+        XCTAssert(disp.core.state is Dispatcher<MyView>.Core.Ready)
         
         //===
         
@@ -75,7 +75,7 @@ class Tst_Private: XCTestCase
         
         //===
         
-        XCTAssert(!(disp.core.state is Dispatcher<MyView>.States.Ready))
+        XCTAssert(!(disp.core.state is Dispatcher<MyView>.Core.Ready))
         
         //===
         

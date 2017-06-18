@@ -4,6 +4,11 @@ import Foundation
 
 extension Dispatcher
 {
+    /**
+     Schedules transition into a new state for processing.
+     
+     - Parameter task: Transition (wrapped with state getter and completion) that needs to be scheduled.
+     */
     func enqueue(_ task: Transition<Target>.Wrapper)
     {
         queue.enqueue(task)
@@ -13,6 +18,9 @@ extension Dispatcher
         processNext()
     }
     
+    /**
+     Starts processing scheduled transitions, if it's not processing yet.
+     */
     func processNext()
     {
         guard
@@ -30,24 +38,11 @@ extension Dispatcher
         
         //===
         
-        guard
-            now.current != newState
-        else
-        {
-            newState.onUpdate(target) // current == newState
-            
-            //===
-            
-            return
-        }
-        
-        //===
-        
         core.state = Core.InTransition(previous: now.current, next: newState)
         
         //===
         
-        State.apply(newState, on: target, via: task.transition) {
+        let readyForNextTask: Transition.Completion = {
             
             self.core.state = Core.Ready(current: newState)
             
@@ -57,7 +52,36 @@ extension Dispatcher
             
             //===
             
-            self.processNext()
+            // in case transition was instant
+            DispatchQueue.main.async {
+                
+                self.processNext()
+            }
+        }
+        
+        //===
+        
+        if
+            now.current == newState
+        {
+            // just update current state
+            
+            newState.onUpdate(target)
+            
+            //===
+            
+            readyForNextTask(true)
+        }
+        else
+        {
+            // apply new state
+            
+            State.apply(
+                newState,
+                on: target,
+                via: task.transition,
+                completion: readyForNextTask
+            )
         }
     }
 }
