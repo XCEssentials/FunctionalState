@@ -1,7 +1,7 @@
 import XCTest
 
 @testable
-import XCEState
+import XCEFunctionalState
 
 import XCEStaticState
 
