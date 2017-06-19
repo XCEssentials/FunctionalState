@@ -14,7 +14,7 @@ Turn any object into discrete system and describe its states declaratively.
 The recommended way is to install using [CocoaPods](https://cocoapods.org/?q=XCEFunctionalState):
 
 ```ruby
-pod 'XCEFunctionalState', '~> 2.6'
+pod 'XCEFunctionalState', '~> 2.7'
 ```
 
 
