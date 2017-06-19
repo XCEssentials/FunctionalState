@@ -39,7 +39,7 @@ let project = Project("Main") { p in
     
     p.target("Fwk", .iOS, .framework) { t in
         
-        t.include("Src")
+        t.include("Sources")
         
         //---
         
@@ -72,7 +72,7 @@ let project = Project("Main") { p in
     
         t.unitTests { ut in
             
-            ut.include("Tst")
+            ut.include("Tests")
             
             //---
             
