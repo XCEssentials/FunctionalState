@@ -4,7 +4,7 @@ import XCEProjectGenerator
 
 let My =
 (
-    repoName: "State",
+    repoName: "FunctionalState",
     deploymentTarget: "8.0",
     companyIdentifier: "io.XCEssentials",
     companyPrefix: "XCE"

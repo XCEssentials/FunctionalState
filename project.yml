@@ -24,9 +24,9 @@ targets:
     - "Src"
     configurations:
       Debug:
-        PRODUCT_NAME: "XCEState"
+        PRODUCT_NAME: "XCEFunctionalState"
         IPHONEOS_DEPLOYMENT_TARGET: "8.0"
-        PRODUCT_BUNDLE_IDENTIFIER: "io.XCEssentials.State"
+        PRODUCT_BUNDLE_IDENTIFIER: "io.XCEssentials.FunctionalState"
         INFOPLIST_FILE: "Info/Fwk.plist"
         SDKROOT: "iphoneos"
         TARGETED_DEVICE_FAMILY: "1,2"
@@ -34,9 +34,9 @@ targets:
         SKIP_INSTALL: "YES"
         MTL_ENABLE_DEBUG_INFO: "true"
       Release:
-        PRODUCT_NAME: "XCEState"
+        PRODUCT_NAME: "XCEFunctionalState"
         IPHONEOS_DEPLOYMENT_TARGET: "8.0"
-        PRODUCT_BUNDLE_IDENTIFIER: "io.XCEssentials.State"
+        PRODUCT_BUNDLE_IDENTIFIER: "io.XCEssentials.FunctionalState"
         INFOPLIST_FILE: "Info/Fwk.plist"
         SDKROOT: "iphoneos"
         TARGETED_DEVICE_FAMILY: "1,2"
@@ -53,14 +53,14 @@ targets:
       Debug:
         LD_RUNPATH_SEARCH_PATHS: "$(inherited) @executable_path/Frameworks @loader_path/Frameworks"
         IPHONEOS_DEPLOYMENT_TARGET: "8.0"
-        PRODUCT_BUNDLE_IDENTIFIER: "io.XCEssentials.State.Tst"
+        PRODUCT_BUNDLE_IDENTIFIER: "io.XCEssentials.FunctionalState.Tst"
         INFOPLIST_FILE: "Info/Tst.plist"
         FRAMEWORK_SEARCH_PATHS: "$(inherited) $(BUILT_PRODUCTS_DIR)"
         MTL_ENABLE_DEBUG_INFO: "true"
       Release:
         LD_RUNPATH_SEARCH_PATHS: "$(inherited) @executable_path/Frameworks @loader_path/Frameworks"
         IPHONEOS_DEPLOYMENT_TARGET: "8.0"
-        PRODUCT_BUNDLE_IDENTIFIER: "io.XCEssentials.State.Tst"
+        PRODUCT_BUNDLE_IDENTIFIER: "io.XCEssentials.FunctionalState.Tst"
         INFOPLIST_FILE: "Info/Tst.plist"
         FRAMEWORK_SEARCH_PATHS: "$(inherited) $(BUILT_PRODUCTS_DIR)"
 variants:
