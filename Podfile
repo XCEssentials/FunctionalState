@@ -1,4 +1,4 @@
-repoName = 'State'
+repoName = 'FunctionalState'
 projName = 'Main'
 
 #===
