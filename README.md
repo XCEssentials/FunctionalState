@@ -1,7 +1,7 @@
-[![GitHub tag](https://img.shields.io/github/tag/XCEssentials/State.svg)](https://github.com/XCEssentials/State/releases)
-[![CocoaPods](https://img.shields.io/cocoapods/v/XCEState.svg)](https://cocoapods.org/?q=XCEState)
-[![CocoaPods](https://img.shields.io/cocoapods/p/XCEState.svg)](https://cocoapods.org/?q=XCEState)
-[![license](https://img.shields.io/github/license/XCEssentials/State.svg)](https://opensource.org/licenses/MIT)
+[![GitHub tag](https://img.shields.io/github/tag/XCEssentials/FunctionalState.svg)](https://github.com/XCEssentials/FunctionalState/releases)
+[![CocoaPods](https://img.shields.io/cocoapods/v/XCEFunctionalState.svg)](https://cocoapods.org/?q=XCEFunctionalState)
+[![CocoaPods](https://img.shields.io/cocoapods/p/XCEFunctionalState.svg)](https://cocoapods.org/?q=XCEFunctionalState)
+[![license](https://img.shields.io/github/license/XCEssentials/FunctionalState.svg)](https://opensource.org/licenses/MIT)
 
 # Introduction
 
@@ -11,10 +11,10 @@ Turn any object into discrete system and describe its states declaratively.
 
 # How to install
 
-The recommended way is to install using [CocoaPods](https://cocoapods.org/?q=XCEState):
+The recommended way is to install using [CocoaPods](https://cocoapods.org/?q=XCEFunctionalState):
 
 ```ruby
-pod 'XCEState', '~> 2.6'
+pod 'XCEFunctionalState', '~> 2.6'
 ```
 
 
@@ -122,7 +122,7 @@ class SearchView: UIView
 {
 	//...
 	
-	static
+    static
     var defaultTransition: Transition<SearchView>.Body = {
     	
     	(view, mutations, completion) in
