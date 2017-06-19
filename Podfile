@@ -1,4 +1,4 @@
-repoName = 'State'
+repoName = 'FunctionalState'
 projName = 'Main'
 
 #===
@@ -13,7 +13,7 @@ use_frameworks!
 
 def sharedPods
 
-	pod 'XCEStaticState', '~> 1.1’
+	pod 'XCEStaticState', '~> 1.1'
 
 end
 
