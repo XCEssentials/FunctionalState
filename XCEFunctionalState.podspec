@@ -11,11 +11,11 @@ Pod::Spec.new do |s|
 
   s.name                      = companyPrefix + projName
   s.summary                   = projSummary
-  s.version                   = '2.7.0'
+  s.version                   = '2.7.1'
   s.homepage                  = companyGitHubPage + '/' + projName
   
   s.source                    = { :git => companyGitHubAccount + '/' + projName + '.git', :tag => s.version }
-  s.source_files              = 'Src/**/*.swift'
+  s.source_files              = 'Sources/**/*.swift'
 
   s.ios.deployment_target     = '8.0'
   s.requires_arc              = true
