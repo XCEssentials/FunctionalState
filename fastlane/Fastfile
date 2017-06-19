@@ -105,21 +105,6 @@ platform :ios do
       message: 'Version Bump to ' + newVersionNumber + ' in Podspec file'
     )
 
-    # === Update docs
-
-    sh 'jazzy' +
-      ' --source-directory ./../' +
-      ' --output ./../docs' +
-      ' --podspec ./../' + moduleName + '.podspec' +
-      ' --author ' + author +
-      ' --author_url ' + authorURL +
-      ' --github_url ' + repoURL +
-      ' --module ' + moduleName +
-      ' --module-version ' + newVersionNumber
-
-    sh 'git add ../.'
-    sh 'git commit -m "Updated docs with Jazzy"'
-
   end
 
   # ===
