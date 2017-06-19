@@ -24,7 +24,7 @@ default_platform :ios
 
 companyName = 'XCEssentials'
 companyPrefix = 'XCE'
-repoName = 'State'
+repoName = 'FunctionalState'
 repoURL = 'https://github.com/' + companyName + '/' + repoName
 moduleName = companyPrefix + repoName
 projName = 'Main' + '.xcodeproj'
