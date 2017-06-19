@@ -76,7 +76,7 @@
 		A31E120F02DE62163E40FFCB /* Pods-Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tests/Pods-Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		A34F75BBF830D9C9B29E4370 /* Pods_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A867702BCB412246C6F989C5 /* Transition.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Transition.swift; sourceTree = "<group>"; };
-		BAD3BF54C1B2D27BC75E26B6 /* Fwk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Fwk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BAD3BF54C1B2D27BC75E26B6 /* Fwk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Fwk.framework; path = XCEFunctionalState.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDAD1491E9E71B3EFE3A887C /* Dispatcher.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Dispatcher.swift; sourceTree = "<group>"; };
 		BFAC22E390918AF84FF6DB70 /* State.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		E71F3BDDE354612CAAB911AE /* MyView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MyView.swift; sourceTree = "<group>"; };
@@ -111,7 +111,6 @@
 			children = (
 				F92188A26210CDB8AB30B8DD /* Stateful.swift */,
 			);
-			name = Stateful;
 			path = Stateful;
 			sourceTree = "<group>";
 		};
@@ -129,10 +128,9 @@
 		2042D5192A73754E3A9CE385 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				D9DD11EA6D264FD07FBAAFE7 /* Spec */,
 				1821370172FB8DD76D97F65F /* StatefulTests.swift */,
+				D9DD11EA6D264FD07FBAAFE7 /* Spec */,
 			);
-			name = Tests;
 			path = Tests;
 			sourceTree = SOURCE_ROOT;
 		};
@@ -140,7 +138,7 @@
 			isa = PBXGroup;
 			children = (
 			);
-			name = "$local";
+			name = $local;
 			sourceTree = "<group>";
 		};
 		3E032CB771A0502AFDA8C88F = {
@@ -165,23 +163,21 @@
 		658648A92BBD5A90A5C21B5C /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				EB08213C25B094C5633F3856 /* Dispatcher */,
 				BCA17055A33B6FAD26D9D3B6 /* Misc */,
 				8F00566C457FBF22689DEAC0 /* State */,
-				19B2A24AD98D74EF0A35DFD6 /* Stateful */,
 				BD78E237A1D394493B4F4DE2 /* Transition */,
+				EB08213C25B094C5633F3856 /* Dispatcher */,
+				19B2A24AD98D74EF0A35DFD6 /* Stateful */,
 			);
-			name = Sources;
 			path = Sources;
 			sourceTree = SOURCE_ROOT;
 		};
 		8F00566C457FBF22689DEAC0 /* State */ = {
 			isa = PBXGroup;
 			children = (
-				F2003D6471007E5D87CB2754 /* State+Pending.swift */,
 				BFAC22E390918AF84FF6DB70 /* State.swift */,
+				F2003D6471007E5D87CB2754 /* State+Pending.swift */,
 			);
-			name = State;
 			path = State;
 			sourceTree = "<group>";
 		};
@@ -190,18 +186,16 @@
 			children = (
 				347DD8D1B17954579A0F806D /* Queue.swift */,
 			);
-			name = Misc;
 			path = Misc;
 			sourceTree = "<group>";
 		};
 		BD78E237A1D394493B4F4DE2 /* Transition */ = {
 			isa = PBXGroup;
 			children = (
+				A867702BCB412246C6F989C5 /* Transition.swift */,
 				59EA2E5440416DF4DD37CA3F /* Transition+Pending.swift */,
 				17A43EEACE3010E2738D578F /* Transition+Wrapper.swift */,
-				A867702BCB412246C6F989C5 /* Transition.swift */,
 			);
-			name = Transition;
 			path = Transition;
 			sourceTree = "<group>";
 		};
@@ -221,19 +215,17 @@
 			children = (
 				E71F3BDDE354612CAAB911AE /* MyView.swift */,
 			);
-			name = Spec;
 			path = Spec;
 			sourceTree = "<group>";
 		};
 		EB08213C25B094C5633F3856 /* Dispatcher */ = {
 			isa = PBXGroup;
 			children = (
+				BDAD1491E9E71B3EFE3A887C /* Dispatcher.swift */,
 				1C769848C58FC75AB69834AE /* Dispatcher+Core.swift */,
 				4A7C66AF3D9B106D736DD0C4 /* Dispatcher+processing.swift */,
-				BDAD1491E9E71B3EFE3A887C /* Dispatcher.swift */,
 				7F64E10A0DB068137AD6E8EC /* DispatcherWrapper.swift */,
 			);
-			name = Dispatcher;
 			path = Dispatcher;
 			sourceTree = "<group>";
 		};
@@ -275,6 +267,7 @@
 			buildConfigurationList = 897C541C96FD9E12FF9E600A /* Build configuration list for PBXNativeTarget "Fwk" */;
 			buildPhases = (
 				2CCD37E8E79CA600D1D59EA1 /* [CP] Check Pods Manifest.lock */,
+				9486EF7E1EF8800100E87D78 /* SwiftLint */,
 				F254192F3CB9AFBC8A760C70 /* Sources */,
 				E33040166D6815941C8B82E1 /* Frameworks */,
 				173A54A5C3AA9C457068EC9D /* Embed Frameworks */,
@@ -362,6 +355,20 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Tests/Pods-Tests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		9486EF7E1EF8800100E87D78 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
 		C61CAC14B03B4DAE47EB9435 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
