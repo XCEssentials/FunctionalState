@@ -9,14 +9,14 @@ import XCEStaticState
  */
 public
 final
-class Dispatcher<Target: AnyObject>
+class Dispatcher<Object: Stateful>
 {
     /**
      Internal queue of scheduled transitions that need to be processed as soon as possible serially (next transition starts right after previous one has been finished).
      
      Every time we add a transition into the queue, we call `processNext()` to start processing scheduled transitions right away.
      */
-    var queue = Queue<Transition<Target>.Wrapper>()
+    var queue = Queue<DeferredTransition<Object>>()
     
     /**
      Dispatcher core, holds internal state.
@@ -28,13 +28,7 @@ class Dispatcher<Target: AnyObject>
      */
     public private(set)
     weak
-    var target: Target?
-    
-    /**
-     Transition that will be used by default, if it will be requested to apply new state via transition, but NO exact transition will be specified.
-     */
-    public
-    let defaultTransition: Transition<Target>.Body?
+    var object: Object?
     
     /**
      The only initializer.
@@ -47,17 +41,13 @@ class Dispatcher<Target: AnyObject>
      
      - Note: It is intentionally `internal` to avoid direct access from outside of this module.
      */
-    init(
-        for target: Target,
-        _ defaultTransition: Transition<Target>.Body? = nil
-        )
+    init(with object: Object)
     {
-        self.target = target
-        self.defaultTransition = defaultTransition
+        self.object = object
         
         //===
         
-        self.core.state = Core.Ready(current: nil)
+        self.core.state = Core.Ready<Object>(current: nil)
     }
 }
 
@@ -66,21 +56,22 @@ class Dispatcher<Target: AnyObject>
 public
 extension Dispatcher
 {
-    /**
-     Applies a new state to `target` object.
-     
-     - Parameter getState: Closure that returns the new state.
-     
-     - Returns: Instance of `Pending` transition that eventually allows to schedule transition into the new state on this dispatcher.
-     */
     func apply(
-        _ getState: @escaping State<Target>.Getter
-        ) -> Transition<Target>.Pending
-    {
-        return Transition<Target>.Pending(
-            dispatcher: self,
-            defaultTransition: defaultTransition,
-            getState: getState
+        _ state: State<Object>,
+        completion: Completion? = nil
         )
+    {
+        enqueue((state, nil, completion))
+    }
+    
+    //===
+    
+    func apply(
+        _ state: State<Object>,
+        via transition: Transition<Object>,
+        completion: Completion? = nil
+        )
+    {
+        enqueue((state, transition, completion))
     }
 }

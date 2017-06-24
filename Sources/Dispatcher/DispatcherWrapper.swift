@@ -36,21 +36,18 @@ extension Dispatcher
      - Returns: `Dispatcher` instance for the given `target` object.
      */
     static
-    func get(
-        for target: Target,
-        with defaultTransition: Transition<Target>.Body?
-        ) -> Dispatcher<Target>
+    func get(for object: Object) -> Dispatcher<Object>
     {
         if
-            let dispatcher = DispatcherWrapper.storage.object(forKey: target),
-            let result = dispatcher as? Dispatcher<Target>
+            let dispatcher = DispatcherWrapper.storage.object(forKey: object),
+            let result = dispatcher as? Dispatcher<Object>
         {
             return result
         }
         else
         {
-            let result = Dispatcher(for: target, defaultTransition)
-            DispatcherWrapper.storage.setObject(result, forKey: target)
+            let result = Dispatcher(with: object)
+            DispatcherWrapper.storage.setObject(result, forKey: object)
             
             return result
         }

@@ -16,10 +16,9 @@
 		2E10F062A69E9CDCAB785B83 /* DispatcherWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F64E10A0DB068137AD6E8EC /* DispatcherWrapper.swift */; };
 		3BC21A8566C191F6D9CBDC16 /* Dispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDAD1491E9E71B3EFE3A887C /* Dispatcher.swift */; };
 		4A9507ADE3BED09E0214E44D /* Dispatcher+Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C769848C58FC75AB69834AE /* Dispatcher+Core.swift */; };
-		8FC7DBDAD4D9A4234450659C /* Transition+Wrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A43EEACE3010E2738D578F /* Transition+Wrapper.swift */; };
-		928EE09A187E600E37510F55 /* State+Pending.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2003D6471007E5D87CB2754 /* State+Pending.swift */; };
+		8FC7DBDAD4D9A4234450659C /* DeferredTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A43EEACE3010E2738D578F /* DeferredTransition.swift */; };
+		942D9DE71EFF0E01004BA114 /* GlobalAliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942D9DE61EFF0E01004BA114 /* GlobalAliases.swift */; };
 		A7E49D641CB68F681D67FA29 /* StatefulTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1821370172FB8DD76D97F65F /* StatefulTests.swift */; };
-		AB34C081017114AA73950835 /* Transition+Pending.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EA2E5440416DF4DD37CA3F /* Transition+Pending.swift */; };
 		C35733626DD991F4846C94C3 /* Dispatcher+processing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7C66AF3D9B106D736DD0C4 /* Dispatcher+processing.swift */; };
 		C910C7097BB79B7229CDB160 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93C2E431D2CF02D9F7DE2FAE /* Foundation.framework */; };
 		E850F1852F007D2762B81249 /* Transition.swift in Sources */ = {isa = PBXBuildFile; fileRef = A867702BCB412246C6F989C5 /* Transition.swift */; };
@@ -61,18 +60,18 @@
 
 /* Begin PBXFileReference section */
 		09A637AB6D8FD3CE022CC8BB /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		17A43EEACE3010E2738D578F /* Transition+Wrapper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "Transition+Wrapper.swift"; sourceTree = "<group>"; };
+		17A43EEACE3010E2738D578F /* DeferredTransition.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DeferredTransition.swift; sourceTree = "<group>"; };
 		1821370172FB8DD76D97F65F /* StatefulTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = StatefulTests.swift; sourceTree = "<group>"; };
 		1C769848C58FC75AB69834AE /* Dispatcher+Core.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "Dispatcher+Core.swift"; sourceTree = "<group>"; };
 		3243FB73799FE65C3B759633 /* Pods-Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tests/Pods-Tests.release.xcconfig"; sourceTree = "<group>"; };
 		347DD8D1B17954579A0F806D /* Queue.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		4A7C66AF3D9B106D736DD0C4 /* Dispatcher+processing.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "Dispatcher+processing.swift"; sourceTree = "<group>"; };
-		59EA2E5440416DF4DD37CA3F /* Transition+Pending.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "Transition+Pending.swift"; sourceTree = "<group>"; };
 		6DD4A93C6EC8FFB316309B96 /* Pods-Fwk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fwk.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Fwk/Pods-Fwk.debug.xcconfig"; sourceTree = "<group>"; };
 		7E91B3AE221CD3B2DFC4EC38 /* Pods-Fwk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fwk.release.xcconfig"; path = "Pods/Target Support Files/Pods-Fwk/Pods-Fwk.release.xcconfig"; sourceTree = "<group>"; };
 		7F64E10A0DB068137AD6E8EC /* DispatcherWrapper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DispatcherWrapper.swift; sourceTree = "<group>"; };
 		8D5BE9752B066B82B360FD3D /* Pods_Fwk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Fwk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		93C2E431D2CF02D9F7DE2FAE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		942D9DE61EFF0E01004BA114 /* GlobalAliases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalAliases.swift; sourceTree = "<group>"; };
 		A31E120F02DE62163E40FFCB /* Pods-Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tests/Pods-Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		A34F75BBF830D9C9B29E4370 /* Pods_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A867702BCB412246C6F989C5 /* Transition.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Transition.swift; sourceTree = "<group>"; };
@@ -80,7 +79,6 @@
 		BDAD1491E9E71B3EFE3A887C /* Dispatcher.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Dispatcher.swift; sourceTree = "<group>"; };
 		BFAC22E390918AF84FF6DB70 /* State.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		E71F3BDDE354612CAAB911AE /* MyView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MyView.swift; sourceTree = "<group>"; };
-		F2003D6471007E5D87CB2754 /* State+Pending.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "State+Pending.swift"; sourceTree = "<group>"; };
 		F92188A26210CDB8AB30B8DD /* Stateful.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Stateful.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -176,7 +174,6 @@
 			isa = PBXGroup;
 			children = (
 				BFAC22E390918AF84FF6DB70 /* State.swift */,
-				F2003D6471007E5D87CB2754 /* State+Pending.swift */,
 			);
 			path = State;
 			sourceTree = "<group>";
@@ -185,6 +182,7 @@
 			isa = PBXGroup;
 			children = (
 				347DD8D1B17954579A0F806D /* Queue.swift */,
+				942D9DE61EFF0E01004BA114 /* GlobalAliases.swift */,
 			);
 			path = Misc;
 			sourceTree = "<group>";
@@ -193,8 +191,7 @@
 			isa = PBXGroup;
 			children = (
 				A867702BCB412246C6F989C5 /* Transition.swift */,
-				59EA2E5440416DF4DD37CA3F /* Transition+Pending.swift */,
-				17A43EEACE3010E2738D578F /* Transition+Wrapper.swift */,
+				17A43EEACE3010E2738D578F /* DeferredTransition.swift */,
 			);
 			path = Transition;
 			sourceTree = "<group>";
@@ -421,11 +418,10 @@
 				3BC21A8566C191F6D9CBDC16 /* Dispatcher.swift in Sources */,
 				2E10F062A69E9CDCAB785B83 /* DispatcherWrapper.swift in Sources */,
 				2AD5A144C5F34B3D3A30FDF1 /* Queue.swift in Sources */,
-				928EE09A187E600E37510F55 /* State+Pending.swift in Sources */,
+				942D9DE71EFF0E01004BA114 /* GlobalAliases.swift in Sources */,
 				1A2074412402793ED583F9FF /* State.swift in Sources */,
 				1CF3AD58729DA6EE7DEAC045 /* Stateful.swift in Sources */,
-				AB34C081017114AA73950835 /* Transition+Pending.swift in Sources */,
-				8FC7DBDAD4D9A4234450659C /* Transition+Wrapper.swift in Sources */,
+				8FC7DBDAD4D9A4234450659C /* DeferredTransition.swift in Sources */,
 				E850F1852F007D2762B81249 /* Transition.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
