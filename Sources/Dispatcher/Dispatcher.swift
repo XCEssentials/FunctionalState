@@ -56,53 +56,73 @@ class Dispatcher<Object: Stateful>
 public
 extension Dispatcher
 {
+    @discardableResult
     func apply(
         via forceTransition: Transition<Object>? = nil,
         _ stateGetter: @autoclosure () -> State<Object>
-        )
+        ) -> Dispatcher<Object>
     {
         enqueue((
             stateGetter(),
             forceTransition,
             nil
         ))
+        
+        //===
+        
+        return self
     }
     
+    @discardableResult
     func apply(
         via forceTransition: Transition<Object>? = nil,
         _ stateGetter: @autoclosure () -> State<Object>,
         completion: @escaping Completion
-        )
+        ) -> Dispatcher<Object>
     {
         enqueue((
             stateGetter(),
             forceTransition,
             completion
         ))
+        
+        //===
+        
+        return self
     }
     
+    @discardableResult
     func apply(
         via forceTransition: Transition<Object>? = nil,
         _ stateGetter: (Object.Type) -> State<Object>
-        )
+        ) -> Dispatcher<Object>
     {
         enqueue((
             stateGetter(Object.self),
             forceTransition,
             nil
         ))
+        
+        //===
+        
+        return self
     }
     
+    @discardableResult
     func apply(
         via forceTransition: Transition<Object>? = nil,
         _ stateGetter: (Object.Type) -> State<Object>,
         completion: @escaping Completion
-        )
+        ) -> Dispatcher<Object>
     {
         enqueue((
             stateGetter(Object.self),
             forceTransition,
             completion
         ))
+        
+        //===
+        
+        return self
     }
 }
