@@ -18,33 +18,32 @@ extension MyView: Stateful
     let animDuration = 0.5
     
     static
-    let specialTransition: Transition<MyView>.Body = { (_, mutations, completion) in
-        
-        DispatchQueue.global().async {
-                
-            print("Animating")
-            mutations()
+    var specialTransition: Transition<MyView>
+    {
+        return { _, mutations, completion in
             
-            //===
-            
-            // emulate animation with non-zero duration
-            DispatchQueue.main.asyncAfter(deadline: .now() + animDuration) {
+            DispatchQueue.global().async {
                 
-                print("Completing now!")
-                completion(true)
+                mutations()
+                
+                //===
+                
+                // emulate animation with non-zero duration
+                DispatchQueue.main.asyncAfter(deadline: .now() + animDuration) {
+                    
+                    print("Completing now!")
+                    completion(true)
+                }
             }
         }
     }
-}
 
-//===
-
-extension MyView
-{
+    //===
+      
     static
     func normal() -> State<MyView>
     {
-        return state { _ in
+        return state{ _ in
             
             print("Applying Normal state")
         }
@@ -53,7 +52,7 @@ extension MyView
     static
     func disabled(_ opacity: Float) -> State<MyView>
     {
-        return state { _ in
+        return state{ _ in
             
             print("Applying Disabled state")
         }
@@ -62,17 +61,19 @@ extension MyView
     static
     func highlighted(_ color: Int) -> State<MyView>
     {
-        return onSet{
+        return state(
+            onSet: {
+                
+                print("Applying Highlighted state")
+                
+                $0.color = color
+            },
+            onUpdate: {
             
-            print("Applying Highlighted state")
-            
-            $0.color = color
-        }
-        .onUpdate{
-            
-            print("Updating Highlighted state")
-            
-            $0.color = color
-        }
+                print("Updating Highlighted state")
+                
+                $0.color = color
+            }
+        )
     }
 }

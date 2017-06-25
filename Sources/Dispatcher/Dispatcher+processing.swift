@@ -26,8 +26,8 @@ extension Dispatcher
     {
         guard
             let object = object,
-            let now = core.state as? Core.Ready<Object>,
-            let (newState, forcedTransition, completion) = queue.dequeue()
+            let now = core.state as? Core.Ready,
+            let (newState, forceTransition, completion) = queue.dequeue()
         else
         {
             return
@@ -46,22 +46,17 @@ extension Dispatcher
             now.current == newState
         {
             changes = { newState.onUpdate?(object) }
-            transition = forcedTransition ?? newState.onUpdateTransition
+            transition = forceTransition ?? newState.onUpdateTransition
         }
         else
         {
             changes = { newState.onSet(object) }
-            transition = forcedTransition ?? newState.onSetTransition
+            transition = forceTransition ?? newState.onSetTransition
         }
         
         //===
         
-        transition.prepare?(object)
-        transition.execute(changes) { finished in
-            
-            transition.complete?(object)
-            
-            //===
+        transition(object, changes){ finished in
             
             self.core.state = Core.Ready(current: newState)
             

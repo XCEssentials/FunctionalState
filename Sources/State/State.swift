@@ -9,16 +9,36 @@ struct State<Object: Stateful>
     typealias ObjectMutation = (Object) -> Void
     
     //===
-    
+
     let identifier: String
+    
+    //===
+    
+    let onSetTransition: Transition<Object>
+    let onUpdateTransition: Transition<Object>
     
     let onSet: ObjectMutation
     let onUpdate: ObjectMutation?
     
     //===
     
-    let onSetTransition: Transition<Object>
-    let onUpdateTransition: Transition<Object>
+    fileprivate
+    init(
+        identifier: String,
+        onSetTransition: @escaping Transition<Object>,
+        onUpdateTransition: @escaping Transition<Object>,
+        onSet: @escaping ObjectMutation,
+        onUpdate: ObjectMutation?
+        )
+    {
+        self.identifier = identifier
+        
+        self.onSetTransition = onSetTransition
+        self.onUpdateTransition = onUpdateTransition
+        
+        self.onSet = onSet
+        self.onUpdate = onUpdate
+    }
 }
 
 //===
@@ -36,67 +56,40 @@ extension State: Equatable
 //=== MARK: Initializers
 
 public
-extension State
+extension Stateful
 {
-    init(
-        _ identifier: String = UUID().uuidString,
-        onSet: @escaping ObjectMutation
-        )
+    static
+    func state(
+        _ identifier: String = #function,
+        onSetTransition: Transition<Self>? = nil,
+        onUpdateTransition: Transition<Self>? = nil,
+        onSet: @escaping State<Self>.ObjectMutation
+        ) -> State<Self>
     {
-        self.identifier = identifier
-        
-        self.onSet = onSet
-        self.onUpdate = nil
-
-        self.onSetTransition = Transition<Object>.defaultOnSetTransition
-        self.onUpdateTransition = Transition<Object>.defaultOnUpdateTransition
+        return State(
+            identifier: identifier,
+            onSetTransition: onSetTransition ?? defaultOnSetTransition,
+            onUpdateTransition: onUpdateTransition ?? defaultOnUpdateTransition,
+            onSet: onSet,
+            onUpdate: nil
+        )
     }
     
-    init(
-        _ identifier: String = UUID().uuidString,
-        onSet: @escaping ObjectMutation,
-        onUpdate: @escaping ObjectMutation
-        )
+    static
+    func state(
+        _ identifier: String = #function,
+        onSetTransition: Transition<Self>? = nil,
+        onUpdateTransition: Transition<Self>? = nil,
+        onSet: @escaping State<Self>.ObjectMutation,
+        onUpdate: @escaping State<Self>.ObjectMutation
+        ) -> State<Self>
     {
-        self.identifier = identifier
-        
-        self.onSet = onSet
-        self.onUpdate = onUpdate
-        
-        self.onSetTransition = Transition<Object>.defaultOnSetTransition
-        self.onUpdateTransition = Transition<Object>.defaultOnUpdateTransition
-    }
-    
-    init(
-        _ identifier: String = UUID().uuidString,
-        onSet: @escaping ObjectMutation,
-        onUpdate: @escaping ObjectMutation,
-        defaultTransition: Transition<Object>
+        return State(
+            identifier: identifier,
+            onSetTransition: onSetTransition ?? defaultOnSetTransition,
+            onUpdateTransition: onUpdateTransition ?? defaultOnUpdateTransition,
+            onSet: onSet,
+            onUpdate: onUpdate
         )
-    {
-        self.identifier = identifier
-        
-        self.onSet = onSet
-        self.onUpdate = onUpdate
-        
-        self.onSetTransition = defaultTransition
-        self.onUpdateTransition = defaultTransition
-    }
-    
-    init(
-        _ identifier: String = UUID().uuidString,
-        onSet: @escaping ObjectMutation,
-        onUpdate: @escaping ObjectMutation,
-        defaultOnSetTransition: Transition<Object>,
-        defaultOnUpdateTransition: Transition<Object>
-        )
-    {
-        self.identifier = identifier
-        
-        self.onSet = onSet
-        self.onUpdate = onUpdate
-        
-        self.onSetTransition = defaultOnSetTransition
-        self.onUpdateTransition = defaultOnUpdateTransition
     }
 }

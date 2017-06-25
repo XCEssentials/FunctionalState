@@ -46,7 +46,7 @@ extension Dispatcher
         }
         else
         {
-            let result = Dispatcher(with: object)
+            let result = Dispatcher(for: object)
             DispatcherWrapper.storage.setObject(result, forKey: object)
             
             return result

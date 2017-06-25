@@ -20,7 +20,7 @@ extension Dispatcher.Core
     /**
      Not in transition right now, ready for a new transition
      */
-    struct Ready<Object: Stateful>: XCEStaticState.State
+    struct Ready: XCEStaticState.State
     {
         /**
          Current object state, or `nil`, if it has not been set yet.
@@ -31,7 +31,7 @@ extension Dispatcher.Core
     /**
      A transition into a new state is progress.
      */
-    struct InTransition<Object: Stateful>: XCEStaticState.State
+    struct InTransition: XCEStaticState.State
     {
         /**
          The state which was current when transition has been started.

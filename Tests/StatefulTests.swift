@@ -24,7 +24,7 @@ class StatefulTests: XCTestCase
         
         //===
         
-        disp = Dispatcher(for: aView, MyView.defaultTransition)
+        disp = Dispatcher(for: aView)
     }
     
     override
@@ -56,7 +56,7 @@ class StatefulTests: XCTestCase
     
     func testApplyStateInstantly()
     {
-        disp.apply{ $0.normal() }.instantly()
+        disp.apply{ $0.normal() }
         
         //===
         
@@ -79,43 +79,43 @@ class StatefulTests: XCTestCase
     {
         RXC.isNotNil("Target object is set."){
             
-            disp.target
+            disp.object
         }
         
         //===
         
         RXC.isNil("'color' property of the object has not been set yet."){
             
-            disp.target?.color
+            disp.object?.color
         }
         
         //===
         
         let initialColorValue = 1
         
-        disp.apply{ $0.highlighted(initialColorValue) }.instantly()
+        disp.apply{ $0.highlighted(initialColorValue) }
         
         //===
         
         RXC.isTrue("'color' property of the object has been set."){
             
-            disp.target?.color == initialColorValue
+            disp.object?.color == initialColorValue
         }
         
         //===
         
         let updatedColorValue = 2
         
-        disp.apply{ $0.highlighted(updatedColorValue) }.instantly()
+        disp.apply{ $0.highlighted(updatedColorValue) }
         
         //===
         
         RXC.isTrue("'color' property of the object has been updated."){
             
-            disp.target?.color == updatedColorValue
+            disp.object?.color == updatedColorValue
         }
     }
-    
+
     func testDefaultTransition()
     {
         var completionHasBeenCalled = false
@@ -123,10 +123,10 @@ class StatefulTests: XCTestCase
         
         //===
         
-        disp.apply{ $0.normal() }.viaTransition{
-                
+        disp.apply(MyView.normal()){ finished in
+            
             completionHasBeenCalled = true
-            transitionSucceeded = $0
+            transitionSucceeded = finished
         }
         
         //===
@@ -142,7 +142,7 @@ class StatefulTests: XCTestCase
         
         RXC.isTrue("Current state of the target object is 'normal'."){
             
-            ready?.current?.identifier == MyView.normal().identifier
+            ready?.current == MyView.normal()
         }
         
         //===
@@ -159,8 +159,20 @@ class StatefulTests: XCTestCase
         
         //===
         
-        disp.apply{ $0.disabled(0.6) }.via(MyView.specialTransition){
-                
+//        disp.apply(
+//            via: MyView.specialTransition,
+//            { $0.disabled(0.6) },
+//            completion: { if $0 { ex.fulfill() } }
+//        )
+        
+//        disp.apply(
+//            via: MyView.specialTransition,
+//            MyView.disabled(0.6),
+//            completion: { if $0 { ex.fulfill() } }
+//        )
+        
+        disp.apply(via: MyView.specialTransition, MyView.disabled(0.6)) {
+            
             if $0 { ex.fulfill() }
         }
         

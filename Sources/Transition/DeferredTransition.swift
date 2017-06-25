@@ -4,7 +4,7 @@ import Foundation
 
 typealias DeferredTransition<Object: Stateful> =
 (
-    targetState: State<Object>,
-    transition: Transition<Object>?,
-    completion: Completion?
+    State<Object>, // targetState
+    Transition<Object>?,
+    Completion?
 )

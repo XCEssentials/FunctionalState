@@ -6,13 +6,38 @@ import Foundation
  Turns any class into [discrete system](https://en.wikipedia.org/wiki/Discrete_system).
  */
 public
-protocol Stateful: class { }
+protocol Stateful: class
+{
+    static
+    var defaultOnSetTransition: Transition<Self> { get }
+    
+    static
+    var defaultOnUpdateTransition: Transition<Self> { get }
+}
 
 //===
 
 public
 extension Stateful
 {
+    static
+    var instantTransition: Transition<Self>
+    {
+        return { $1(); $2(true) }
+    }
+    
+    static
+    var defaultOnSetTransition: Transition<Self>
+    {
+        return instantTransition
+    }
+    
+    static
+    var defaultOnUpdateTransition: Transition<Self>
+    {
+        return instantTransition
+    }
+    
     /**
      Exclusive way to accessing state dispatcher of `self`. Lazy-initializable, weakly binded with `self`, deallocates automatically when `self` is deallocated.
      

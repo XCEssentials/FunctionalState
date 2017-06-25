@@ -41,13 +41,13 @@ class Dispatcher<Object: Stateful>
      
      - Note: It is intentionally `internal` to avoid direct access from outside of this module.
      */
-    init(with object: Object)
+    init(for object: Object)
     {
         self.object = object
         
         //===
         
-        self.core.state = Core.Ready<Object>(current: nil)
+        self.core.state = Core.Ready(current: nil)
     }
 }
 
@@ -57,21 +57,52 @@ public
 extension Dispatcher
 {
     func apply(
-        _ state: State<Object>,
-        completion: Completion? = nil
+        via forceTransition: Transition<Object>? = nil,
+        _ stateGetter: @autoclosure () -> State<Object>
         )
     {
-        enqueue((state, nil, completion))
+        enqueue((
+            stateGetter(),
+            forceTransition,
+            nil
+        ))
     }
     
-    //===
-    
     func apply(
-        _ state: State<Object>,
-        via transition: Transition<Object>,
-        completion: Completion? = nil
+        via forceTransition: Transition<Object>? = nil,
+        _ stateGetter: @autoclosure () -> State<Object>,
+        completion: @escaping Completion
         )
     {
-        enqueue((state, transition, completion))
+        enqueue((
+            stateGetter(),
+            forceTransition,
+            completion
+        ))
+    }
+    
+    func apply(
+        via forceTransition: Transition<Object>? = nil,
+        _ stateGetter: (Object.Type) -> State<Object>
+        )
+    {
+        enqueue((
+            stateGetter(Object.self),
+            forceTransition,
+            nil
+        ))
+    }
+    
+    func apply(
+        via forceTransition: Transition<Object>? = nil,
+        _ stateGetter: (Object.Type) -> State<Object>,
+        completion: @escaping Completion
+        )
+    {
+        enqueue((
+            stateGetter(Object.self),
+            forceTransition,
+            completion
+        ))
     }
 }
