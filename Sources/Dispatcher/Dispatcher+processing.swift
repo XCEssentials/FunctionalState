@@ -50,7 +50,7 @@ extension Dispatcher
         }
         else
         {
-            changes = { newState.onSet(object) }
+            changes = { newState.onSet(object); newState.onUpdate?(object) }
             transition = forceTransition ?? newState.onSetTransition
         }
         
