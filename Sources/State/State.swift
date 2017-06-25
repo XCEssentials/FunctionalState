@@ -63,14 +63,14 @@ extension Stateful
         _ identifier: String = #function,
         onSetTransition: Transition<Self>? = nil,
         onUpdateTransition: Transition<Self>? = nil,
-        onSet: @escaping State<Self>.ObjectMutation
+        onSet: State<Self>.ObjectMutation?
         ) -> State<Self>
     {
         return State(
             identifier: identifier,
             onSetTransition: onSetTransition ?? defaultOnSetTransition,
             onUpdateTransition: onUpdateTransition ?? defaultOnUpdateTransition,
-            onSet: onSet,
+            onSet: onSet ?? { _ in },
             onUpdate: nil
         )
     }
@@ -80,7 +80,7 @@ extension Stateful
         _ identifier: String = #function,
         onSetTransition: Transition<Self>? = nil,
         onUpdateTransition: Transition<Self>? = nil,
-        onSet: @escaping State<Self>.ObjectMutation,
+        onSet: State<Self>.ObjectMutation?,
         onUpdate: @escaping State<Self>.ObjectMutation
         ) -> State<Self>
     {
@@ -88,7 +88,7 @@ extension Stateful
             identifier: identifier,
             onSetTransition: onSetTransition ?? defaultOnSetTransition,
             onUpdateTransition: onUpdateTransition ?? defaultOnUpdateTransition,
-            onSet: onSet,
+            onSet: onSet ?? { _ in },
             onUpdate: onUpdate
         )
     }
