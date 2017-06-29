@@ -1,10 +1,8 @@
 import XCTest
 
-@testable
 import XCEFunctionalState
 
 import XCEStaticState
-
 import XCETesting
 
 //===
@@ -71,7 +69,7 @@ class StatefulTests: XCTestCase
         
         RXC.isTrue("Current state of the target object is 'normal'."){
             
-            ready?.current?.identifier == MyView.normal().identifier
+            ready?.current == MyView.normal()
         }
     }
     

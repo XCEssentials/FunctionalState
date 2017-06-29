@@ -22,7 +22,8 @@ class Dispatcher<Object: Stateful>
     /**
      Holds internal state.
      */
-    var internalState: Any?
+    public internal(set)
+    var internalState: Any
     
     /**
      The object for which this dispatcher is managing state.
