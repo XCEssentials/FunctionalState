@@ -77,14 +77,14 @@ class StatefulTests: XCTestCase
     {
         RXC.isNotNil("Target object is set."){
             
-            disp.object
+            disp.subject
         }
         
         //===
         
         RXC.isNil("'color' property of the object has not been set yet."){
             
-            disp.object?.color
+            disp.subject?.color
         }
         
         //===
@@ -97,7 +97,7 @@ class StatefulTests: XCTestCase
         
         RXC.isTrue("'color' property of the object has been set."){
             
-            disp.object?.color == initialColorValue
+            disp.subject?.color == initialColorValue
         }
         
         //===
@@ -110,7 +110,7 @@ class StatefulTests: XCTestCase
         
         RXC.isTrue("'color' property of the object has been updated."){
             
-            disp.object?.color == updatedColorValue
+            disp.subject?.color == updatedColorValue
         }
     }
 
@@ -169,7 +169,7 @@ class StatefulTests: XCTestCase
 //            completion: { if $0 { ex.fulfill() } }
 //        )
         
-        disp.apply(via: MyView.specialTransition, MyView.disabled(0.6)) {
+        disp.apply(via: MyView.specialTransition, MyView.disabled(0.6)){
             
             if $0 { ex.fulfill() }
         }

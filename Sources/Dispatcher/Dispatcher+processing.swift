@@ -9,25 +9,33 @@ extension Dispatcher
      
      - Parameter task: Transition (wrapped with state getter and completion) that needs to be scheduled.
      */
-    func enqueue(_ task: DeferredTransition<Object>)
+    func enqueue(_ task: DeferredTransition<Subject>)
     {
-        queue.enqueue(task)
+        let callOnMain = {
+            
+            self.queue.enqueue(task)
+            
+            //===
+            
+            self.processNext()
+        }
         
         //===
         
-        processNext()
+        Thread.current == Thread.main ?
+            callOnMain() : DispatchQueue.main.async(execute: callOnMain)
     }
     
     /**
-     Starts processing scheduled transitions, if it's not processing yet.
+     Starts processing scheduled transitions, if there teh queue is not empty and it's not processing yet.
      */
     private
     func processNext()
     {
         guard
-            let object = object,
             let now = internalState as? Ready,
-            let (newState, forceTransition, completion) = queue.dequeue()
+            let (newState, forceTransition, completion) = queue.dequeue(),
+            let subject = subject
         else
         {
             return
@@ -40,23 +48,23 @@ extension Dispatcher
         //===
         
         let changes: () -> Void
-        let transition: Transition<Object>
+        let transition: Transition<Subject>
         
         if
             now.current == newState
         {
-            changes = { newState.onUpdate?(object) }
+            changes = { newState.onUpdate?(subject) }
             transition = forceTransition ?? newState.onUpdateTransition
         }
         else
         {
-            changes = { newState.onSet(object); newState.onUpdate?(object) }
+            changes = { newState.onSet(subject); newState.onUpdate?(subject) }
             transition = forceTransition ?? newState.onSetTransition
         }
         
         //===
         
-        transition(object, changes){ finished in
+        transition(subject, changes){ finished in
             
             self.internalState = Ready(current: newState)
             
@@ -66,23 +74,7 @@ extension Dispatcher
             
             //===
             
-            // TODO: Decide here!?
-            
-//            if
-//                Thread.current == Thread.main
-//            {
-//                self.processNext()
-//            }
-//            else
-//            {
-//
-//            }
-            
-            // in case transition was instant
-            DispatchQueue.main.async {
-                
-                self.processNext()
-            }
+            self.processNext()
         }
     }
 }

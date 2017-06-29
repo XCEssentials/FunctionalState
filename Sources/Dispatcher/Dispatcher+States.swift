@@ -20,7 +20,7 @@ extension Dispatcher
          Current object state, or `nil`, if it has not been set yet.
          */
         public
-        let current: State<Object>?
+        let current: State<Subject>?
     }
     
     /**
@@ -36,12 +36,12 @@ extension Dispatcher
          The state which was current when transition has been started.
          */
         public
-        let previous: State<Object>?
+        let previous: State<Subject>?
         
         /**
          The state which will be current when transition will be finieshed.
          */
         public
-        let next: State<Object>
+        let next: State<Subject>
     }
 }
