@@ -16,7 +16,7 @@
 		3BC21A8566C191F6D9CBDC16 /* Dispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDAD1491E9E71B3EFE3A887C /* Dispatcher.swift */; };
 		4A9507ADE3BED09E0214E44D /* Dispatcher+States.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C769848C58FC75AB69834AE /* Dispatcher+States.swift */; };
 		8FC7DBDAD4D9A4234450659C /* DeferredTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A43EEACE3010E2738D578F /* DeferredTransition.swift */; };
-		942D9DE71EFF0E01004BA114 /* GlobalAliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942D9DE61EFF0E01004BA114 /* GlobalAliases.swift */; };
+		941DAA701F05B7F6005A5098 /* Aliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941DAA6F1F05B7F6005A5098 /* Aliases.swift */; };
 		A7E49D641CB68F681D67FA29 /* StatefulTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1821370172FB8DD76D97F65F /* StatefulTests.swift */; };
 		C35733626DD991F4846C94C3 /* Dispatcher+processing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7C66AF3D9B106D736DD0C4 /* Dispatcher+processing.swift */; };
 		C910C7097BB79B7229CDB160 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93C2E431D2CF02D9F7DE2FAE /* Foundation.framework */; };
@@ -69,7 +69,7 @@
 		7E91B3AE221CD3B2DFC4EC38 /* Pods-Fwk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fwk.release.xcconfig"; path = "Pods/Target Support Files/Pods-Fwk/Pods-Fwk.release.xcconfig"; sourceTree = "<group>"; };
 		8D5BE9752B066B82B360FD3D /* Pods_Fwk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Fwk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		93C2E431D2CF02D9F7DE2FAE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		942D9DE61EFF0E01004BA114 /* GlobalAliases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalAliases.swift; sourceTree = "<group>"; };
+		941DAA6F1F05B7F6005A5098 /* Aliases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Aliases.swift; sourceTree = "<group>"; };
 		A31E120F02DE62163E40FFCB /* Pods-Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tests/Pods-Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		A34F75BBF830D9C9B29E4370 /* Pods_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A867702BCB412246C6F989C5 /* Transition.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Transition.swift; sourceTree = "<group>"; };
@@ -159,6 +159,7 @@
 		658648A92BBD5A90A5C21B5C /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				941DAA6F1F05B7F6005A5098 /* Aliases.swift */,
 				BCA17055A33B6FAD26D9D3B6 /* Misc */,
 				8F00566C457FBF22689DEAC0 /* State */,
 				BD78E237A1D394493B4F4DE2 /* Transition */,
@@ -180,7 +181,6 @@
 			isa = PBXGroup;
 			children = (
 				347DD8D1B17954579A0F806D /* Queue.swift */,
-				942D9DE61EFF0E01004BA114 /* GlobalAliases.swift */,
 			);
 			path = Misc;
 			sourceTree = "<group>";
@@ -412,9 +412,9 @@
 			files = (
 				4A9507ADE3BED09E0214E44D /* Dispatcher+States.swift in Sources */,
 				C35733626DD991F4846C94C3 /* Dispatcher+processing.swift in Sources */,
+				941DAA701F05B7F6005A5098 /* Aliases.swift in Sources */,
 				3BC21A8566C191F6D9CBDC16 /* Dispatcher.swift in Sources */,
 				2AD5A144C5F34B3D3A30FDF1 /* Queue.swift in Sources */,
-				942D9DE71EFF0E01004BA114 /* GlobalAliases.swift in Sources */,
 				1A2074412402793ED583F9FF /* State.swift in Sources */,
 				1CF3AD58729DA6EE7DEAC045 /* Stateful.swift in Sources */,
 				8FC7DBDAD4D9A4234450659C /* DeferredTransition.swift in Sources */,
@@ -513,7 +513,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				CURRENT_PROJECT_VERSION = 23;
+				CURRENT_PROJECT_VERSION = 24;
 				DEFINES_MODULE = NO;
 				ENABLE_TESTABILITY = YES;
 				INFOPLIST_FILE = Info/Fwk.plist;
@@ -602,7 +602,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				CURRENT_PROJECT_VERSION = 23;
+				CURRENT_PROJECT_VERSION = 24;
 				DEFINES_MODULE = NO;
 				ENABLE_TESTABILITY = YES;
 				INFOPLIST_FILE = Info/Fwk.plist;
