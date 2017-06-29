@@ -14,7 +14,7 @@ Turn any object into discrete system and describe its states declaratively.
 The recommended way is to install using [CocoaPods](https://cocoapods.org/?q=XCEFunctionalState):
 
 ```ruby
-pod 'XCEFunctionalState', '~> 2.7'
+pod 'XCEFunctionalState', '~> 2.8'
 ```
 
 
@@ -33,36 +33,27 @@ A typical use case for this library is for re-configuring instances of `UIView` 
 
 ## State
 
-Each state of a given object is represented by two closures. Each of these closures gets an instance of the object as input parameter and supposed to make mutations on internal object members. All such mutations together define a distinct state of the object.
-
-First closure - `onSet` -  is required and declares mutations that must be made when the object transitions into the state. Second closure - `onUpdate` - is optional and declares mutations that must be made when the object transitions into the state and when the same state it is being applied again.
+Each state defines how it's being applied, as well as how it's being updated (when it's been requested to be applied while it's already current state), plus transitions for each of these operations (instant by default).
 
 
 
 ## Stateful
 
-Let's say we have a class that represents a view with a text field where user can input their search keyword and a button that will start the search process when it's tapped:
+Let's say we have a class `SearchView` that represents a view with text field where user can enter their search keyword and button that starts a search process. It must conform to `Stateful` protocol to become discrete system.
 
 ```swift
-class SearchView: UIView
+import XCEFunctionalState
+
+class SearchView: Stateful
 {
-  let keyword = UITextField()
-  let start = UIButton()
+    let keyword = UITextField()
+    let start = UIButton()
+    
+    private(set)
+    lazy
+    var state: Dispatcher<MyView> = Dispatcher(for: self)
 }
 ```
-
-To declare this class as discrete system, declare its conformance to `Stateful` protocol:
-
-```swift
-extension SearchView: Stateful
-{
-  // optionally lets declare a type alias
-  // to shorten states declaration:
-  typealias St = State<SearchView>
-}
-```
-
-`Stateful` protocol does not require to implement anything, but exclusively provides access to special helper members that allow to declare and later apply states.
 
 To describe a state for a given class, define a class level function (its name will be interpreted as the state name) inside this class that returns a `State` for this class.
 
@@ -72,7 +63,7 @@ For example, let's define `awaiting` state for our `SearchView` class in which b
 extension SearchView
 {
     static
-    func awaiting(with keyword: String) -> St
+    func awaiting(with keyword: String) -> State<SearchView>
     {
         return state{
 
@@ -90,7 +81,7 @@ Once user has entered search keyword and tapepd `start` button we may want to lo
 extension SearchView
 {
     static
-    func locked() -> St
+    func locked() -> State<SearchView>
     {
         return state{
 
@@ -104,26 +95,25 @@ extension SearchView
 Later in time, we can apply any of the states declared for the class to an instance of this class as follows:
 
 ```swift
-let transition: Transition<SearchView>.Body = ... // define transition
+let transition: Transition<SearchView> = ... // define transition
 let view = SearchView()
 
-view.state.apply{ $0.awaiting(with: "something") }.instantly()
-view.state.apply{ $0.awaiting(with: "something") }.instantly() // no effect
-view.state.apply{ $0.locked() }.viaTransition() // with default transition
-view.state.apply{ $0.awaiting(with: "after search") }.viaTransition(transition)
+view.state.apply{ $0.awaiting(with: "something") }
+view.state.apply{ $0.awaiting(with: "another value") } // no effect
+view.state.apply(via: transition, MyView.locked()){ /* completion*/ }
+//...
+view.state.apply{ $0.awaiting(with: "after search") }
 ```
 
-It's totally up to developer how to implement transition. When working with `UIView`-based classes, it's common to apply changes with animations, and `Transition` typealias gives full control over it.
+By default, all mutations are being applied instantly. When working with `UIView`-based classes, it's common to apply changes with animations, and `Transition` type gives full control over it.
 
-We also can define transition that should be used by default when we apply a state with transition, but do not provide specific transition explicitly.
+`Stateful` protocol also gives a chance to define transitions that should be used by default when we apply a state, but do not provide specific transition explicitly in the state definition.
 
 ```swift
-class SearchView: UIView
+extension SearchView
 {
-	//...
-	
     static
-    var defaultTransition: Transition<SearchView>.Body = {
+    var defaultOnSetTransition: Transition<SearchView> = {
     	
     	(view, mutations, completion) in
 
@@ -141,12 +131,16 @@ class SearchView: UIView
             completion: completion
         )
     }
-	
-	//...
+    
+    static
+    var defaultOnUpdateTransition: Transition<SearchView> = {
+      
+      //...
+    }
 }
 ```
 
-The listing above demonstrates  default trnasition that hides whole view, then applies mutations from the new state, and then fades in whole view with animation, making it visible again. Alternatively, we could put `mutations()` call inside `animations` closure of the `UIView.animate(…)` call to animate actual mutations during fade-in animation, if so desired.
+`defaultOnSetTransition` in listing above demonstrates transition that hides whole view, then applies mutations from the new state, and then fades in whole view with animation, making it visible again. Alternatively, we could put `mutations()` call inside `animations` closure of the `UIView.animate(…)` call to animate actual mutations during fade-in animation, if so desired.
 
 # Interoperability with Objective-C
 

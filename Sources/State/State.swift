@@ -1,129 +1,152 @@
 import Foundation
 
+//===
+
 /**
- Represents a distinct state that can be applied to any object of `Target` type.
- 
- In general, consider each state as a pre-defined configuration for the object; each state defines mutations to be made on the object internal properties when this state is being applied.
+ Special container object that represents a single state. `Owner` generic type represents the type to which this state can be applied.
  */
 public
-struct State<Target: AnyObject>
+struct State<Owner: Stateful>
 {
     /**
-     Closure that serves as a wrapper inside which you can access any of the declared states for given object when applying a state via `Dispatcher`.
+     Closure that applies mutations to an instance of
      */
     public
-    typealias Getter = (_: Target.Type) -> State<Target>
+    typealias OwnerMutation = (_ object: Owner) -> Void
     
     /**
-     Closure that declares mutations to be made on `Target` object.
+     Internal state identifier that helps to distinguish one state from another. It is supposed to be unique per state, regardless of the rest of the state internal member values.
      */
-    public
-    typealias TargetMutation = (_: Target) -> Void
-    
-    /**
-     Unique identifier that helps to distinct one state from another.
-     */
-    public
     let identifier: String
     
     /**
-     Closure that will be called when the state is being applied after another state, or when current state of the object has not been set yet.
+     Transition that will be used to apply `onSet` mutations.
      */
-    let onSet: TargetMutation
+    let onSetTransition: Transition<Owner>
     
     /**
-     Closure that will be called when the state is being re-applied, i.e. on attempt to apply this state when it is already the current state of the object.
+     Transition that will be used to apply `onUpdate` mutations.
      */
-    let onUpdate: TargetMutation
+    let onUpdateTransition: Transition<Owner>
     
     /**
-     Full version of initializer, allows to explicitly set `onUpdate` closure.
-     
-     - Note: It is intentionally `internal` to avoid direct access from outside of this module.
+     Mutations that must be applied to the owner object to switch into this state from another state, or when current state is "undefined" yet.
      */
+    let onSet: OwnerMutation
+    
+    /**
+     Mutations that must be applied to the owner object to re-apply this state - when this state is already current state and it's requested to apply this state again. This might be useful to update some parameters that the state captures from the outer scope when gets called/created, while entire state stays the same.
+     */
+    let onUpdate: OwnerMutation?
+    
+    //===
+    
+    /**
+     The only designated constructor, intentionally inaccessible from outer scope to make the static `state(...)` functions of `Stateful` protocol exclusive way of defining states for a given class. Its input parameters are just translated directly into corresponding internal state members.
+     */
+    fileprivate
     init(
-        _ identifier: String = NSUUID().uuidString,
-        _ onSet: @escaping TargetMutation,
-        _ onUpdate: @escaping TargetMutation
+        identifier: String,
+        onSetTransition: @escaping Transition<Owner>,
+        onUpdateTransition: @escaping Transition<Owner>,
+        onSet: @escaping OwnerMutation,
+        onUpdate: OwnerMutation?
         )
     {
         self.identifier = identifier
+        
+        self.onSetTransition = onSetTransition
+        self.onUpdateTransition = onUpdateTransition
+        
         self.onSet = onSet
         self.onUpdate = onUpdate
     }
-    
-    /**
-     Convenience short version of initializer that allows to create a `State` without providing `onUpdate` closure (which is optional for a state); the default `onUpdate` cloure implementation will be set, it does nothing.
-     
-     - Note: It is intentionally `internal` to avoid direct access from outside of this module.
-     */
-    init(
-        _ identifier: String = NSUUID().uuidString,
-        _ onSet: @escaping TargetMutation
-        )
-    {
-        self.identifier = identifier
-        self.onSet = onSet
-        self.onUpdate = { _ in }
-    }
 }
 
-//=== MARK: Equatable
+//===
 
+/**
+ Two instances of the same state considered to be equal, regardless of the rest of the state internal member values.
+ */
 extension State: Equatable
 {
-    /**
-     Two instances of `State` considered to be equal if their `identifier` properties are equal, regardless of the content of `onSet` and `onUpdate` closures.
-     */
     public
     static
-    func == (lhs: State<Target>, rhs: State<Target>) -> Bool
+    func == (left: State, right: State) -> Bool
     {
-        return lhs.identifier == rhs.identifier
+        return left.identifier == right.identifier
     }
 }
 
-//=== MARK: Utility
+//=== MARK: Initializers
 
-extension State
+public
+extension Stateful
 {
     /**
-     Helper function that actually applies given state to given object.
+     One of the designated functions to define a state.
      
-     - Note: It is intentionally `internal` to avoid direct access from outside of this module.
+     - Parameters:
+        
+        - identifier: Internal state identifier that helps to distinguish one state from another. It is supposed to be unique per state, regardless of the rest of the state internal member values. It's highly recommended to always let the function use default value, which is defined by the name of the enclosing function. This guarantees its uniqueness within `Owner` type while is very convenient for debugging.
+     
+        - onSetTransition: Transition that will be used to apply `onSet` mutations.
+     
+        - onUpdateTransition: Transition that will be used to apply `onUpdate` mutations.
+     
+        - onSet: Mutations that must be applied to the owner object to switch into this state from another state, or when current state is "undefined" yet.
+     
+     - Returns: State with `Self` as state `Owner` type, made of all the provided input parameters.
+     */
+    static
+    func state(
+        _ identifier: String = #function,
+        onSetTransition: Transition<Self>? = nil,
+        onUpdateTransition: Transition<Self>? = nil,
+        onSet: State<Self>.OwnerMutation?
+        ) -> State<Self>
+    {
+        return State(
+            identifier: identifier,
+            onSetTransition: onSetTransition ?? defaultOnSetTransition,
+            onUpdateTransition: onUpdateTransition ?? defaultOnUpdateTransition,
+            onSet: onSet ?? { _ in },
+            onUpdate: nil
+        )
+    }
+    
+    /**
+     One of the designated functions to define a state.
      
      - Parameters:
      
-         - state: State to be applied to the object.
+         - identifier: Internal state identifier that helps to distinguish one state from another. It is supposed to be unique per state, regardless of the rest of the state internal member values. It's highly recommended to always let the function use default value, which is defined by the name of the enclosing function. This guarantees its uniqueness within `Owner` type while is very convenient for debugging.
+         
+         - onSetTransition: Transition that will be used to apply `onSet` mutations.
+         
+         - onUpdateTransition: Transition that will be used to apply `onUpdate` mutations.
+         
+         - onSet: Mutations that must be applied to the owner object to switch into this state from another state, or when current state is "undefined" yet.
+         
+         - onUpdate: Mutations that must be applied to the owner object to re-apply this state - when this state is already current state and it's requested to apply this state again. This might be useful to update some parameters that the state captures from the outer scope when gets called/created, while entire state stays the same.
      
-         - target: Object to which we need to apply the `state`.
-     
-         - transition: Body of transition to be used to translate `target` from current state into new `state`.
-     
-         - completion: Closure to be called when transition into `state` is finished.
+     - Returns: State with `Self` as state `Owner` type, made of all the provided input parameters.
      */
     static
-    func apply(
-        _ state: State<Target>,
-        on target: Target,
-        via transition: Transition<Target>.Body? = nil,
-        completion: Transition<Target>.Completion? = nil
-        )
+    func state(
+        _ identifier: String = #function,
+        onSetTransition: Transition<Self>? = nil,
+        onUpdateTransition: Transition<Self>? = nil,
+        onSet: State<Self>.OwnerMutation?,
+        onUpdate: @escaping State<Self>.OwnerMutation
+        ) -> State<Self>
     {
-        let mutation = {
-            
-            state.onSet(target)
-            state.onUpdate(target)
-        }
-        
-        let completion = completion ?? { _ in }
-        
-        let transition = transition ?? { $1(); $2(true) }
-        
-        //===
-        
-        // actually apply state mutation now:
-        
-        transition(target, mutation, completion)
+        return State(
+            identifier: identifier,
+            onSetTransition: onSetTransition ?? defaultOnSetTransition,
+            onUpdateTransition: onUpdateTransition ?? defaultOnUpdateTransition,
+            onSet: onSet ?? { _ in },
+            onUpdate: onUpdate
+        )
     }
 }
