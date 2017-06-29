@@ -43,7 +43,7 @@ class StatefulTests: XCTestCase
             
         RXC.value("There is no state transition in progress right now."){
             
-            disp.core.state as? Dispatcher<MyView>.Core.Ready
+            disp.internalState as? Dispatcher<MyView>.Ready
         }
         
         //===
@@ -64,7 +64,7 @@ class StatefulTests: XCTestCase
             
         RXC.value("State has been applied instantly."){
             
-            disp.core.state as? Dispatcher<MyView>.Core.Ready
+            disp.internalState as? Dispatcher<MyView>.Ready
         }
         
         //===
@@ -135,7 +135,7 @@ class StatefulTests: XCTestCase
             
         RXC.value("State has been applied instantly."){
             
-            disp.core.state as? Dispatcher<MyView>.Core.Ready
+            disp.internalState as? Dispatcher<MyView>.Ready
         }
         
         //===
@@ -180,7 +180,7 @@ class StatefulTests: XCTestCase
         
         RXC.isTrue("State is being applied via transition."){
             
-            disp.core.state is Dispatcher<MyView>.Core.InTransition
+            disp.internalState is Dispatcher<MyView>.InTransition
         }
         
         //===
@@ -191,7 +191,7 @@ class StatefulTests: XCTestCase
         
         RXC.isTrue("Dispatcher is now ready for another transition."){
             
-            disp.core.state is Dispatcher<MyView>.Core.Ready
+            disp.internalState is Dispatcher<MyView>.Ready
         }
     }
 }

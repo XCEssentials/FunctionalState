@@ -5,14 +5,20 @@ import XCEFunctionalState
 //===
 
 final
-class MyView
+class MyView: Stateful
 {
+    private(set)
+    lazy
+    var state: Dispatcher<MyView> = Dispatcher(for: self)
+    
+    //===
+    
     var color: Int?
 }
 
 //===
 
-extension MyView: Stateful
+extension MyView
 {
     static
     let animDuration = 0.5

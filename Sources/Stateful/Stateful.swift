@@ -8,24 +8,68 @@ import Foundation
 public
 protocol Stateful: class
 {
+    /**
+     Designated storage for state dispatcher.
+     
+     - Note: Don't be confused. Its type is `Dispatcher`, but its name `state` - just for a nicer API like this:
+     
+     ```swift
+     class MyView: Stateful
+     {
+         private(set)
+         lazy
+         var state: Dispatcher<MyView> = Dispatcher(for: self)
+     }
+     
+     extension MyView
+     {
+        static
+        func initialized() -> State<MyView>
+        {
+            return state{ ... }
+        }
+     }
+     
+     let aView = MyView()
+     
+     aView.state.apply{ $0.initialized() }
+     ```
+     */
+    var state: Dispatcher<Self> { get }
+    
+    /**
+     Transition that will be used as `onSetTransition` in each state related to this class, if no other transition is specified explicitly.
+     */
     static
     var defaultOnSetTransition: Transition<Self> { get }
     
+    /**
+     Transition that will be used as `onUpdateTransition` in each state related to this class, if no other transition is specified explicitly.
+     */
     static
     var defaultOnUpdateTransition: Transition<Self> { get }
 }
 
-//===
+//=== MARK: Helpers
 
 public
 extension Stateful
 {
+    /**
+     Helper constructor of transition that applies mutations instantly and calls completion right away, synchronously.
+     */
     static
     var instantTransition: Transition<Self>
     {
         return { $1(); $2(true) }
     }
-    
+}
+
+//=== MARK: Default implementations
+
+public
+extension Stateful
+{
     static
     var defaultOnSetTransition: Transition<Self>
     {
@@ -36,32 +80,5 @@ extension Stateful
     var defaultOnUpdateTransition: Transition<Self>
     {
         return instantTransition
-    }
-    
-    /**
-     Exclusive way to accessing state dispatcher of `self`. Lazy-initializable, weakly binded with `self`, deallocates automatically when `self` is deallocated.
-     
-     - Note: Don't be confused. It returns `Dispatcher`, but its name `state` - just for a nicer API like this:
-     
-     ```swift
-     class MyView: Stateful {}
-     
-     extension MyView
-     {
-         static
-         func initialized() -> State<MyView>
-         {
-             return state{ ... }
-         }
-     }
-     
-     let aView = MyView()
-     
-     aView.state.apply{ $0.initialized() }.viaTransition()
-     ```
-     */
-    var state: Dispatcher<Self>
-    {
-        return Dispatcher.get(for: self)
     }
 }

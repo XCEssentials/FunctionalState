@@ -13,7 +13,7 @@ use_frameworks!
 
 def sharedPods
 
-	pod 'XCEStaticState', '~> 1.1'
+	pod 'XCEStaticState', :path => './../StaticState' #, '~> 1.2'
 
 end
 

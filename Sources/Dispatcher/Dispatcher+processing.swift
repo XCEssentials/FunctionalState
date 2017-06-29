@@ -26,7 +26,7 @@ extension Dispatcher
     {
         guard
             let object = object,
-            let now = core.state as? Core.Ready,
+            let now = internalState as? Ready,
             let (newState, forceTransition, completion) = queue.dequeue()
         else
         {
@@ -35,7 +35,7 @@ extension Dispatcher
         
         //===
         
-        core.state = Core.InTransition(previous: now.current, next: newState)
+        internalState = InTransition(previous: now.current, next: newState)
         
         //===
         
@@ -58,7 +58,7 @@ extension Dispatcher
         
         transition(object, changes){ finished in
             
-            self.core.state = Core.Ready(current: newState)
+            self.internalState = Ready(current: newState)
             
             //===
             

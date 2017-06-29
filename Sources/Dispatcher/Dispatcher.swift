@@ -2,7 +2,8 @@ import Foundation
 
 import XCEStaticState
 
-//===
+internal
+protocol InternalStateful: XCEStaticState.Stateful { }
 
 /**
  Keeps track of current object state and manages transitions into new states.
@@ -19,9 +20,9 @@ class Dispatcher<Object: Stateful>
     var queue = Queue<DeferredTransition<Object>>()
     
     /**
-     Dispatcher core, holds internal state.
+     Holds internal state.
      */
-    let core = Core()
+    var internalState: Any?
     
     /**
      The object for which this dispatcher is managing state.
@@ -33,21 +34,16 @@ class Dispatcher<Object: Stateful>
     /**
      The only initializer.
      
-     - Parameters:
-     
-         - target: Object for which this dispatcher will track current state and manage transitions.
-     
-         - defaultTransition: Transition that will be used by default, if it will be requested to apply new state via transition, but NO exact transition will be specified.
-     
-     - Note: It is intentionally `internal` to avoid direct access from outside of this module.
+     - Parameter object: Object for which this dispatcher will track current state and manage transitions.
      */
+    public
     init(for object: Object)
     {
         self.object = object
         
         //===
         
-        self.core.state = Core.Ready(current: nil)
+        self.internalState = Ready(current: nil)
     }
 }
 
