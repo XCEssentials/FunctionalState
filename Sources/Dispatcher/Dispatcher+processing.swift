@@ -9,24 +9,33 @@ extension Dispatcher
      
      - Parameter task: Transition (wrapped with state getter and completion) that needs to be scheduled.
      */
-    func enqueue(_ task: Transition<Target>.Wrapper)
+    func enqueue(_ task: DeferredTransition<Subject>)
     {
-        queue.enqueue(task)
+        let callOnMain = {
+            
+            self.queue.enqueue(task)
+            
+            //===
+            
+            self.processNext()
+        }
         
         //===
         
-        processNext()
+        Thread.current == Thread.main ?
+            callOnMain() : DispatchQueue.main.async(execute: callOnMain)
     }
     
     /**
-     Starts processing scheduled transitions, if it's not processing yet.
+     Starts processing scheduled transitions, if there teh queue is not empty and it's not processing yet.
      */
+    private
     func processNext()
     {
         guard
-            let target = target,
-            let now = core.state as? Core.Ready,
-            let task = queue.dequeue() // dequeue after we chaked internalState!
+            let now = internalState as? Ready,
+            let (newState, forceTransition, completion) = queue.dequeue(),
+            let subject = subject
         else
         {
             return
@@ -34,54 +43,38 @@ extension Dispatcher
         
         //===
         
-        let newState = task.getState(Target.self)
+        internalState = InTransition(previous: now.current, next: newState)
         
         //===
         
-        core.state = Core.InTransition(previous: now.current, next: newState)
-        
-        //===
-        
-        let readyForNextTask: Transition.Completion = {
-            
-            self.core.state = Core.Ready(current: newState)
-            
-            //===
-            
-            task.completion?($0)
-            
-            //===
-            
-            // in case transition was instant
-            DispatchQueue.main.async {
-                
-                self.processNext()
-            }
-        }
-        
-        //===
+        let changes: () -> Void
+        let transition: Transition<Subject>
         
         if
             now.current == newState
         {
-            // just update current state
-            
-            newState.onUpdate(target)
-            
-            //===
-            
-            readyForNextTask(true)
+            changes = { newState.onUpdate?(subject) }
+            transition = forceTransition ?? newState.onUpdateTransition
         }
         else
         {
-            // apply new state
+            changes = { newState.onSet(subject); newState.onUpdate?(subject) }
+            transition = forceTransition ?? newState.onSetTransition
+        }
+        
+        //===
+        
+        transition(subject, changes){ finished in
             
-            State.apply(
-                newState,
-                on: target,
-                via: task.transition,
-                completion: readyForNextTask
-            )
+            self.internalState = Ready(current: newState)
+            
+            //===
+            
+            completion?(finished)
+            
+            //===
+            
+            self.processNext()
         }
     }
 }

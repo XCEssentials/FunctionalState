@@ -2,62 +2,49 @@ import Foundation
 
 import XCEStaticState
 
-//===
+internal
+protocol InternalStateful: XCEStaticState.Stateful { }
 
 /**
  Keeps track of current object state and manages transitions into new states.
  */
 public
 final
-class Dispatcher<Target: AnyObject>
+class Dispatcher<Subject: Stateful>
 {
     /**
      Internal queue of scheduled transitions that need to be processed as soon as possible serially (next transition starts right after previous one has been finished).
      
      Every time we add a transition into the queue, we call `processNext()` to start processing scheduled transitions right away.
      */
-    var queue = Queue<Transition<Target>.Wrapper>()
+    var queue = Queue<DeferredTransition<Subject>>()
     
     /**
-     Dispatcher core, holds internal state.
+     Holds internal state.
      */
-    let core = Core()
+    public internal(set)
+    var internalState: Any
     
     /**
      The object for which this dispatcher is managing state.
      */
     public private(set)
     weak
-    var target: Target?
-    
-    /**
-     Transition that will be used by default, if it will be requested to apply new state via transition, but NO exact transition will be specified.
-     */
-    public
-    let defaultTransition: Transition<Target>.Body?
+    var subject: Subject?
     
     /**
      The only initializer.
      
-     - Parameters:
-     
-         - target: Object for which this dispatcher will track current state and manage transitions.
-     
-         - defaultTransition: Transition that will be used by default, if it will be requested to apply new state via transition, but NO exact transition will be specified.
-     
-     - Note: It is intentionally `internal` to avoid direct access from outside of this module.
+     - Parameter object: Object for which this dispatcher will track current state and manage transitions.
      */
-    init(
-        for target: Target,
-        _ defaultTransition: Transition<Target>.Body? = nil
-        )
+    public
+    init(for subject: Subject)
     {
-        self.target = target
-        self.defaultTransition = defaultTransition
+        self.subject = subject
         
         //===
         
-        self.core.state = Core.Ready(current: nil)
+        self.internalState = Ready(current: nil)
     }
 }
 
@@ -67,20 +54,120 @@ public
 extension Dispatcher
 {
     /**
-     Applies a new state to `target` object.
+     Schedules transition into a given state (target state).
      
-     - Parameter getState: Closure that returns the new state.
+     - Parameters:
      
-     - Returns: Instance of `Pending` transition that eventually allows to schedule transition into the new state on this dispatcher.
+        - forceTransition: Transition that must be used to override transitions defined in target state (both `onSetTransition` and `onUpdateTransition`). If it's `nil` then transitions from `targetState` will be used instead.
+     
+        - stateGetter: Closure that returns state (target state) which needs to be applied to `self.subject` object
+     
+     - Returns: Reference to self to support chaining calls.
      */
+    @discardableResult
     func apply(
-        _ getState: @escaping State<Target>.Getter
-        ) -> Transition<Target>.Pending
+        via forceTransition: Transition<Subject>? = nil,
+        _ stateGetter: @autoclosure () -> State<Subject>
+        ) -> Dispatcher<Subject>
     {
-        return Transition<Target>.Pending(
-            dispatcher: self,
-            defaultTransition: defaultTransition,
-            getState: getState
-        )
+        enqueue((
+            stateGetter(),
+            forceTransition,
+            nil
+        ))
+        
+        //===
+        
+        return self
+    }
+    
+    /**
+     Schedules transition into a given state (target state).
+     
+     - Parameters:
+     
+        - forceTransition: Transition that must be used to override transitions defined in target state (both `onSetTransition` and `onUpdateTransition`). If it's `nil` then transitions from `targetState` will be used instead.
+
+        - stateGetter: Closure that returns state (target state) which needs to be applied to `self.subject` object
+
+        - completion: Higher level completion that will be called after transition is complete and current state is set to target state.
+     
+     - Returns: Reference to self to support chaining calls.
+     */
+    @discardableResult
+    func apply(
+        via forceTransition: Transition<Subject>? = nil,
+        _ stateGetter: @autoclosure () -> State<Subject>,
+        completion: @escaping Completion
+        ) -> Dispatcher<Subject>
+    {
+        enqueue((
+            stateGetter(),
+            forceTransition,
+            completion
+        ))
+        
+        //===
+        
+        return self
+    }
+    
+    /**
+     Schedules transition into a given state (target state).
+     
+     - Parameters:
+     
+         - forceTransition: Transition that must be used to override transitions defined in target state (both `onSetTransition` and `onUpdateTransition`). If it's `nil` then transitions from `targetState` will be used instead.
+         
+         - stateGetter: Closure that returns state (target state) which needs to be applied to `self.subject` object
+     
+     - Returns: Reference to self to support chaining calls.
+     */
+    @discardableResult
+    func apply(
+        via forceTransition: Transition<Subject>? = nil,
+        _ stateGetter: (Subject.Type) -> State<Subject>
+        ) -> Dispatcher<Subject>
+    {
+        enqueue((
+            stateGetter(Subject.self),
+            forceTransition,
+            nil
+        ))
+        
+        //===
+        
+        return self
+    }
+    
+    /**
+     Schedules transition into a given state (target state).
+     
+     - Parameters:
+     
+        - forceTransition: Transition that must be used to override transitions defined in target state (both `onSetTransition` and `onUpdateTransition`). If it's `nil` then transitions from `targetState` will be used instead.
+     
+        - stateGetter: Closure that returns state (target state) which needs to be applied to `self.subject` object
+     
+        - completion: Higher level completion that will be called after transition is complete and current state is set to target state.
+     
+     - Returns: Reference to self to support chaining calls.
+     */
+    @discardableResult
+    func apply(
+        via forceTransition: Transition<Subject>? = nil,
+        _ stateGetter: (Subject.Type) -> State<Subject>,
+        completion: @escaping Completion
+        ) -> Dispatcher<Subject>
+    {
+        enqueue((
+            stateGetter(Subject.self),
+            forceTransition,
+            completion
+        ))
+        
+        //===
+        
+        return self
     }
 }

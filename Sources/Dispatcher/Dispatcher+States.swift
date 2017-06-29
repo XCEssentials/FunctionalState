@@ -2,45 +2,46 @@ import Foundation
 
 import XCEStaticState
 
-//===
-
-extension Dispatcher
-{
-    /**
-     Internal data structure that is needed to track internal dispatcher state.
-     */
-    final
-    class Core: XCEStaticState.Stateful { }
-}
-
 //=== MARK: States
 
-extension Dispatcher.Core
+public
+extension Dispatcher
 {
     /**
      Not in transition right now, ready for a new transition
      */
+    public
     struct Ready: XCEStaticState.State
     {
+        public
+        typealias Owner = Dispatcher
+        
         /**
          Current object state, or `nil`, if it has not been set yet.
          */
-        let current: State<Target>?
+        public
+        let current: State<Subject>?
     }
     
     /**
      A transition into a new state is progress.
      */
+    public
     struct InTransition: XCEStaticState.State
     {
+        public
+        typealias Owner = Dispatcher
+        
         /**
          The state which was current when transition has been started.
          */
-        let previous: State<Target>?
+        public
+        let previous: State<Subject>?
         
         /**
          The state which will be current when transition will be finieshed.
          */
-        let next: State<Target>
+        public
+        let next: State<Subject>
     }
 }

@@ -9,113 +9,76 @@ public
 protocol Stateful: class
 {
     /**
-     Transition that will be used by default, if it will be requested to apply new state via transition, but NO exact transition will be specified. This value will be used for initializing associated `Dispatcher` object.
-     */
-    static
-    var defaultTransition: Transition<Self>.Body { get }
-}
-
-//===
-
-public
-extension Stateful
-{
-    /**
-     Default implementation of the `defaultTransition` requirement. It's equivalent of applying new state instantly.
-     */
-    static
-    var defaultTransition: Transition<Self>.Body { return { $1(); $2(true) } }
-}
-
-//===
-
-public
-extension Stateful
-{
-    /**
-     Exclusive way to accessing state dispatcher of `self`. Lazy-initializable, weakly binded with `self`, deallocates automatically when `self` is deallocated.
+     Designated storage for state dispatcher.
      
-     - Note: Don't be confused. It returns `Dispatcher`, but its name `state` - just for a nicer API like this:
+     - Note: Don't be confused. Its type is `Dispatcher`, but its name `state` - just for a nicer API like this:
      
      ```swift
-     class MyView: Stateful {}
+     class MyView: Stateful
+     {
+         private(set)
+         lazy
+         var state: Dispatcher<MyView> = Dispatcher(for: self)
+     }
      
      extension MyView
      {
-         static
-         func initialized() -> State<MyView>
-         {
-             return state{ ... }
-         }
+        static
+        func initialized() -> State<MyView>
+        {
+            return state{ ... }
+        }
      }
      
      let aView = MyView()
      
-     aView.state.apply{ $0.initialized() }.viaTransition()
+     aView.state.apply{ $0.initialized() }
      ```
      */
-    var state: Dispatcher<Self>
-    {
-        return Dispatcher.get(
-            for: self,
-            with: Self.defaultTransition
-        )
-    }
+    var state: Dispatcher<Self> { get }
     
     /**
-     Designeted metod for declaring state with `onSet` mutation closure only (without `onUpdate`).
-     
-     - Parameters:
-     
-         - name: Desired name of the state. This will contribute to the state `identifier`, so it must be unique within type. It's highly recommended to not specify it explicitly so the default implementation will pick up enclosing function name as state name.
-     
-         - onSet: This closure will be used as `onSet` closure of result state.
-     
-     - Result: `State` instance that contains `identifier` built with `name`, provided `onSet` closure and empty `onUpdate` closure.
+     Transition that will be used as `onSetTransition` in each state related to this class, if no other transition is specified explicitly.
      */
     static
-    func state(
-        name: String = #function,
-        onSet: @escaping State<Self>.TargetMutation
-        ) -> State<Self>
-    {
-        return State(stateIdentifier(with: name), onSet)
-    }
+    var defaultOnSetTransition: Transition<Self> { get }
     
     /**
-     Designeted metod for declaring state with both `onSet` and `onUpdate` mutation closures.
-     
-     - Parameters:
-     
-         - name: Desired name of the state. This will contribute to the state `identifier`, so it must be unique within type. It's highly recommended to not specify it explicitly so the default implementation will pick up enclosing function name as state name.
-     
-         - onSet: This closure will be used as `onSet` closure of result state.
-     
-     - Returns: Instance of `Pending` state that eventually allows to define `State` instance that contains `identifier` built with `name`, provided `onSet` and `onUpdate` closures.
+     Transition that will be used as `onUpdateTransition` in each state related to this class, if no other transition is specified explicitly.
      */
     static
-    func onSet(
-        name: String = #function,
-        _ onSet: @escaping State<Self>.TargetMutation
-        ) -> State<Self>.Pending
-    {
-        return State.Pending(stateIdentifier(with: name), onSet)
-    }
+    var defaultOnUpdateTransition: Transition<Self> { get }
 }
 
-//===
+//=== MARK: Helpers
 
-private
+public
 extension Stateful
 {
     /**
-     Generates designeted state identifier, which supposed to be globally unique within current module.
-     
-     - Parameter name: State name or description, must be unique within type.
+     Helper constructor of transition that applies mutations instantly and calls completion right away, synchronously.
      */
     static
-    func stateIdentifier(with name: String) -> String
+    var instantTransition: Transition<Self>
     {
-        return String(reflecting: self) + "." + name
+        return { $1(); $2(true) }
+    }
+}
+
+//=== MARK: Default implementations
+
+public
+extension Stateful
+{
+    static
+    var defaultOnSetTransition: Transition<Self>
+    {
+        return instantTransition
+    }
+    
+    static
+    var defaultOnUpdateTransition: Transition<Self>
+    {
+        return instantTransition
     }
 }
