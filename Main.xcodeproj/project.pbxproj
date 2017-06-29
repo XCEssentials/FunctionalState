@@ -73,7 +73,7 @@
 		A31E120F02DE62163E40FFCB /* Pods-Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tests/Pods-Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		A34F75BBF830D9C9B29E4370 /* Pods_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A867702BCB412246C6F989C5 /* Transition.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Transition.swift; sourceTree = "<group>"; };
-		BAD3BF54C1B2D27BC75E26B6 /* Fwk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Fwk.framework; path = XCEFunctionalState.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BAD3BF54C1B2D27BC75E26B6 /* XCEFunctionalState.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = XCEFunctionalState.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDAD1491E9E71B3EFE3A887C /* Dispatcher.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Dispatcher.swift; sourceTree = "<group>"; };
 		BFAC22E390918AF84FF6DB70 /* State.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		E71F3BDDE354612CAAB911AE /* MyView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MyView.swift; sourceTree = "<group>"; };
@@ -226,7 +226,7 @@
 		ECF9A7A3CE7AC27719DBD882 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				BAD3BF54C1B2D27BC75E26B6 /* Fwk.framework */,
+				BAD3BF54C1B2D27BC75E26B6 /* XCEFunctionalState.framework */,
 				09A637AB6D8FD3CE022CC8BB /* Tests.xctest */,
 			);
 			name = Products;
@@ -273,7 +273,7 @@
 			);
 			name = Fwk;
 			productName = Fwk;
-			productReference = BAD3BF54C1B2D27BC75E26B6 /* Fwk.framework */;
+			productReference = BAD3BF54C1B2D27BC75E26B6 /* XCEFunctionalState.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -283,7 +283,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0830;
 				Struct.Version = 2.0.0;
 			};
 			buildConfigurationList = 3FD2FA7036A8AC84CD27C70F /* Build configuration list for PBXProject "Main" */;
@@ -512,6 +512,7 @@
 			baseConfigurationReference = 7E91B3AE221CD3B2DFC4EC38 /* Pods-Fwk.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				CURRENT_PROJECT_VERSION = 22;
 				DEFINES_MODULE = NO;
 				ENABLE_TESTABILITY = YES;
@@ -600,6 +601,7 @@
 			baseConfigurationReference = 6DD4A93C6EC8FFB316309B96 /* Pods-Fwk.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				CURRENT_PROJECT_VERSION = 22;
 				DEFINES_MODULE = NO;
 				ENABLE_TESTABILITY = YES;
