@@ -30,9 +30,6 @@ moduleName = companyPrefix + repoName
 projName = 'Main' + '.xcodeproj'
 podspecFilePath = './' + moduleName + '.podspec'
 
-author = '"Maxim Khatskevich"'
-authorURL = 'https://github.com/maximkhatskevich'
-
 #===
 
 platform :ios do
@@ -49,7 +46,9 @@ platform :ios do
 
     # ===
 
-    pod_lib_lint
+    pod_lib_lint(
+      allow_warnings: true
+    )
 
     # ===
 
@@ -143,6 +142,14 @@ platform :ios do
       build_number: buildNumber
     )
 
+    # === Sort all project entries
+
+    sh 'cd ./.. && xcodeproj sort'
+
+    # === Add custom 'Run Script Phase' entries
+
+    sh 'cd ./.. && ruby ./Scripts/AfterReGenerateProject.rb ' + projName
+
   end
 
   # ===
@@ -164,6 +171,14 @@ platform :ios do
       xcodeproj: projName,
       build_number: newBuildNumber
     )
+
+    # === Sort all project entries
+
+    sh 'cd ./.. && xcodeproj sort'
+
+    # === Add custom 'Run Script Phase' entries
+
+    sh 'cd ./.. && ruby ./Scripts/AfterReGenerateProject.rb ' + projName
 
   end
 
