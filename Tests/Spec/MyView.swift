@@ -38,7 +38,7 @@ extension MyView
         }
     }
 
-    //===
+    // MARK: - States
 
     static
     func normal() -> State<MyView>

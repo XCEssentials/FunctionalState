@@ -35,6 +35,9 @@ struct State<Subject: AnyObject>
      */
     let identifier: String
     
+    /**
+     A helper typealias that represents Subject-specific pure mutation combined with transition that is supposed to be used to apply that mutation.
+     */
     typealias MutationWithTransition =
         (mutation: Mutation<Subject>, transition: Transition<Subject>)
     

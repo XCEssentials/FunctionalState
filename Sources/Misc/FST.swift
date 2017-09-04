@@ -40,7 +40,7 @@ enum FST // scope
         return { _, mutations, completion in
             
             mutations()
-            DispatchQueue.main.async{ completion(true) }
+            completion(true)
         }
     }
 }
