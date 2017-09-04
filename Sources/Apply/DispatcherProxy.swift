@@ -63,15 +63,12 @@ extension DispatcherProxy
         completion: UserProvidedCompletion = nil
         ) -> DispatcherProxy<Subject>
     {
-        DispatchQueue.main.sync{
-            
-            dispatcher.queue.enqueue((
-                state.toSomeState(with: object, forceTransition: forceTransition),
-                completion
-            ))
-            
-            dispatcher.processNext()
-        }
+        dispatcher.queue.enqueue((
+            state.toSomeState(with: object, forceTransition: forceTransition),
+            completion
+        ))
+        
+        dispatcher.processNext()
         
         //===
         
@@ -100,15 +97,12 @@ extension DispatcherProxy
     {
         let state = stateGetter(Subject.self)
         
-        DispatchQueue.main.sync{
-            
-            dispatcher.queue.enqueue((
-                state.toSomeState(with: object, forceTransition: forceTransition),
-                completion
-            ))
-            
-            dispatcher.processNext()
-        }
+        dispatcher.queue.enqueue((
+            state.toSomeState(with: object, forceTransition: forceTransition),
+            completion
+        ))
+        
+        dispatcher.processNext()
 
         //===
 
@@ -134,15 +128,12 @@ extension DispatcherProxy
     {
         let state = stateGetter(Subject.self)
         
-        DispatchQueue.main.sync{
-            
-            dispatcher.queue.enqueue((
-                state.toSomeState(with: object, forceTransition: forceTransition),
-                nil
-            ))
-            
-            dispatcher.processNext()
-        }
+        dispatcher.queue.enqueue((
+            state.toSomeState(with: object, forceTransition: forceTransition),
+            nil
+        ))
+        
+        dispatcher.processNext()
         
         //===
         
