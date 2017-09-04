@@ -85,9 +85,9 @@ extension DispatcherProxy
 
          - forceTransition: Transition that must be used to override transitions defined in target state (both `onSetTransition` and `onUpdateTransition`). If it's `nil` then transitions from `targetState` will be used instead.
 
-         - stateGetter: Closure that returns state (target state) which needs to be applied to `self.subject` object
-
          - completion: Higher level completion that will be called after transition is complete and current state is set to target state.
+     
+         - stateGetter: Closure that returns state (target state) which needs to be applied to `self.subject` object
 
      - Returns: Reference to self to support chaining calls.
      */
@@ -95,7 +95,7 @@ extension DispatcherProxy
     func apply(
         via forceTransition: Transition<Subject>? = nil,
         state stateGetter: (Subject.Type) -> State<Subject>,
-        completion: UserProvidedCompletion = nil
+        completion: UserProvidedCompletion
         ) -> DispatcherProxy<Subject>
     {
         let state = stateGetter(Subject.self)
@@ -112,6 +112,40 @@ extension DispatcherProxy
 
         //===
 
+        return self
+    }
+    
+    /**
+     Schedules transition into a given state (target state).
+     
+     - Parameters:
+     
+         - forceTransition: Transition that must be used to override transitions defined in target state (both `onSetTransition` and `onUpdateTransition`). If it's `nil` then transitions from `targetState` will be used instead.
+     
+         - stateGetter: Closure that returns state (target state) which needs to be applied to `self.subject` object
+     
+     - Returns: Reference to self to support chaining calls.
+     */
+    @discardableResult
+    func apply(
+        via forceTransition: Transition<Subject>? = nil,
+        state stateGetter: (Subject.Type) -> State<Subject>
+        ) -> DispatcherProxy<Subject>
+    {
+        let state = stateGetter(Subject.self)
+        
+        DispatchQueue.main.sync{
+            
+            dispatcher.queue.enqueue((
+                state.toSomeState(with: object, forceTransition: forceTransition),
+                nil
+            ))
+            
+            dispatcher.processNext()
+        }
+        
+        //===
+        
         return self
     }
 }

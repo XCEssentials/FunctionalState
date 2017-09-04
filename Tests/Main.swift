@@ -1,5 +1,6 @@
 import XCTest
 
+@testable
 import XCEFunctionalState
 
 import XCETesting
@@ -8,187 +9,167 @@ import XCETesting
 
 class StatefulTests: XCTestCase
 {
-    let aView = MyView()
+    var aView: MyView!
     
-//    var disp: Dispatcher<MyView>!
-//    
-//    //===
-//    
-//    override
-//    func setUp()
-//    {
-//        super.setUp()
-//        
-//        //===
-//        
-//        disp = Dispatcher(for: aView)
-//    }
-//    
-//    override
-//    func tearDown()
-//    {
-//        disp = nil
-//        
-//        //===
-//        
-//        super.tearDown()
-//    }
-//    
-//    func testFreshStart()
-//    {
-//        let ready =
-//            
-//        RXC.value("There is no state transition in progress right now."){
-//            
-//            disp.internalState as? Dispatcher<MyView>.Ready
-//        }
-//        
-//        //===
-//        
-//        RXC.isNotNil("Dispatcher is ready for transition."){
-//            
-//            ready
-//        }
-//    }
-//    
-//    func testApplyStateInstantly()
-//    {
-//        disp.apply{ $0.normal() }
-//        
-//        //===
-//        
-//        let ready =
-//            
-//        RXC.value("State has been applied instantly."){
-//            
-//            disp.internalState as? Dispatcher<MyView>.Ready
-//        }
-//        
-//        //===
-//        
-//        RXC.isTrue("Current state of the target object is 'normal'."){
-//            
-//            ready?.current == MyView.normal()
-//        }
-//    }
-//    
-//    func testApplyStateTwice()
-//    {
-//        RXC.isNotNil("Target object is set."){
-//            
-//            disp.subject
-//        }
-//        
-//        //===
-//        
-//        RXC.isNil("'color' property of the object has not been set yet."){
-//            
-//            disp.subject?.color
-//        }
-//        
-//        //===
-//        
-//        let initialColorValue = 1
-//        
-//        disp.apply{ $0.highlighted(initialColorValue) }
-//        
-//        //===
-//        
-//        RXC.isTrue("'color' property of the object has been set."){
-//            
-//            disp.subject?.color == initialColorValue
-//        }
-//        
-//        //===
-//        
-//        let updatedColorValue = 2
-//        
-//        disp.apply{ $0.highlighted(updatedColorValue) }
-//        
-//        //===
-//        
-//        RXC.isTrue("'color' property of the object has been updated."){
-//            
-//            disp.subject?.color == updatedColorValue
-//        }
-//    }
-//
-//    func testDefaultTransition()
-//    {
-//        var completionHasBeenCalled = false
-//        var transitionSucceeded = false
-//        
-//        //===
-//        
-//        disp.apply(MyView.normal()){ finished in
-//            
-//            completionHasBeenCalled = true
-//            transitionSucceeded = finished
-//        }
-//        
-//        //===
-//        
-//        let ready =
-//            
-//        RXC.value("State has been applied instantly."){
-//            
-//            disp.internalState as? Dispatcher<MyView>.Ready
-//        }
-//        
-//        //===
-//        
-//        RXC.isTrue("Current state of the target object is 'normal'."){
-//            
-//            ready?.current == MyView.normal()
-//        }
-//        
-//        //===
-//        
-//        RXC.isTrue("Transition went as expected."){
-//            
-//            completionHasBeenCalled && transitionSucceeded
-//        }
-//    }
-//    
-//    func testCustomTransitionWithDuration()
-//    {
-//        let ex = expectation(description: "Transition completed.")
-//        
-//        //===
-//        
-////        disp.apply(
-////            via: MyView.specialTransition,
-////            { $0.disabled(0.6) },
-////            completion: { if $0 { ex.fulfill() } }
-////        )
-//        
-////        disp.apply(
-////            via: MyView.specialTransition,
-////            MyView.disabled(0.6),
-////            completion: { if $0 { ex.fulfill() } }
-////        )
-//        
-//        disp.apply(via: MyView.specialTransition, MyView.disabled(0.6)){
-//            
-//            if $0 { ex.fulfill() }
-//        }
-//        
-//        //===
-//        
-//        RXC.isTrue("State is being applied via transition."){
-//            
-//            disp.internalState is Dispatcher<MyView>.InTransition
-//        }
-//        
-//        //===
-//        
-//        waitForExpectations(timeout: MyView.animDuration*2)
-//        
-//        //===
-//        
-//        RXC.isTrue("Dispatcher is now ready for another transition."){
-//            
-//            disp.internalState is Dispatcher<MyView>.Ready
-//        }
-//    }
+    //===
+    
+    override
+    func setUp()
+    {
+        super.setUp()
+        
+        //===
+        
+        aView = MyView()
+    }
+    
+    override
+    func tearDown()
+    {
+        aView = nil
+        
+        //===
+        
+        super.tearDown()
+    }
+    
+    func testFreshStart()
+    {
+        let ready =
+            
+        Assert("There is no state transition in progress right now.").isNotNil {
+            
+            self.aView.state.dispatcher.internalState as? Dispatcher.Ready
+        }
+        
+        //===
+        
+        Assert("Dispatcher is ready for transition.").isNotNil {
+            
+            ready
+        }
+    }
+    
+    func testApplyStateInstantly()
+    {
+        aView.state.apply{ $0.normal() }
+        
+        //===
+        
+        let ready =
+            
+        Assert("State has been applied instantly.").isNotNil {
+            
+            self.aView.state.dispatcher.internalState as? Dispatcher.Ready
+        }
+        
+        //===
+        
+        Assert("Current state of the target object is 'normal'.").isTrue {
+            
+            ready?.current == MyView.normal().identifier
+        }
+    }
+    
+    func testApplyStateTwice()
+    {
+        Assert("'color' property of the object has not been set yet.").isNil {
+            
+            self.aView.color
+        }
+        
+        //===
+        
+        let initialColorValue = 1
+        
+        aView.state.apply{ $0.highlighted(initialColorValue) }
+        
+        //===
+        
+        Assert("'color' property of the object has been set.").isTrue {
+            
+            self.aView.color == initialColorValue
+        }
+        
+        //===
+        
+        let updatedColorValue = 2
+        
+        aView.state.apply{ $0.highlighted(updatedColorValue) }
+        
+        //===
+        
+        Assert("'color' property of the object has been updated.").isTrue {
+            
+            self.aView.color == updatedColorValue
+        }
+    }
+
+    func testDefaultTransition()
+    {
+        var completionHasBeenCalled = false
+        var transitionSucceeded = false
+        
+        //===
+        
+        aView.state.apply(state: MyView.normal()){ finished in
+
+            completionHasBeenCalled = true
+            transitionSucceeded = finished
+        }
+        
+        //===
+        
+        let ready =
+            
+        Assert("State has been applied instantly.").isNotNil {
+            
+            self.aView.state.dispatcher.internalState as? Dispatcher.Ready
+        }
+        
+        //===
+        
+        Assert("Current state of the target object is 'normal'.").isTrue {
+            
+            ready?.current == MyView.normal().identifier
+        }
+        
+        //===
+        
+        Assert("Transition went as expected.").isTrue {
+            
+            completionHasBeenCalled && transitionSucceeded
+        }
+    }
+    
+    func testCustomTransitionWithDuration()
+    {
+        let ex = expectation(description: "Transition completed.")
+        
+        //===
+        
+        aView.state.apply(
+            via: MyView.specialTransition,
+            state: { $0.disabled(0.6) },
+            completion: { if $0 { ex.fulfill() } }
+        )
+        
+        //===
+        
+        Assert("State is being applied via transition.").isTrue {
+            
+            self.aView.state.dispatcher.internalState is Dispatcher.InTransition
+        }
+        
+        //===
+        
+        waitForExpectations(timeout: MyView.animDuration*2)
+        
+        //===
+        
+        Assert("Dispatcher is now ready for another transition.").isTrue {
+
+            self.aView.state.dispatcher.internalState is Dispatcher.Ready
+        }
+    }
 }
