@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
 
   s.name                      = companyPrefix + projName
   s.summary                   = projSummary
-  s.version                   = '2.8.1'
+  s.version                   = '3.0.0'
   s.homepage                  = companyGitHubPage + '/' + projName
   
   s.source                    = { :git => companyGitHubAccount + '/' + projName + '.git', :tag => s.version }
@@ -20,7 +20,7 @@ Pod::Spec.new do |s|
   s.ios.deployment_target     = '8.0'
   s.requires_arc              = true
   
-  s.dependency                'XCEStaticState', '~> 1.2'
+  s.framework                 = 'UIKit'
 
   s.license                   = { :type => 'MIT', :file => 'LICENSE' }
   s.author                    = { 'Maxim Khatskevich' => 'maxim@khatskevi.ch' }
