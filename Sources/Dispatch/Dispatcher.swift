@@ -26,7 +26,6 @@
 
 //===
 
-internal
 protocol DispatcherInternalState { }
 
 /**
