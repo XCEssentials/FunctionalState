@@ -95,18 +95,56 @@ public
 typealias Mutation<Subject: AnyObject> = (Subject) -> Void
 
 ////=== MARK: Prefixed aliases for all public top-level types
-//
-//public
-//typealias FSTCompletion = Completion
-//
-//public
-//typealias FSTState<Owner: Stateful> = State<Owner>
-//
-//public
-//typealias FSTTransition<Owner: Stateful> = Transition<Owner>
-//
-//public
-//typealias FSTDispatcher<Subject: Stateful> = Dispatcher<Subject>
-//
-//public
-//typealias FSTStateful = Stateful
+
+public
+typealias FSTBasicClosure = BasicClosure
+
+public
+typealias FSTCompletion = Completion
+
+public
+typealias FSTInternalCompletion = InternalCompletion
+
+public
+typealias FSTUserProvidedCompletion = UserProvidedCompletion
+
+public
+typealias FSTSomePureMutation = SomePureMutation
+
+public
+typealias FSTSomeMutationWithCompletion = SomeMutationWithCompletion
+
+public
+typealias FSTSomeTransition = SomeTransition
+
+public
+typealias FSTStateIdentifier = StateIdentifier
+
+public
+typealias FSTTransition<Owner: Stateful> = Transition<Owner>
+
+public
+typealias FSTMutation<Subject: AnyObject> = Mutation<Subject>
+
+//===
+
+public
+typealias FSTStateful = Stateful
+
+public
+typealias FSTState<Subject: AnyObject> = State<Subject>
+
+public
+typealias FSTPendingState<Subject: Stateful>  = PendingState<Subject>
+
+public
+typealias FSTSomeState = SomeState
+
+public
+typealias FSTDispatcherProxy<Subject: FSTStateful> = DispatcherProxy<Subject>
+
+public
+typealias FSTDispatcher = Dispatcher
+
+public
+typealias FSTDispatchableView = DispatchableView
