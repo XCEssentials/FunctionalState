@@ -19,6 +19,10 @@
 		9485CA541F5CC6E3001E2972 /* DispatchableView+Stateful.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9485CA531F5CC6E3001E2972 /* DispatchableView+Stateful.swift */; };
 		9485CA561F5CC845001E2972 /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9485CA551F5CC845001E2972 /* Main.swift */; };
 		9485CA5C1F5CDFF6001E2972 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9485CA5B1F5CDFF6001E2972 /* State.swift */; };
+		94A929201FE49B540011E3BB /* DispatchableCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9291E1FE49B530011E3BB /* DispatchableCollectionCell.swift */; };
+		94A929211FE49B540011E3BB /* DispatchableCollectionCell+Stateful.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9291F1FE49B530011E3BB /* DispatchableCollectionCell+Stateful.swift */; };
+		94A929231FE49B960011E3BB /* DispatchableTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A929221FE49B960011E3BB /* DispatchableTableCell.swift */; };
+		94A929251FE49BC20011E3BB /* DispatchableTableCell+Stateful.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A929241FE49BC20011E3BB /* DispatchableTableCell+Stateful.swift */; };
 		94AC4BD91F5CE46700E10123 /* SomeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94AC4BD81F5CE44E00E10123 /* SomeState.swift */; };
 		94AC4BDB1F5CE49000E10123 /* StateToSomeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94AC4BDA1F5CE49000E10123 /* StateToSomeState.swift */; };
 		94AC4BDD1F5CE53500E10123 /* StateConstructors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94AC4BDC1F5CE53500E10123 /* StateConstructors.swift */; };
@@ -76,6 +80,10 @@
 		9485CA531F5CC6E3001E2972 /* DispatchableView+Stateful.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchableView+Stateful.swift"; sourceTree = "<group>"; };
 		9485CA551F5CC845001E2972 /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
 		9485CA5B1F5CDFF6001E2972 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
+		94A9291E1FE49B530011E3BB /* DispatchableCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DispatchableCollectionCell.swift; sourceTree = "<group>"; };
+		94A9291F1FE49B530011E3BB /* DispatchableCollectionCell+Stateful.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DispatchableCollectionCell+Stateful.swift"; sourceTree = "<group>"; };
+		94A929221FE49B960011E3BB /* DispatchableTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchableTableCell.swift; sourceTree = "<group>"; };
+		94A929241FE49BC20011E3BB /* DispatchableTableCell+Stateful.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchableTableCell+Stateful.swift"; sourceTree = "<group>"; };
 		94AC4BD81F5CE44E00E10123 /* SomeState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SomeState.swift; sourceTree = "<group>"; };
 		94AC4BDA1F5CE49000E10123 /* StateToSomeState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateToSomeState.swift; sourceTree = "<group>"; };
 		94AC4BDC1F5CE53500E10123 /* StateConstructors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateConstructors.swift; sourceTree = "<group>"; };
@@ -172,6 +180,10 @@
 			children = (
 				9421D41E1F5C878D006787B5 /* DispatchableView.swift */,
 				9485CA531F5CC6E3001E2972 /* DispatchableView+Stateful.swift */,
+				94A9291E1FE49B530011E3BB /* DispatchableCollectionCell.swift */,
+				94A9291F1FE49B530011E3BB /* DispatchableCollectionCell+Stateful.swift */,
+				94A929221FE49B960011E3BB /* DispatchableTableCell.swift */,
+				94A929241FE49BC20011E3BB /* DispatchableTableCell+Stateful.swift */,
 			);
 			path = Convenience;
 			sourceTree = "<group>";
@@ -401,11 +413,15 @@
 				94AC4BDF1F5CE60900E10123 /* Stateful.swift in Sources */,
 				9421D41F1F5C878D006787B5 /* DispatchableView.swift in Sources */,
 				9485CA5C1F5CDFF6001E2972 /* State.swift in Sources */,
+				94A929231FE49B960011E3BB /* DispatchableTableCell.swift in Sources */,
+				94A929201FE49B540011E3BB /* DispatchableCollectionCell.swift in Sources */,
+				94A929211FE49B540011E3BB /* DispatchableCollectionCell+Stateful.swift in Sources */,
 				941DAA701F05B7F6005A5098 /* Aliases.swift in Sources */,
 				94AC4BDD1F5CE53500E10123 /* StateConstructors.swift in Sources */,
 				9485CA541F5CC6E3001E2972 /* DispatchableView+Stateful.swift in Sources */,
 				9404BEF31F5CFFED00A6F8B0 /* DispatcherProxy.swift in Sources */,
 				2AD5A144C5F34B3D3A30FDF1 /* Queue.swift in Sources */,
+				94A929251FE49BC20011E3BB /* DispatchableTableCell+Stateful.swift in Sources */,
 				94AC4BE11F5CE72600E10123 /* FST.swift in Sources */,
 				9404BEF81F5D067E00A6F8B0 /* Dispatcher+States.swift in Sources */,
 				94AC4BD91F5CE46700E10123 /* SomeState.swift in Sources */,
