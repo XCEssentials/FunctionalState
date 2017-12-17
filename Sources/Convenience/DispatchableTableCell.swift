@@ -28,7 +28,7 @@ import UIKit
 
 //---
 
-public
+open
 class DispatchableTableCell: UITableViewCell
 {
     let stateDispatcher = Dispatcher()
