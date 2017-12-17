@@ -28,7 +28,7 @@ import UIKit
 
 //---
 
-public
+open
 class DispatchableCollectionCell: UICollectionViewCell
 {
     let stateDispatcher = Dispatcher()
