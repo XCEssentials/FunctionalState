@@ -145,12 +145,3 @@ typealias FSTDispatcherProxy<Subject: FSTStateful> = DispatcherProxy<Subject>
 
 public
 typealias FSTDispatcher = Dispatcher
-
-public
-typealias FSTDispatchableView = DispatchableView
-
-public
-typealias FSTDispatchableCollectionCell = DispatchableCollectionCell
-
-public
-typealias FSTDispatchableTableCell = DispatchableTableCell
