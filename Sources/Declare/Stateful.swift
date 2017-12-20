@@ -30,7 +30,7 @@
 public
 protocol Stateful: class
 {
-    var state: DispatcherProxy<Self> { get }
+    var stateDispatcher: Dispatcher { get }
 
     /**
      Transition that will be used as `onSetTransition` in each state related to this class, if no other transition is specified explicitly.
@@ -50,6 +50,19 @@ protocol Stateful: class
 public
 extension Stateful
 {
+    /**
+     Don't be confused, it's called 'state' jsut for a nicer API.
+     When need to apply a state, you call use it like this:
+
+     ```swift
+     self.state.apply{ $0.someState() }
+     ```
+     */
+    var state: DispatcherProxy<Self>
+    {
+        return DispatcherProxy(dispatcher: stateDispatcher, object: self)
+    }
+
     static
     var defaultOnSetTransition: Transition<Self>
     {

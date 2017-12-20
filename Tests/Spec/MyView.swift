@@ -5,8 +5,12 @@ import XCEFunctionalState
 //===
 
 final
-class MyView: DispatchableView, Stateful
+class MyView: UIView, Stateful
 {
+    let stateDispatcher = Dispatcher()
+
+    //---
+
     var color: Int?
 }
 
