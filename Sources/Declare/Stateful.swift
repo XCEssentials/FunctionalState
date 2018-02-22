@@ -30,7 +30,7 @@
 public
 protocol Stateful: class
 {
-    var stateDispatcher: Dispatcher { get }
+    var dispatcher: Dispatcher { get }
 
     /**
      Transition that will be used as `onSetTransition` in each state related to this class, if no other transition is specified explicitly.
@@ -50,19 +50,6 @@ protocol Stateful: class
 public
 extension Stateful
 {
-    /**
-     Don't be confused, it's called 'state' jsut for a nicer API.
-     When need to apply a state, you call use it like this:
-
-     ```swift
-     self.state.apply{ $0.someState() }
-     ```
-     */
-    var state: DispatcherProxy<Self>
-    {
-        return DispatcherProxy(dispatcher: stateDispatcher, object: self)
-    }
-
     static
     var defaultOnSetTransition: Transition<Self>
     {
@@ -73,5 +60,87 @@ extension Stateful
     var defaultOnUpdateTransition: Transition<Self>
     {
         return FST.instantTransition()
+    }
+}
+
+// MARK: - Apply
+
+public
+extension Stateful
+{
+    /**
+     Schedules transition into a given state (target state).
+
+     - Parameters:
+
+     - forceTransition: Transition that must be used to override transitions defined in target state (both `onSetTransition` and `onUpdateTransition`). If it's `nil` then transitions from `targetState` will be used instead.
+
+     - state: State that needs to be applied to `self.subject` object (target state).
+
+     - completion: Higher level completion that will be called after transition is complete and current state is set to target state.
+     */
+    func apply(
+        via forceTransition: Transition<Self>? = nil,
+        state: State<Self>,
+        completion: UserProvidedCompletion = nil
+        )
+    {
+        dispatcher.queue.enqueue((
+            state.toSomeState(with: self, forceTransition: forceTransition),
+            completion
+        ))
+
+        dispatcher.processNext()
+    }
+
+    /**
+     Schedules transition into a given state (target state).
+
+     - Parameters:
+
+     - forceTransition: Transition that must be used to override transitions defined in target state (both `onSetTransition` and `onUpdateTransition`). If it's `nil` then transitions from `targetState` will be used instead.
+
+     - completion: Higher level completion that will be called after transition is complete and current state is set to target state.
+
+     - stateGetter: Closure that returns state (target state) which needs to be applied to `self.subject` object
+     */
+    func apply(
+        via forceTransition: Transition<Self>? = nil,
+        state stateGetter: (Self.Type) -> State<Self>,
+        completion: UserProvidedCompletion
+        )
+    {
+        let state = stateGetter(Self.self)
+
+        dispatcher.queue.enqueue((
+            state.toSomeState(with: self, forceTransition: forceTransition),
+            completion
+        ))
+
+        dispatcher.processNext()
+    }
+
+    /**
+     Schedules transition into a given state (target state).
+
+     - Parameters:
+
+     - forceTransition: Transition that must be used to override transitions defined in target state (both `onSetTransition` and `onUpdateTransition`). If it's `nil` then transitions from `targetState` will be used instead.
+
+     - stateGetter: Closure that returns state (target state) which needs to be applied to `self.subject` object
+     */
+    func apply(
+        via forceTransition: Transition<Self>? = nil,
+        state stateGetter: (Self.Type) -> State<Self>
+        )
+    {
+        let state = stateGetter(Self.self)
+
+        dispatcher.queue.enqueue((
+            state.toSomeState(with: self, forceTransition: forceTransition),
+            nil
+        ))
+
+        dispatcher.processNext()
     }
 }

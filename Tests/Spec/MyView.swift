@@ -7,7 +7,7 @@ import XCEFunctionalState
 final
 class MyView: UIView, Stateful
 {
-    let stateDispatcher = Dispatcher()
+    let dispatcher = Dispatcher()
 
     //---
 

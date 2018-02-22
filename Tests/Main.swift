@@ -43,7 +43,7 @@ class StatefulTests: XCTestCase
             
         Assert("There is no state transition in progress right now.").isNotNil(
             
-            self.aView.state.dispatcher.internalState as? Dispatcher.Ready
+            self.aView.dispatcher.internalState as? Dispatcher.Ready
         )
         
         //---
@@ -58,7 +58,7 @@ class StatefulTests: XCTestCase
 
     func testApplyStateInstantly()
     {
-        aView.state.apply{ $0.normal() }
+        aView.apply{ $0.normal() }
         
         //---
         
@@ -66,7 +66,7 @@ class StatefulTests: XCTestCase
             
         Assert("State has been applied instantly.").isNotNil(
             
-            self.aView.state.dispatcher.internalState as? Dispatcher.Ready
+            self.aView.dispatcher.internalState as? Dispatcher.Ready
         )
         
         //---
@@ -90,7 +90,7 @@ class StatefulTests: XCTestCase
         
         let initialColorValue = 1
         
-        aView.state.apply{ $0.highlighted(initialColorValue) }
+        aView.apply{ $0.highlighted(initialColorValue) }
         
         //---
         
@@ -103,7 +103,7 @@ class StatefulTests: XCTestCase
         
         let updatedColorValue = 2
         
-        aView.state.apply{ $0.highlighted(updatedColorValue) }
+        aView.apply{ $0.highlighted(updatedColorValue) }
         
         //---
         
@@ -122,7 +122,7 @@ class StatefulTests: XCTestCase
         
         //---
         
-        aView.state.apply(state: MyView.normal()){ finished in
+        aView.apply(state: MyView.normal()){ finished in
 
             completionHasBeenCalled = true
             transitionSucceeded = finished
@@ -134,7 +134,7 @@ class StatefulTests: XCTestCase
             
         Assert("State has been applied instantly.").isNotNil(
             
-            self.aView.state.dispatcher.internalState as? Dispatcher.Ready
+            self.aView.dispatcher.internalState as? Dispatcher.Ready
         )
     
         //---
@@ -160,7 +160,7 @@ class StatefulTests: XCTestCase
         
         //---
         
-        aView.state.apply(
+        aView.apply(
             via: MyView.specialTransition,
             state: { $0.disabled(0.6) },
             completion: { if $0 { ex.fulfill() } }
@@ -170,7 +170,7 @@ class StatefulTests: XCTestCase
         
         Assert("State is being applied via transition.").isTrue(
             
-            self.aView.state.dispatcher.internalState is Dispatcher.InTransition
+            self.aView.dispatcher.internalState is Dispatcher.InTransition
         )
         
         //---
@@ -181,7 +181,7 @@ class StatefulTests: XCTestCase
         
         Assert("Dispatcher is now ready for another transition.").isTrue(
 
-            self.aView.state.dispatcher.internalState is Dispatcher.Ready
+            self.aView.dispatcher.internalState is Dispatcher.Ready
         )
     }
 }
