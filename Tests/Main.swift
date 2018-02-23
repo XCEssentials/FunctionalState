@@ -58,7 +58,7 @@ class StatefulTests: XCTestCase
 
     func testApplyStateInstantly()
     {
-        aView.apply{ $0.normal() }
+        aView.apply << MyView.normal()
         
         //---
         
