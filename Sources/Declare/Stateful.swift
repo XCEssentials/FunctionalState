@@ -81,14 +81,12 @@ extension Stateful
      */
     func apply(
         via forceTransition: Transition<Self>? = nil,
-        state: State<Self>,
-        completion: UserProvidedCompletion = nil
+        state: State<Self>
         )
     {
-        dispatcher.queue.enqueue((
-            state.toSomeState(with: self, forceTransition: forceTransition),
-            completion
-        ))
+        dispatcher.queue.enqueue(
+            state.toSomeState(with: self, forceTransition: forceTransition)
+        )
 
         dispatcher.processNext()
     }
@@ -109,37 +107,9 @@ extension Stateful
     {
         let state = stateGetter(Self.self)
 
-        dispatcher.queue.enqueue((
-            state.toSomeState(with: self, forceTransition: forceTransition),
-            nil
-        ))
-
-        dispatcher.processNext()
-    }
-
-    /**
-     Schedules transition into a given state (target state).
-
-     - Parameters:
-
-     - forceTransition: Transition that must be used to override transitions defined in target state (both `onSetTransition` and `onUpdateTransition`). If it's `nil` then transitions from `targetState` will be used instead.
-
-     - stateGetter: Closure that returns state (target state) which needs to be applied to `self.subject` object
-
-     - completion: Higher level completion that will be called after transition is complete and current state is set to target state.
-     */
-    func apply(
-        via forceTransition: Transition<Self>? = nil,
-        state stateGetter: (Self.Type) -> State<Self>,
-        completion: UserProvidedCompletion
+        dispatcher.queue.enqueue(
+            state.toSomeState(with: self, forceTransition: forceTransition)
         )
-    {
-        let state = stateGetter(Self.self)
-
-        dispatcher.queue.enqueue((
-            state.toSomeState(with: self, forceTransition: forceTransition),
-            completion
-        ))
 
         dispatcher.processNext()
     }

@@ -26,20 +26,20 @@
 
 public
 func << <T: Stateful>(
-    apply: (Transition<T>?, State<T>, UserProvidedCompletion) -> Void,
+    apply: (Transition<T>?, State<T>) -> Void,
     input: (Transition<T>, State<T>)
     )
 {
-    apply(input.0, input.1, nil)
+    apply(input.0, input.1)
 }
 
 //---
 
 public
 func << <T: Stateful>(
-    apply: (Transition<T>?, State<T>, UserProvidedCompletion) -> Void,
+    apply: (Transition<T>?, State<T>) -> Void,
     state: State<T>
     )
 {
-    apply(nil, state, nil)
+    apply(nil, state)
 }

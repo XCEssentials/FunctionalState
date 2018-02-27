@@ -33,7 +33,7 @@ extension Dispatcher
     {
         guard
             let ready = internalState as? Ready,
-            let (newState, userCompletion) = queue.dequeue()
+            let newState = queue.dequeue()
         else
         {
             return
@@ -46,10 +46,6 @@ extension Dispatcher
         let internalCompletion: InternalCompletion = { finished in
             
             self.internalState = Ready(current: newState.identifier)
-            
-            //===
-            
-            userCompletion?(finished)
             
             //===
             
