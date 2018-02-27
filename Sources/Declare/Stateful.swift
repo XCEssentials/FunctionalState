@@ -31,36 +31,6 @@ public
 protocol Stateful: class
 {
     var dispatcher: Dispatcher { get }
-
-    /**
-     Transition that will be used as `onSetTransition` in each state related to this class, if no other transition is specified explicitly.
-     */
-    static
-    var defaultOnSetTransition: Transition<Self> { get }
-
-    /**
-     Transition that will be used as `onUpdateTransition` in each state related to this class, if no other transition is specified explicitly.
-     */
-    static
-    var defaultOnUpdateTransition: Transition<Self> { get }
-}
-
-// MARK: - Default implementations
-
-public
-extension Stateful
-{
-    static
-    var defaultOnSetTransition: Transition<Self>
-    {
-        return FST.instantTransition()
-    }
-
-    static
-    var defaultOnUpdateTransition: Transition<Self>
-    {
-        return FST.instantTransition()
-    }
 }
 
 // MARK: - Apply

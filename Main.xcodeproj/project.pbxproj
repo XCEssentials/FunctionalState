@@ -22,7 +22,6 @@
 		94AC4BDB1F5CE49000E10123 /* StateToSomeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94AC4BDA1F5CE49000E10123 /* StateToSomeState.swift */; };
 		94AC4BDD1F5CE53500E10123 /* StateConstructors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94AC4BDC1F5CE53500E10123 /* StateConstructors.swift */; };
 		94AC4BDF1F5CE60900E10123 /* Stateful.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94AC4BDE1F5CE60900E10123 /* Stateful.swift */; };
-		94AC4BE11F5CE72600E10123 /* FST.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94AC4BE01F5CE72600E10123 /* FST.swift */; };
 		C910C7097BB79B7229CDB160 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93C2E431D2CF02D9F7DE2FAE /* Foundation.framework */; };
 		FD6D8EE2018716C2FE432F78 /* MyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71F3BDDE354612CAAB911AE /* MyView.swift */; };
 /* End PBXBuildFile section */
@@ -78,7 +77,6 @@
 		94AC4BDA1F5CE49000E10123 /* StateToSomeState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateToSomeState.swift; sourceTree = "<group>"; };
 		94AC4BDC1F5CE53500E10123 /* StateConstructors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateConstructors.swift; sourceTree = "<group>"; };
 		94AC4BDE1F5CE60900E10123 /* Stateful.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stateful.swift; sourceTree = "<group>"; };
-		94AC4BE01F5CE72600E10123 /* FST.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FST.swift; sourceTree = "<group>"; };
 		A31E120F02DE62163E40FFCB /* Pods-Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tests/Pods-Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		A34F75BBF830D9C9B29E4370 /* Pods_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAD3BF54C1B2D27BC75E26B6 /* XCEFunctionalState.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = XCEFunctionalState.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -186,10 +184,10 @@
 		9485CA5A1F5CDF8E001E2972 /* Declare */ = {
 			isa = PBXGroup;
 			children = (
+				943107692045E2C8009F33D9 /* Transition.swift */,
 				94AC4BDE1F5CE60900E10123 /* Stateful.swift */,
 				9485CA5B1F5CDFF6001E2972 /* State.swift */,
 				94AC4BDC1F5CE53500E10123 /* StateConstructors.swift */,
-				943107692045E2C8009F33D9 /* Transition.swift */,
 			);
 			path = Declare;
 			sourceTree = "<group>";
@@ -198,7 +196,6 @@
 			isa = PBXGroup;
 			children = (
 				347DD8D1B17954579A0F806D /* Queue.swift */,
-				94AC4BE01F5CE72600E10123 /* FST.swift */,
 				9415828C203F965A008BFBDF /* HelperOperators.swift */,
 			);
 			path = Misc;
@@ -394,7 +391,6 @@
 				941DAA701F05B7F6005A5098 /* Aliases.swift in Sources */,
 				94AC4BDD1F5CE53500E10123 /* StateConstructors.swift in Sources */,
 				2AD5A144C5F34B3D3A30FDF1 /* Queue.swift in Sources */,
-				94AC4BE11F5CE72600E10123 /* FST.swift in Sources */,
 				9404BEF81F5D067E00A6F8B0 /* Dispatcher+States.swift in Sources */,
 				94AC4BD91F5CE46700E10123 /* SomeState.swift in Sources */,
 			);

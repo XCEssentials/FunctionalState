@@ -43,7 +43,7 @@ extension Stateful
     static
     func state(
         _ identifier: String = #function,
-        via onSetTransition: @escaping Transition<Self> = Self.defaultOnSetTransition,
+        via onSetTransition: @escaping Transition<Self> = DefaultTransitions.instant(),
         _ onSet: @escaping Mutation<Self>
         ) -> State<Self>
     {
@@ -76,7 +76,7 @@ extension Stateful
     static
     func onSet(
         _ identifier: String = #function,
-        via onSetTransition: @escaping Transition<Self> = Self.defaultOnSetTransition,
+        via onSetTransition: @escaping Transition<Self> = DefaultTransitions.instant(),
         _ onSet: @escaping Mutation<Self>
         ) -> PendingState<Self>
     {
@@ -120,7 +120,7 @@ extension PendingState
      - Returns: State with `Self.Subject` as state `Subject` type, made of all the provided input parameters plus 'identifier' and 'onSet' related values from internal state value.
      */
     func onUpdate(
-        via onUpdateTransition: @escaping Transition<Subject> = Subject.defaultOnUpdateTransition,
+        via onUpdateTransition: @escaping Transition<Subject> = DefaultTransitions.instant(),
         _ onUpdate: @escaping Mutation<Subject>
         ) -> State<Subject>
     {

@@ -38,6 +38,22 @@
 public
 typealias Transition<Subject: AnyObject> = (
     Subject,
-    @escaping SomePureMutation,
+    @escaping BasicClosure,
     @escaping Completion
     ) -> Void
+
+//---
+
+public
+enum DefaultTransitions // scope
+{
+    /**
+     Helper constructor of transition that applies mutations instantly and calls completion right away.
+     */
+    static
+    func instant<T>() -> Transition<T>
+    {
+        return { $1(); $2(true) }
+    }
+}
+
