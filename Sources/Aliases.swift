@@ -87,8 +87,8 @@ typealias FSTDefaultTransitions = DefaultTransitions
 public
 typealias FSTStateful = Stateful
 
-public
-typealias FSTState<Subject: AnyObject> = State<Subject>
+//public
+//typealias FSTState<Subject: AnyObject> = State<Subject>
 
 public
 typealias FSTPendingState<Subject: Stateful>  = PendingState<Subject>

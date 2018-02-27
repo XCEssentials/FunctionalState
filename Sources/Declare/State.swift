@@ -27,7 +27,6 @@
 /**
  Special container object that represents a single state for 'Subject' type.
  */
-public
 struct State<Subject: AnyObject>
 {
     /**
