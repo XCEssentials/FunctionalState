@@ -55,7 +55,7 @@ extension Stateful
     }
 }
 
-//===
+//---
 
 public
 extension Stateful
@@ -90,7 +90,7 @@ extension Stateful
     }
 }
 
-//===
+//---
 
 /**
  An intermediate data structure that is used as syntax suger to define a state with both 'onSet' and 'onUpdate' mutations via chainable API.
@@ -101,7 +101,7 @@ struct PendingState<Subject: Stateful>
     let state: State<Subject>
 }
 
-//===
+//---
 
 public
 extension PendingState

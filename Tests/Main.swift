@@ -5,13 +5,13 @@ import XCEFunctionalState
 
 import XCETesting
 
-//===
+//---
 
 class StatefulTests: XCTestCase
 {
     var aView: MyView!
     
-    //===
+    //---
     
     override
     func setUp()
@@ -23,7 +23,7 @@ class StatefulTests: XCTestCase
         aView = MyView()
     }
     
-    //===
+    //---
 
     override
     func tearDown()
@@ -35,7 +35,7 @@ class StatefulTests: XCTestCase
         super.tearDown()
     }
     
-    //===
+    //---
 
     func testFreshStart()
     {
@@ -54,7 +54,7 @@ class StatefulTests: XCTestCase
         )
     }
     
-    //===
+    //---
 
     func testApplyStateInstantly()
     {
@@ -77,7 +77,7 @@ class StatefulTests: XCTestCase
         )
     }
     
-    //===
+    //---
 
     func testApplyStateTwice()
     {
@@ -113,7 +113,7 @@ class StatefulTests: XCTestCase
         )
     }
     
-    //===
+    //---
 
     func testDefaultTransition()
     {
@@ -152,7 +152,7 @@ class StatefulTests: XCTestCase
         )
     }
     
-    //===
+    //---
 
     func testCustomTransitionWithDuration()
     {

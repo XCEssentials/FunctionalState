@@ -24,7 +24,7 @@
  
  */
 
-//===
+//---
 
 protocol DispatcherInternalState { }
 

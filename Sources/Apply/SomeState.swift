@@ -45,7 +45,7 @@ struct SomeState
      */
     let onUpdate: SomeMutationWithCompletion?
     
-    //===
+    //---
     
     /**
      The only designated constructor, intentionally inaccessible from outer scope to make the static `state(...)` functions of `Stateful` protocol exclusive way of defining states for a given class.
@@ -63,7 +63,7 @@ struct SomeState
     }
 }
 
-//===
+//---
 
 extension SomeState: Equatable
 {

@@ -2,7 +2,7 @@ import UIKit
 
 import XCEFunctionalState
 
-//===
+//---
 
 final
 class MyView: UIView, Stateful
@@ -14,7 +14,7 @@ class MyView: UIView, Stateful
     var color: Int?
 }
 
-//===
+//---
 
 extension MyView
 {
@@ -30,7 +30,7 @@ extension MyView
 
                 mutations()
 
-                //===
+                //---
 
                 // emulate animation with non-zero duration
                 DispatchQueue.main.asyncAfter(deadline: .now() + animDuration) {

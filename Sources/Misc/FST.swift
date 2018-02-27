@@ -26,7 +26,7 @@
 
 import Foundation
 
-//===
+//---
 
 public
 enum FST // scope

@@ -57,12 +57,12 @@ typealias SomeMutationWithCompletion = (@escaping InternalCompletion) -> Void
 public
 typealias SomeTransition = SomeMutationWithCompletion
 
-//===
+//---
 
 public
 typealias StateIdentifier = String
 
-//===
+//---
 
 /**
  This closure must represent pure changes (synchonous) that are being applied to an instance of 'Subject' type that is being passed as the only input parameter. No need to call completion, any kind of transition is out of scope as well (no animation expected to be used inside this closure).
@@ -70,7 +70,7 @@ typealias StateIdentifier = String
 public
 typealias Mutation<Subject: AnyObject> = (Subject) -> Void
 
-////=== MARK: Prefixed aliases for all public top-level types
+// MARK: Prefixed aliases for all public top-level types
 
 public
 typealias FSTBasicClosure = BasicClosure
@@ -99,7 +99,7 @@ typealias FSTTransition<Owner: Stateful> = Transition<Owner>
 public
 typealias FSTMutation<Subject: AnyObject> = Mutation<Subject>
 
-//===
+//---
 
 public
 typealias FSTStateful = Stateful

@@ -51,7 +51,7 @@ struct State<Subject: AnyObject>
      */
     let onUpdate: MutationWithTransition?
     
-    //===
+    //---
     
     /**
      The only designated constructor, intentionally inaccessible from outer scope to make the static `state(...)` functions of `Stateful` protocol exclusive way of defining states for a given class.
@@ -69,7 +69,7 @@ struct State<Subject: AnyObject>
     }
 }
 
-//===
+//---
 
 extension State: Equatable
 {

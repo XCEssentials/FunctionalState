@@ -39,20 +39,20 @@ extension Dispatcher
             return
         }
 
-        //===
+        //---
 
         internalState = InTransition(previous: ready.current, target: newState.identifier)
 
         let internalCompletion: InternalCompletion = { finished in
             
             self.internalState = Ready(current: newState.identifier)
-            
-            //===
+
+            //---
             
             self.processNext()
         }
         
-        //===
+        //---
 
         if
             ready.current == newState.identifier
