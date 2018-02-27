@@ -53,13 +53,13 @@ extension Stateful
      */
     func onSetOnly(
         stateId: StateIdentifier = #function,
-        via transition: @escaping Transition<Self> = DefaultTransitions.instant(),
+        via transition: Transition<Self>? = nil,
         _ onSet: @escaping BasicClosure
         )
     {
         let state = State<Self>(
             identifier: stateId,
-            onSet: (onSet, transition),
+            onSet: (onSet, transition ?? DefaultTransitions.instant()),
             onUpdate: nil
         )
 
@@ -70,14 +70,14 @@ extension Stateful
 
     func onSetAndUpdate(
         stateId: StateIdentifier = #function,
-        via sameTransition: @escaping Transition<Self> = DefaultTransitions.instant(),
+        via sameTransition: Transition<Self>? = nil,
         _ onBoth: @escaping BasicClosure
         )
     {
         let state = State<Self>(
             identifier: stateId,
-            onSet: (onBoth, sameTransition),
-            onUpdate: (onBoth, sameTransition)
+            onSet: (onBoth, sameTransition ?? DefaultTransitions.instant()),
+            onUpdate: (onBoth, sameTransition ?? DefaultTransitions.instant())
         )
 
         dispatcher.queue.enqueue(state.toSomeState(with: self))
@@ -87,15 +87,15 @@ extension Stateful
 
     func onSetAndUpdate(
         stateId: StateIdentifier = #function,
-        setVia onSetTransition: @escaping Transition<Self> = DefaultTransitions.instant(),
-        updateVia onUpdateTransition: @escaping Transition<Self> = DefaultTransitions.instant(),
+        setVia onSetTransition: Transition<Self>? = nil,
+        updateVia onUpdateTransition: Transition<Self>? = nil,
         _ onBoth: @escaping BasicClosure
         )
     {
         let state = State<Self>(
             identifier: stateId,
-            onSet: (onBoth, onSetTransition),
-            onUpdate: (onBoth, onUpdateTransition)
+            onSet: (onBoth, onSetTransition ?? DefaultTransitions.instant()),
+            onUpdate: (onBoth, onUpdateTransition ?? DefaultTransitions.instant())
         )
 
         dispatcher.queue.enqueue(state.toSomeState(with: self))
@@ -124,14 +124,14 @@ extension Stateful
      */
     func onSet(
         stateId: StateIdentifier = #function,
-        via transition: @escaping Transition<Self> = DefaultTransitions.instant(),
+        via transition: Transition<Self>? = nil,
         _ onSet: @escaping BasicClosure
         ) -> PendingState<Self>
     {
         return PendingState(
             host: self,
             stateId: stateId,
-            onSetTransition: transition,
+            onSetTransition: transition ?? DefaultTransitions.instant(),
             onSetBody: onSet
         )
     }
@@ -175,14 +175,14 @@ extension PendingState
      - Returns: State with `Self.Subject` as state `Subject` type, made of all the provided input parameters plus 'identifier' and 'onSet' related values from internal state value.
      */
     func onUpdate(
-        via onUpdateTransition: @escaping Transition<Subject> = DefaultTransitions.instant(),
+        via onUpdateTransition: Transition<Subject>? = nil,
         _ onUpdateBody: @escaping BasicClosure
         )
     {
         let state = State<Subject>(
             identifier: stateId,
             onSet: (onSetBody, onSetTransition),
-            onUpdate: (onUpdateBody, onUpdateTransition)
+            onUpdate: (onUpdateBody, onUpdateTransition ?? DefaultTransitions.instant())
         )
 
         host.dispatcher.queue.enqueue(state.toSomeState(with: host))

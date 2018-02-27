@@ -58,7 +58,7 @@ class StatefulTests: XCTestCase
 
     func testApplyStateInstantly()
     {
-        aView.apply << MyView.normal()
+        aView.normal()
         
         //---
         
@@ -73,7 +73,7 @@ class StatefulTests: XCTestCase
         
         Assert("Current state of the target object is 'normal'.").isTrue(
             
-            ready?.current == MyView.normal().identifier
+            ready?.current == MyView.StateIds.normal.rawValue
         )
     }
     
@@ -90,7 +90,7 @@ class StatefulTests: XCTestCase
         
         let initialColorValue = 1
         
-        aView.apply{ $0.highlighted(initialColorValue) }
+        aView.highlighted(initialColorValue)
         
         //---
         
@@ -103,7 +103,7 @@ class StatefulTests: XCTestCase
         
         let updatedColorValue = 2
         
-        aView.apply{ $0.highlighted(updatedColorValue) }
+        aView.highlighted(updatedColorValue)
         
         //---
         
@@ -117,16 +117,7 @@ class StatefulTests: XCTestCase
 
     func testDefaultTransition()
     {
-        var completionHasBeenCalled = false
-        var transitionSucceeded = false
-        
-        //---
-        
-        aView.apply(state: MyView.normal()){ finished in
-
-            completionHasBeenCalled = true
-            transitionSucceeded = finished
-        }
+        aView.normal()
         
         //---
         
@@ -141,14 +132,7 @@ class StatefulTests: XCTestCase
         
         Assert("Current state of the target object is 'normal'.").isTrue(
             
-            ready?.current == MyView.normal().identifier
-        )
-        
-        //---
-        
-        Assert("Transition went as expected.").isTrue(
-            
-            completionHasBeenCalled && transitionSucceeded
+            ready?.current == MyView.StateIds.normal.rawValue
         )
     }
     
@@ -160,10 +144,9 @@ class StatefulTests: XCTestCase
         
         //---
         
-        aView.apply(
-            via: MyView.specialTransition,
-            state: { $0.disabled(0.6) },
-            completion: { if $0 { ex.fulfill() } }
+        aView.disabled(
+            with: 0.6,
+            via: MyView.specialTransition({ if $0 { ex.fulfill() } })
         )
         
         //---
