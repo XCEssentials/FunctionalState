@@ -43,7 +43,7 @@ extension Dispatcher
 
         internalState = InTransition(previous: ready.current, target: newState.identifier)
 
-        let completion: Completion = { finished in
+        let completion: Completion = { _ in
             
             self.internalState = Ready(current: newState.identifier)
 

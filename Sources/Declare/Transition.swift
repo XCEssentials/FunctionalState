@@ -56,4 +56,3 @@ enum DefaultTransitions // scope
         return { $1(); $2(true) }
     }
 }
-

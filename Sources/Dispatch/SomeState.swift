@@ -33,7 +33,7 @@ struct SomeState
     /**
      Internal state identifier that helps to distinguish one state from another. It is supposed to be unique per stateful object, regardless of the rest of the state internal member values.
      */
-    let identifier: String
+    let identifier: StateIdentifier
     
     /**
      Closure that must be called to apply this state (when this state is NOT current yet, or current state is undefined yet, to make it current).

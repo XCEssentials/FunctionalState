@@ -33,13 +33,13 @@ struct State<Subject: AnyObject>
     /**
      Internal state identifier that helps to distinguish one state from another. It is supposed to be unique per stateful object, regardless of the rest of the state internal member values.
      */
-    let identifier: String
+    let identifier: StateIdentifier
     
     /**
      A helper typealias that represents Subject-specific pure mutation combined with transition that is supposed to be used to apply that mutation.
      */
     typealias MutationWithTransition =
-        (mutation: Mutation<Subject>, transition: Transition<Subject>)
+        (mutation: BasicClosure, transition: Transition<Subject>)
     
     /**
      Mutation and transition that must be used to apply this state (when this state is NOT current yet, or current state is undefined yet, to make it current).

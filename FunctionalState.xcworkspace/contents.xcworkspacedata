@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Workspace
    version = "1.0">
+   <Group
+      location = "group:Debug"
+      name = "Debug">
+      <FileRef
+         location = "group:Debug.playground">
+      </FileRef>
+   </Group>
    <FileRef
       location = "group:LICENSE">
    </FileRef>
