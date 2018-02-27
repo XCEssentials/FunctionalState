@@ -43,7 +43,7 @@ extension Dispatcher
 
         internalState = InTransition(previous: ready.current, target: newState.identifier)
 
-        let internalCompletion: InternalCompletion = { finished in
+        let completion: Completion = { finished in
             
             self.internalState = Ready(current: newState.identifier)
 
@@ -62,18 +62,18 @@ extension Dispatcher
             if
                 let onUpdate = newState.onUpdate
             {
-                onUpdate(internalCompletion)
+                onUpdate(completion)
             }
             else
             {
-                internalCompletion(true)
+                completion(true)
             }
         }
         else
         {
             // set
             
-            newState.onSet(internalCompletion)
+            newState.onSet(completion)
         }
     }
 }

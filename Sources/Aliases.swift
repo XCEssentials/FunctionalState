@@ -34,12 +34,6 @@ public
 typealias Completion = (Bool) -> Void
 
 /**
- 'Internal' means provided by the library and used for implementing some internal functionality, to coordinate user provided asynchronous code execution with internal state.
- */
-public
-typealias InternalCompletion = Completion
-
-/**
  This closure must represent pure changes (synchonous) on a captured from outer scope subject. NO info about 'Subject' type, no need to call completion, any kind of transition is out of scope as well (no animation expected to be used inside this closure).
  */
 public
@@ -49,7 +43,7 @@ typealias SomePureMutation = BasicClosure
  This closure must contain some (asynchonous) changes on a captured from outer scope subject. As in case of 'SomePureMutation', there is NO info about 'Subject' type, BUT any kind of transition/animation code IS allowed inside, the only input parameter is completion block that must be dispatched on main thread as soon as all changes are applied and all transitions/animations (if being used) are completed - in case of positive completion, or as soon as an interruption happened in case of unsuccessful completion of the mutation/transition.
  */
 public
-typealias SomeMutationWithCompletion = (@escaping InternalCompletion) -> Void
+typealias SomeMutationWithCompletion = (@escaping Completion) -> Void
 
 /**
  An 'InternalCompletion' closure is being passed into 'SomeMutationWithCompletion' closure, and when it gets called - it calls 'UserProvidedCompletion' (if presented) and continues processing of the transitions in the queue.
@@ -77,9 +71,6 @@ typealias FSTBasicClosure = BasicClosure
 
 public
 typealias FSTCompletion = Completion
-
-public
-typealias FSTInternalCompletion = InternalCompletion
 
 public
 typealias FSTSomePureMutation = SomePureMutation

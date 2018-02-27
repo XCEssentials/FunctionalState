@@ -39,5 +39,5 @@ public
 typealias Transition<Subject: AnyObject> = (
     Subject,
     @escaping SomePureMutation,
-    @escaping InternalCompletion
+    @escaping Completion
     ) -> Void
