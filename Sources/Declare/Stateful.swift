@@ -43,23 +43,21 @@ extension Stateful
 
      - Parameters:
 
-     - identifier: Internal state identifier that helps to distinguish one state from another. It is supposed to be unique per stateful type. It's highly recommended to always let the function use default value, which is defined by the name of the enclosing function. This guarantees its uniqueness within `Subject` type while is very convenient for debugging.
+     - stateId: Internal state identifier that helps to distinguish one state from another. It is supposed to be unique per stateful type. It's highly recommended to always let the function use default value, which is defined by the name of the enclosing function. This guarantees its uniqueness within `Subject` type and it's very convenient for debugging.
 
-     - onSetTransition: Transition that will be used to apply `onSet` mutations.
+     - transition: Transition that will be used to apply `setBody` mutations.
 
-     - onSet: Closure that must be called to apply this state (when this state is NOT current yet, or current state is undefined yet, to make it current).
-
-     - Returns: State with `Self` as state `Subject` type, made of all the provided input parameters.
+     - onSetMutations: Closure that must be called to apply this state (to make it current when this state is NOT current yet, or current state is undefined yet).
      */
-    func onSetOnly(
+    func setStateOnly(
         stateId: StateIdentifier = #function,
         via transition: Transition<Self>? = nil,
-        _ onSet: @escaping BasicClosure
+        _ onSetMutations: @escaping BasicClosure
         )
     {
         let state = State<Self>(
             identifier: stateId,
-            onSet: (onSet, transition ?? DefaultTransitions.instant()),
+            onSet: (onSetMutations, transition ?? DefaultTransitions.instant()),
             onUpdate: nil
         )
 
@@ -68,16 +66,16 @@ extension Stateful
         dispatcher.processNext()
     }
 
-    func onSetAndUpdate(
+    func setOrUpdateState(
         stateId: StateIdentifier = #function,
         via sameTransition: Transition<Self>? = nil,
-        _ onBoth: @escaping BasicClosure
+        _ commonMutations: @escaping BasicClosure
         )
     {
         let state = State<Self>(
             identifier: stateId,
-            onSet: (onBoth, sameTransition ?? DefaultTransitions.instant()),
-            onUpdate: (onBoth, sameTransition ?? DefaultTransitions.instant())
+            onSet: (commonMutations, sameTransition ?? DefaultTransitions.instant()),
+            onUpdate: (commonMutations, sameTransition ?? DefaultTransitions.instant())
         )
 
         dispatcher.queue.enqueue(state.toSomeState(with: self))
@@ -85,17 +83,17 @@ extension Stateful
         dispatcher.processNext()
     }
 
-    func onSetAndUpdate(
+    func setOrUpdateState(
         stateId: StateIdentifier = #function,
         setVia onSetTransition: Transition<Self>? = nil,
         updateVia onUpdateTransition: Transition<Self>? = nil,
-        _ onBoth: @escaping BasicClosure
+        _ commonMutations: @escaping BasicClosure
         )
     {
         let state = State<Self>(
             identifier: stateId,
-            onSet: (onBoth, onSetTransition ?? DefaultTransitions.instant()),
-            onUpdate: (onBoth, onUpdateTransition ?? DefaultTransitions.instant())
+            onSet: (commonMutations, onSetTransition ?? DefaultTransitions.instant()),
+            onUpdate: (commonMutations, onUpdateTransition ?? DefaultTransitions.instant())
         )
 
         dispatcher.queue.enqueue(state.toSomeState(with: self))
@@ -114,25 +112,25 @@ extension Stateful
 
      - Parameters:
 
-     - identifier: Internal state identifier that helps to distinguish one state from another. It is supposed to be unique per stateful type. It's highly recommended to always let the function use default value, which is defined by the name of the enclosing function. This guarantees its uniqueness within `Subject` type while is very convenient for debugging.
+     - stateId: Internal state identifier that helps to distinguish one state from another. It is supposed to be unique per stateful type. It's highly recommended to always let the function use default value, which is defined by the name of the enclosing function. This guarantees its uniqueness within `Subject` type and it's very convenient for debugging.
 
-     - onSetTransition: Transition that will be used to apply `onSet` mutations.
+     - transition: Transition that will be used to apply `onSet` mutations.
 
      - onSet: Closure that must be called to apply this state (when this state is NOT current yet, or current state is undefined yet, to make it current).
 
      - Returns: An intermediate data structure that is used as syntax suger to define a state with both 'onSet' and 'onUpdate' mutations via chainable API. It will keep inside a state value made of all provided parameters (with empty 'onUpdate').
      */
-    func onSet(
+    func setState(
         stateId: StateIdentifier = #function,
         via transition: Transition<Self>? = nil,
-        _ onSet: @escaping BasicClosure
+        _ onSetMutations: @escaping BasicClosure
         ) -> PendingState<Self>
     {
         return PendingState(
             host: self,
             stateId: stateId,
             onSetTransition: transition ?? DefaultTransitions.instant(),
-            onSetBody: onSet
+            onSetMutations: onSetMutations
         )
     }
 }
@@ -155,7 +153,7 @@ struct PendingState<Subject: Stateful>
     let onSetTransition: Transition<Subject>
 
     fileprivate
-    let onSetBody: BasicClosure
+    let onSetMutations: BasicClosure
 }
 
 public
@@ -166,23 +164,19 @@ extension PendingState
 
      - Parameters:
 
-     - identifier: Internal state identifier that helps to distinguish one state from another. It is supposed to be unique per stateful type. It's highly recommended to always let the function use default value, which is defined by the name of the enclosing function. This guarantees its uniqueness within `Subject` type while is very convenient for debugging.
-
      - onUpdateTransition: Transition that will be used to apply `onUpdate` mutations.
 
-     - onUpdate: Closure that must be called to apply this state when this state IS already current. This might be useful to update some parameters that the state captures from the outer scope when gets called/created, while entire state stays the same.
-
-     - Returns: State with `Self.Subject` as state `Subject` type, made of all the provided input parameters plus 'identifier' and 'onSet' related values from internal state value.
+     - onUpdateMutations: Closure that must be called to apply this state when this state IS already current. This might be useful to update some parameters that the state captures from the outer scope when gets called/created, while entire state stays the same.
      */
-    func onUpdate(
+    func updateState(
         via onUpdateTransition: Transition<Subject>? = nil,
-        _ onUpdateBody: @escaping BasicClosure
+        _ onUpdateMutations: @escaping BasicClosure
         )
     {
         let state = State<Subject>(
             identifier: stateId,
-            onSet: (onSetBody, onSetTransition),
-            onUpdate: (onUpdateBody, onUpdateTransition ?? DefaultTransitions.instant())
+            onSet: (onSetMutations, onSetTransition),
+            onUpdate: (onUpdateMutations, onUpdateTransition ?? DefaultTransitions.instant())
         )
 
         host.dispatcher.queue.enqueue(state.toSomeState(with: host))

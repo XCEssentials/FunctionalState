@@ -55,7 +55,7 @@ extension MyView
 
     func normal()
     {
-        onSetOnly(stateId: StateIds.normal.rawValue)
+        setStateOnly(stateId: StateIds.normal.rawValue)
         {
             print("Applying Normal state")
         }
@@ -63,7 +63,7 @@ extension MyView
 
     func disabled(with opacity: Float, via specialTransition: Transition<MyView>? = nil)
     {
-        onSetOnly(stateId: StateIds.disabled.rawValue, via: specialTransition)
+        setStateOnly(stateId: StateIds.disabled.rawValue, via: specialTransition)
         {
             print("Applying Disabled state")
         }
@@ -71,13 +71,13 @@ extension MyView
 
     func highlighted(_ color: Int)
     {
-        onSet(stateId: StateIds.highlighted.rawValue)
+        setState(stateId: StateIds.highlighted.rawValue)
         {
             print("Applying Highlighted state")
 
             self.color = color
         }
-        .onUpdate
+        .updateState
         {
             print("Updating Highlighted state")
 
