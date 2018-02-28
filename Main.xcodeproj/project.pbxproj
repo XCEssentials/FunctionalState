@@ -13,15 +13,13 @@
 		9404BEF71F5D067E00A6F8B0 /* Dispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9404BEF51F5D065E00A6F8B0 /* Dispatcher.swift */; };
 		9404BEF81F5D067E00A6F8B0 /* Dispatcher+States.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9404BEF41F5D065E00A6F8B0 /* Dispatcher+States.swift */; };
 		9404BEF91F5D067E00A6F8B0 /* Dispatcher+processing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9404BEF61F5D065E00A6F8B0 /* Dispatcher+processing.swift */; };
-		9415828D203F965A008BFBDF /* HelperOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9415828C203F965A008BFBDF /* HelperOperators.swift */; };
 		941DAA701F05B7F6005A5098 /* Aliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941DAA6F1F05B7F6005A5098 /* Aliases.swift */; };
+		9431076A2045E2C8009F33D9 /* Transition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943107692045E2C8009F33D9 /* Transition.swift */; };
 		9485CA561F5CC845001E2972 /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9485CA551F5CC845001E2972 /* Main.swift */; };
 		9485CA5C1F5CDFF6001E2972 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9485CA5B1F5CDFF6001E2972 /* State.swift */; };
 		94AC4BD91F5CE46700E10123 /* SomeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94AC4BD81F5CE44E00E10123 /* SomeState.swift */; };
 		94AC4BDB1F5CE49000E10123 /* StateToSomeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94AC4BDA1F5CE49000E10123 /* StateToSomeState.swift */; };
-		94AC4BDD1F5CE53500E10123 /* StateConstructors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94AC4BDC1F5CE53500E10123 /* StateConstructors.swift */; };
 		94AC4BDF1F5CE60900E10123 /* Stateful.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94AC4BDE1F5CE60900E10123 /* Stateful.swift */; };
-		94AC4BE11F5CE72600E10123 /* FST.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94AC4BE01F5CE72600E10123 /* FST.swift */; };
 		C910C7097BB79B7229CDB160 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93C2E431D2CF02D9F7DE2FAE /* Foundation.framework */; };
 		FD6D8EE2018716C2FE432F78 /* MyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71F3BDDE354612CAAB911AE /* MyView.swift */; };
 /* End PBXBuildFile section */
@@ -68,15 +66,13 @@
 		9404BEF41F5D065E00A6F8B0 /* Dispatcher+States.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dispatcher+States.swift"; sourceTree = "<group>"; };
 		9404BEF51F5D065E00A6F8B0 /* Dispatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dispatcher.swift; sourceTree = "<group>"; };
 		9404BEF61F5D065E00A6F8B0 /* Dispatcher+processing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dispatcher+processing.swift"; sourceTree = "<group>"; };
-		9415828C203F965A008BFBDF /* HelperOperators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperOperators.swift; sourceTree = "<group>"; };
 		941DAA6F1F05B7F6005A5098 /* Aliases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Aliases.swift; sourceTree = "<group>"; };
+		943107692045E2C8009F33D9 /* Transition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transition.swift; sourceTree = "<group>"; };
 		9485CA551F5CC845001E2972 /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
 		9485CA5B1F5CDFF6001E2972 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		94AC4BD81F5CE44E00E10123 /* SomeState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SomeState.swift; sourceTree = "<group>"; };
 		94AC4BDA1F5CE49000E10123 /* StateToSomeState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateToSomeState.swift; sourceTree = "<group>"; };
-		94AC4BDC1F5CE53500E10123 /* StateConstructors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateConstructors.swift; sourceTree = "<group>"; };
 		94AC4BDE1F5CE60900E10123 /* Stateful.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stateful.swift; sourceTree = "<group>"; };
-		94AC4BE01F5CE72600E10123 /* FST.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FST.swift; sourceTree = "<group>"; };
 		A31E120F02DE62163E40FFCB /* Pods-Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tests/Pods-Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		A34F75BBF830D9C9B29E4370 /* Pods_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAD3BF54C1B2D27BC75E26B6 /* XCEFunctionalState.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = XCEFunctionalState.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -155,7 +151,6 @@
 			children = (
 				941DAA6F1F05B7F6005A5098 /* Aliases.swift */,
 				9485CA5A1F5CDF8E001E2972 /* Declare */,
-				9485CA591F5CDF8E001E2972 /* Apply */,
 				9485CA581F5CDF8E001E2972 /* Dispatch */,
 				BCA17055A33B6FAD26D9D3B6 /* Misc */,
 			);
@@ -165,6 +160,8 @@
 		9485CA581F5CDF8E001E2972 /* Dispatch */ = {
 			isa = PBXGroup;
 			children = (
+				94AC4BD81F5CE44E00E10123 /* SomeState.swift */,
+				94AC4BDA1F5CE49000E10123 /* StateToSomeState.swift */,
 				9404BEF51F5D065E00A6F8B0 /* Dispatcher.swift */,
 				9404BEF41F5D065E00A6F8B0 /* Dispatcher+States.swift */,
 				9404BEF61F5D065E00A6F8B0 /* Dispatcher+processing.swift */,
@@ -172,21 +169,12 @@
 			path = Dispatch;
 			sourceTree = "<group>";
 		};
-		9485CA591F5CDF8E001E2972 /* Apply */ = {
-			isa = PBXGroup;
-			children = (
-				94AC4BD81F5CE44E00E10123 /* SomeState.swift */,
-				94AC4BDA1F5CE49000E10123 /* StateToSomeState.swift */,
-			);
-			path = Apply;
-			sourceTree = "<group>";
-		};
 		9485CA5A1F5CDF8E001E2972 /* Declare */ = {
 			isa = PBXGroup;
 			children = (
+				943107692045E2C8009F33D9 /* Transition.swift */,
 				94AC4BDE1F5CE60900E10123 /* Stateful.swift */,
 				9485CA5B1F5CDFF6001E2972 /* State.swift */,
-				94AC4BDC1F5CE53500E10123 /* StateConstructors.swift */,
 			);
 			path = Declare;
 			sourceTree = "<group>";
@@ -195,8 +183,6 @@
 			isa = PBXGroup;
 			children = (
 				347DD8D1B17954579A0F806D /* Queue.swift */,
-				94AC4BE01F5CE72600E10123 /* FST.swift */,
-				9415828C203F965A008BFBDF /* HelperOperators.swift */,
 			);
 			path = Misc;
 			sourceTree = "<group>";
@@ -384,13 +370,11 @@
 				9404BEF71F5D067E00A6F8B0 /* Dispatcher.swift in Sources */,
 				94AC4BDB1F5CE49000E10123 /* StateToSomeState.swift in Sources */,
 				9404BEF91F5D067E00A6F8B0 /* Dispatcher+processing.swift in Sources */,
-				9415828D203F965A008BFBDF /* HelperOperators.swift in Sources */,
 				94AC4BDF1F5CE60900E10123 /* Stateful.swift in Sources */,
 				9485CA5C1F5CDFF6001E2972 /* State.swift in Sources */,
+				9431076A2045E2C8009F33D9 /* Transition.swift in Sources */,
 				941DAA701F05B7F6005A5098 /* Aliases.swift in Sources */,
-				94AC4BDD1F5CE53500E10123 /* StateConstructors.swift in Sources */,
 				2AD5A144C5F34B3D3A30FDF1 /* Queue.swift in Sources */,
-				94AC4BE11F5CE72600E10123 /* FST.swift in Sources */,
 				9404BEF81F5D067E00A6F8B0 /* Dispatcher+States.swift in Sources */,
 				94AC4BD91F5CE46700E10123 /* SomeState.swift in Sources */,
 			);
@@ -486,7 +470,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				CURRENT_PROJECT_VERSION = 30;
+				CURRENT_PROJECT_VERSION = 31;
 				DEFINES_MODULE = NO;
 				ENABLE_TESTABILITY = YES;
 				INFOPLIST_FILE = Info/Fwk.plist;
@@ -574,7 +558,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				CURRENT_PROJECT_VERSION = 30;
+				CURRENT_PROJECT_VERSION = 31;
 				DEFINES_MODULE = NO;
 				ENABLE_TESTABILITY = YES;
 				INFOPLIST_FILE = Info/Fwk.plist;
