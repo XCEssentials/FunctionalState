@@ -92,6 +92,7 @@ Pods/
 
 # fastlane specific
 fastlane/report.xml
+fastlane/README.md
 
 # deliver temporary files
 fastlane/Preview.html
